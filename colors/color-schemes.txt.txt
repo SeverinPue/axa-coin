@@ -1,0 +1,14 @@
+Light-Beach
+    --primary: #cfcfcf;
+    --secondary: #000;
+    --titles: #69b9c9;
+    --titlesaction: #489FB5;
+    --highlight: #EDE7E3;
+    --highlightaction: #FFA62B;
+Dark-Beach
+    --primary: #202020;
+    --secondary: #cfcfcf;
+    --titles: #38798a;
+    --titlesaction: #69b9c9;
+    --highlight: #EDE7E3;
+    --highlightaction: #FFA62B;    
