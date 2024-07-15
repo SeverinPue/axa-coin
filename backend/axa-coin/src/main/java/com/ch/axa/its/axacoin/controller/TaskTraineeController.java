@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/tasktrainee")
 public class TaskTraineeController {
 
     @Autowired
@@ -43,7 +44,7 @@ public class TaskTraineeController {
         return ResponseEntity.ok(taskTraineeRepository.save(taskTrainee));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteTaskTrainee(@RequestParam String id) {
         taskTraineeRepository.deleteById(id);
     }

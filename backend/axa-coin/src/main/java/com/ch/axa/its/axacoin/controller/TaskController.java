@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/tasks")
 public class TaskController {
 
     @Autowired
@@ -43,7 +44,7 @@ public class TaskController {
         return ResponseEntity.ok(taskRepository.save(task));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteUser(@RequestParam String id) {
         taskRepository.deleteById(id);
     }

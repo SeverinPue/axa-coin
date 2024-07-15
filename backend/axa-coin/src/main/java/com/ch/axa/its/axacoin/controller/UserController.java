@@ -42,7 +42,7 @@ public class UserController {
         return ResponseEntity.ok(userRepository.save(user));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteUser(@RequestParam String id) {
         userRepository.deleteById(id);
     }

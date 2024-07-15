@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/trainee")
 public class TraineeController {
 
     @Autowired
@@ -42,7 +43,7 @@ public class TraineeController {
         return ResponseEntity.ok(traineeRepository.save(trainee));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void deleteUser(@RequestParam String id) {
         traineeRepository.deleteById(id);
     }
