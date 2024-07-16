@@ -23,4 +23,9 @@ public class AuthenticationController {
     public ResponseEntity<String> admin() {
         return ResponseEntity.ok("You are a admin");
     }
+
+    @GetMapping()
+    public ResponseEntity<String> validToken(){
+        return ResponseEntity.ok("Your token is valid");
+    }
 }

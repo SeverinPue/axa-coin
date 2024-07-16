@@ -1,0 +1,18 @@
+Index: src/main/java/com/ch/axa/its/axacoin/config/SecurityConfiguration.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.ch.axa.its.axacoin.config;\n\nimport jakarta.servlet.Filter;\nimport lombok.RequiredArgsConstructor;\nimport org.springframework.context.annotation.Bean;\nimport org.springframework.context.annotation.Configuration;\nimport org.springframework.context.annotation.Role;\nimport org.springframework.http.HttpMethod;\nimport org.springframework.security.authentication.AuthenticationProvider;\nimport org.springframework.security.config.annotation.web.builders.HttpSecurity;\nimport org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;\nimport org.springframework.security.config.http.SessionCreationPolicy;\nimport org.springframework.security.web.SecurityFilterChain;\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\nimport org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;\n\n\n@Configuration\n@EnableWebSecurity\n@RequiredArgsConstructor\npublic class SecurityConfiguration {\n\n    private final JwtAuthenticationFilter jwtAuthFilter;\n    private final AuthenticationProvider authenticationProvider;\n\n    @Bean\n    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {\n\n        http\n                .csrf(AbstractHttpConfigurer::disable)\n                .authorizeHttpRequests(auth -> auth\n                        .requestMatchers(\"/api/auth/authenticate\").permitAll()\n                        .requestMatchers(\"/api/auth/admin\").hasRole(\"ADMIN\")\n                        .requestMatchers(\"/api/auth\").hasAnyRole(\"ADMIN\", \"USER\")\n                        .anyRequest().authenticated()\n                )\n                .sessionManagement(session -> session\n                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)\n                )\n                .authenticationProvider(authenticationProvider)\n                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);\n\n        return http.build();\n    }\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/ch/axa/its/axacoin/config/SecurityConfiguration.java b/src/main/java/com/ch/axa/its/axacoin/config/SecurityConfiguration.java
+--- a/src/main/java/com/ch/axa/its/axacoin/config/SecurityConfiguration.java	(revision 44376e92887624b5fa4a2298fe774bba3bbfbecc)
++++ b/src/main/java/com/ch/axa/its/axacoin/config/SecurityConfiguration.java	(date 1721131979870)
+@@ -42,7 +42,4 @@
+ 
+         return http.build();
+     }
+-
+-
+-
+ }
