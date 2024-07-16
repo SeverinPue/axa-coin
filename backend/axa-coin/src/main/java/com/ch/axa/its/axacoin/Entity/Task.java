@@ -1,5 +1,6 @@
 package com.ch.axa.its.axacoin.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,9 +21,11 @@ public class Task {
     private LocalDate endDate;
     private int earningPoints;
 
+    @JsonIgnoreProperties({"tasks", "trainees", "products"})
     @ManyToOne
     Trainer creator;
 
+    @JsonIgnoreProperties("task_id")
     @OneToMany(mappedBy = "task_id")
     Set<TaskTrainee> taskTrainees;
 }

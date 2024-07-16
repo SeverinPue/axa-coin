@@ -1,10 +1,10 @@
 package com.ch.axa.its.axacoin.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -14,17 +14,22 @@ public class Trainee {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    private LocalDate year;
 
+    private int year;
+
+    @JsonIgnoreProperties("trainee_id")
     @OneToMany(mappedBy = "trainee_id")
     Set<TaskTrainee> taskTrainees;
 
+    @JsonIgnoreProperties("trainee")
     @OneToMany(mappedBy = "trainee")
     Set<Transaction> transactions;
 
+    @JsonIgnoreProperties({"tasks", "products", "trainees"})
     @ManyToOne
     Trainer trainer;
 
+    @JsonIgnoreProperties({"trainees", "trainers"})
     @ManyToOne
     User user;
 }

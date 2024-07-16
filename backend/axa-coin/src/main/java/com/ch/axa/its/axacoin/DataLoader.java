@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -65,7 +66,8 @@ public class DataLoader implements CommandLineRunner {
         Trainee trainee = new Trainee();
         trainee.setUser(user);
         trainee.setTrainer(trainer);
-        trainee.setYear(LocalDate.now());
+        Random rand = new Random();
+        trainee.setYear(rand.nextInt(4) + 1);
         return traineeRepository.save(trainee);
     }
 
@@ -76,7 +78,7 @@ public class DataLoader implements CommandLineRunner {
                 product.setName(faker.commerce().productName());
                 product.setDescription(faker.lorem().sentence());
                 product.setPrice(faker.number().randomDouble(2, 1, 100));
-                product.setTrainer(trainer);
+                product.setCreator(trainer);
                 add(product);
             }
         }});
@@ -111,7 +113,7 @@ public class DataLoader implements CommandLineRunner {
         transactionRepository.saveAll(new HashSet<>() {{
             for (Product product : products) {
                 Transaction transaction = new Transaction();
-                transaction.setTransactionDate(LocalDateTime.now());
+                transaction.setTransactionDate(LocalDate.now());
                 transaction.setTrainee(trainee);
                 transaction.setProduct(product);
                 add(transaction);
