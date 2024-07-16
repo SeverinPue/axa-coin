@@ -35,10 +35,10 @@ export default function Login() {
         return response.json();
       })
       .then((data) => {
-        sessionStorage.setItem("jwtToken", JSON.stringify(data.token));
+        sessionStorage.setItem("jwt", JSON.stringify(data.token));
       })
       .catch((error) => {
-        console.error("Fehler beim Fetschen: ", error);
+        console.error("Fehler beim Fetschen: " + error);
       });
   };
 

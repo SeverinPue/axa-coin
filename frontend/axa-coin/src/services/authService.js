@@ -1,22 +1,10 @@
-function authService() {
+function AuthService() {
 
-    fetch("http://localhost:8080/api/auth/authenticate", {
+    fetch("http://localhost:8080/api/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            setError("Falsches Password oder Benuzername!");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          sessionStorage.setItem("jwtToken", JSON.stringify(data.token));
-        })
-        .catch((error) => {
-          console.error("Fehler beim Fetschen: ", error);
-        });
+          'Authorization': `Bearer ${sessionStorage.getItem("jwt")}`  
+        }
+      })    
 }
