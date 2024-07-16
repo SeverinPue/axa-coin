@@ -32,12 +32,11 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private Set<Trainee> trainees;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override
