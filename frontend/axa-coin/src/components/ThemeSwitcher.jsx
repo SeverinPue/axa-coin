@@ -6,9 +6,9 @@ const ThemeSwitcher = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <label id="switch" class="switch">
+    <label id="switch" className="switch">
             <input type="checkbox" onChange={toggleTheme} checked={theme === 'light' ? true : false} id="slider"></input>
-            <span class="slider round"></span>
+            <span className="slider round"></span>
         </label>
   );
 };

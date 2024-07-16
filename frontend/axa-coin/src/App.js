@@ -7,16 +7,18 @@ import './App.css';
 import Navbar from './components/navbar.tsx';
 import Footer from './components/footer.tsx'
 import Login from './pages/login.tsx'
+import ProtectedRoute from './components/ProtectedRoute.js';
 
 function App() {
   return (
-    <div class="app">
+    <div className="app">
       <Navbar></Navbar>
       <div className='main'>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/start" element={<Start />} />
+            <Route path='/test' element={<ProtectedRoute component={<Start/>}/>}></Route>
             <Route path="/login" element={<Login />} />
           </Routes>
         </BrowserRouter>
