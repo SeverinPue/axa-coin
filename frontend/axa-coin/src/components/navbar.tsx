@@ -1,5 +1,5 @@
 import React from "react";
-import "./navbar.css";
+import "./stylesheets/navbar.css";
 import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function Navbar() {
