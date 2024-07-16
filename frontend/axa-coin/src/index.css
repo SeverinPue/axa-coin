@@ -22,3 +22,15 @@
     margin: 0px;
     padding: 0px;
   }
+    button{
+      padding: 10px;
+      font-family: var(--font-family);
+      border: 2px solid var(--titles);
+      background-color: var(--primary);
+      color: var(--titles);
+    }
+    button:hover{
+      border: 2px solid var(--highlightaction);
+      background-color: var(--primary);
+
+    }
