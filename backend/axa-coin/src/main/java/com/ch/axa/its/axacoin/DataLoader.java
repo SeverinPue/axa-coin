@@ -47,7 +47,7 @@ public class DataLoader implements CommandLineRunner {
         livio.setUsername("livio");
         livio.setPassword(passwordEncoder.encode("livio"));
         livio.setEmail("livio@gmail.com");
-        livio.setRole("ROLE_"+Role.USER.name());
+        livio.setRole("ROLE_"+Role.ADMIN.name());
         userRepository.save(livio);
         for (int i = 0; i < 5; i++) {
             User user = createUser();
