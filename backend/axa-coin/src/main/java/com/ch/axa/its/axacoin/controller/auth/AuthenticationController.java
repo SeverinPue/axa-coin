@@ -18,4 +18,9 @@ public class AuthenticationController {
         System.out.printf(request.toString());
         return ResponseEntity.ok(service.authenticate(request));
     }
+
+    @GetMapping("/admin")
+    public ResponseEntity<String> admin() {
+        return ResponseEntity.ok("You are a admin");
+    }
 }
