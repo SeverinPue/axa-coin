@@ -20,12 +20,12 @@ public class ProductController {
     private ProductRepository productRepository;
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAllUsers(){
+    public ResponseEntity<List<Product>> getAllProducts(){
         return ResponseEntity.ok(productRepository.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getUserById(@RequestParam String id){
+    public ResponseEntity<Product> getProductById(@RequestParam String id){
         Optional<Product> product = productRepository.findById(id);
         if(product.isPresent()){
             return ResponseEntity.ok(product.get());
@@ -34,18 +34,18 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> createUser(@RequestBody Product product){
+    public ResponseEntity<Product> createProduct(@RequestBody Product product){
         return ResponseEntity.ok(productRepository.save(product));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updatePlayer(@RequestParam String id, @Valid @RequestBody Product product) {
+    public ResponseEntity<Product> updateProduct(@RequestParam String id, @Valid @RequestBody Product product) {
         product.setId(id);
         return ResponseEntity.ok(productRepository.save(product));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@RequestParam String id) {
+    public void deleteProduct(@RequestParam String id) {
         productRepository.deleteById(id);
     }
 }

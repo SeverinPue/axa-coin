@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updatePlayer(@RequestParam String id, @Valid @RequestBody User user) {
+    public ResponseEntity<User> updateUser(@RequestParam String id, @Valid @RequestBody User user) {
         user.setId(id);
         return ResponseEntity.ok(userRepository.save(user));
     }

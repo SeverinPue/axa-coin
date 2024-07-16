@@ -19,12 +19,12 @@ public class TransactionController {
     private TransactionRepository transactionRepository;
 
     @GetMapping
-    public ResponseEntity<List<Transaction>> getAllUsers(){
+    public ResponseEntity<List<Transaction>> getAllTransactions(){
         return ResponseEntity.ok(transactionRepository.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Transaction> getUserById(@RequestParam String id){
+    public ResponseEntity<Transaction> getTransactionById(@RequestParam String id){
         Optional<Transaction> transaction = transactionRepository.findById(id);
         if(transaction.isPresent()){
             return ResponseEntity.ok(transaction.get());
@@ -33,18 +33,18 @@ public class TransactionController {
     }
 
     @PostMapping
-    public ResponseEntity<Transaction> createUser(@RequestBody Transaction transaction){
+    public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction){
         return ResponseEntity.ok(transactionRepository.save(transaction));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Transaction> updatePlayer(@RequestParam String id, @Valid @RequestBody Transaction transaction) {
+    public ResponseEntity<Transaction> updateTransaction(@RequestParam String id, @Valid @RequestBody Transaction transaction) {
         transaction.setId(id);
         return ResponseEntity.ok(transactionRepository.save(transaction));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@RequestParam String id) {
+    public void deleteTransaction(@RequestParam String id) {
         transactionRepository.deleteById(id);
     }
 }

@@ -19,12 +19,12 @@ public class TraineeController {
     private TraineeRepository traineeRepository;
 
     @GetMapping
-    public ResponseEntity<List<Trainee>> getAllUsers(){
+    public ResponseEntity<List<Trainee>> getAllTrainees(){
         return ResponseEntity.ok(traineeRepository.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Trainee> getUserById(@RequestParam String id){
+    public ResponseEntity<Trainee> getTraineeById(@RequestParam String id){
         Optional<Trainee> trainee = traineeRepository.findById(id);
         if(trainee.isPresent()){
             return ResponseEntity.ok(trainee.get());
@@ -33,12 +33,12 @@ public class TraineeController {
     }
 
     @PostMapping
-    public ResponseEntity<Trainee> createUser(@RequestBody Trainee trainee){
+    public ResponseEntity<Trainee> createTrainee(@RequestBody Trainee trainee){
         return ResponseEntity.ok(traineeRepository.save(trainee));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Trainee> updatePlayer(@RequestParam String id, @Valid @RequestBody Trainee trainee) {
+    public ResponseEntity<Trainee> updateTrainee(@RequestParam String id, @Valid @RequestBody Trainee trainee) {
         trainee.setId(id);
         return ResponseEntity.ok(traineeRepository.save(trainee));
     }

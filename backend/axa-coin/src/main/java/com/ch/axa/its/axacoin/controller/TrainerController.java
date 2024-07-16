@@ -19,12 +19,12 @@ public class TrainerController {
     private TrainerRepository trainerRepository;
 
     @GetMapping
-    public ResponseEntity<List<Trainer>> getAllUsers(){
+    public ResponseEntity<List<Trainer>> getAllTrainers(){
         return ResponseEntity.ok(trainerRepository.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Trainer> getUserById(@RequestParam String id){
+    public ResponseEntity<Trainer> getTrainerById(@RequestParam String id){
         Optional<Trainer> trainer = trainerRepository.findById(id);
         if(trainer.isPresent()){
             return ResponseEntity.ok(trainer.get());
@@ -33,18 +33,18 @@ public class TrainerController {
     }
 
     @PostMapping
-    public ResponseEntity<Trainer> createUser(@RequestBody Trainer trainer){
+    public ResponseEntity<Trainer> createTrainer(@RequestBody Trainer trainer){
         return ResponseEntity.ok(trainerRepository.save(trainer));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Trainer> updatePlayer(@RequestParam String id, @Valid @RequestBody Trainer trainer) {
+    public ResponseEntity<Trainer> updateTrainer(@RequestParam String id, @Valid @RequestBody Trainer trainer) {
         trainer.setId(id);
         return ResponseEntity.ok(trainerRepository.save(trainer));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@RequestParam String id) {
+    public void deleteTrainer(@RequestParam String id) {
         trainerRepository.deleteById(id);
     }
 }

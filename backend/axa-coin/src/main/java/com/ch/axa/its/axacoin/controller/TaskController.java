@@ -20,12 +20,12 @@ public class TaskController {
     private TaskRepository taskRepository;
 
     @GetMapping
-    public ResponseEntity<List<Task>> getAllUsers(){
+    public ResponseEntity<List<Task>> getAllTasks(){
         return ResponseEntity.ok(taskRepository.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Task> getUserById(@RequestParam String id){
+    public ResponseEntity<Task> getTaskById(@RequestParam String id){
         Optional<Task> task = taskRepository.findById(id);
         if(task.isPresent()){
             return ResponseEntity.ok(task.get());
@@ -34,18 +34,18 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<Task> createUser(@RequestBody Task task){
+    public ResponseEntity<Task> createTask(@RequestBody Task task){
         return ResponseEntity.ok(taskRepository.save(task));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updatePlayer(@RequestParam String id, @Valid @RequestBody Task task) {
+    public ResponseEntity<Task> updateTask(@RequestParam String id, @Valid @RequestBody Task task) {
         task.setId(id);
         return ResponseEntity.ok(taskRepository.save(task));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@RequestParam String id) {
+    public void deleteTask(@RequestParam String id) {
         taskRepository.deleteById(id);
     }
 }
