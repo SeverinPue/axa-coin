@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="check if admin endpoint done">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/config/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/auth/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/auth/AuthenticationController.java" afterDir="false" />
-    </list>
+    <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment=".class" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -117,7 +114,7 @@
       <workItem from="1721045961356" duration="7990000" />
       <workItem from="1721054877551" duration="1088000" />
       <workItem from="1721109491011" duration="16147000" />
-      <workItem from="1721128133579" duration="3248000" />
+      <workItem from="1721128133579" duration="3621000" />
     </task>
     <task id="LOCAL-00001" summary="create UserController.java">
       <option name="closed" value="true" />
@@ -199,7 +196,23 @@
       <option name="project" value="LOCAL" />
       <updated>1721129638093</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="check if token valid enpoint done">
+      <option name="closed" value="true" />
+      <created>1721131766539</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1721131766539</updated>
+    </task>
+    <task id="LOCAL-00012" summary=".class">
+      <option name="closed" value="true" />
+      <created>1721132094744</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1721132094744</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,6 +229,8 @@
     <MESSAGE value="aufgeräumt" />
     <MESSAGE value="ROLLEN provisorisch" />
     <MESSAGE value="check if admin endpoint done" />
-    <option name="LAST_COMMIT_MESSAGE" value="check if admin endpoint done" />
+    <MESSAGE value="check if token valid enpoint done" />
+    <MESSAGE value=".class" />
+    <option name="LAST_COMMIT_MESSAGE" value=".class" />
   </component>
 </project>
