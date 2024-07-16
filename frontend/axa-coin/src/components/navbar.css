@@ -1,10 +1,37 @@
-nav p{
-    margin-top: 0;
-}
-header{
 
-    position: sticky;
-    height: 3rem;
+.navBar{
+
     background-color: var(--primary);
-    top: 0;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--titles);
+    box-sizing: border-box;
+}
+.navList{
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    
+}
+.navList a{
+    padding: 10px;
+    border-radius: 30%;
+    border: 2px solid var(--primary);
+    font-family: var(--font-family);
+    font-size: 2rem;
+    margin: 0px 2rem; 
+    text-decoration: none;
+    color: var(--titles);
+}
+.navList a:hover{
+    border: 2px solid var(--highlightaction);
+    color: var(--titlesaction);
+}
+.logo{
+    margin-left: 30px;
 }

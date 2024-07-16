@@ -1,0 +1,21 @@
+.footer{
+    background-color: var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+.links a{
+    margin: 0px 20px;
+    text-decoration: none;
+    color: var(--secondary);
+    font-family: var(--font-family);
+}
+.links a:hover{
+    color: var(--highlightaction);
+}

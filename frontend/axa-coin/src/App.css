@@ -1,0 +1,8 @@
+.main{
+    height: 90vh;
+    background-color: var(--primary);
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 2px solid var(--titles);
+    box-sizing: border-box;
+}
