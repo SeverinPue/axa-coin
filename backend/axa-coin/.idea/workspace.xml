@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="check if admin endpoint done">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/config/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/auth/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/auth/AuthenticationController.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;thlivio&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/SeverinPue/axa-coin.git&quot;,
+    &quot;accountId&quot;: &quot;85b2148c-bb02-4683-88cc-b2d70e2b360f&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2jHZSGEaE2aqFYivD4UeEZe9pGk" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.AxaCoinApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/livio/developement/axa-coin/backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.ch.axa.its.axacoin.controller.auth" />
+      <recent name="com.ch.axa.its.axacoin.controller" />
+      <recent name="com.ch.axa.its.axacoin.Entity" />
+      <recent name="com.ch.axa.its.axacoin.config" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="AxaCoinApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="axa-coin" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.ch.axa.its.axacoin.AxaCoinApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="" />
+      <created>1721045960336</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1721045960336</updated>
+      <workItem from="1721045961356" duration="7990000" />
+      <workItem from="1721054877551" duration="1088000" />
+      <workItem from="1721109491011" duration="16147000" />
+      <workItem from="1721128133579" duration="3248000" />
+    </task>
+    <task id="LOCAL-00001" summary="create UserController.java">
+      <option name="closed" value="true" />
+      <created>1721046213521</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1721046213521</updated>
+    </task>
+    <task id="LOCAL-00002" summary="all basic controllers">
+      <option name="closed" value="true" />
+      <created>1721051633708</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1721051633708</updated>
+    </task>
+    <task id="LOCAL-00003" summary="sdf">
+      <option name="closed" value="true" />
+      <created>1721054650043</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1721054650043</updated>
+    </task>
+    <task id="LOCAL-00004" summary="updated method names">
+      <option name="closed" value="true" />
+      <created>1721109882137</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1721109882137</updated>
+    </task>
+    <task id="LOCAL-00005" summary="updated dependencies for spring security">
+      <option name="closed" value="true" />
+      <created>1721110472710</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1721110472710</updated>
+    </task>
+    <task id="LOCAL-00006" summary="huere scheisssss">
+      <option name="closed" value="true" />
+      <created>1721114287472</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1721114287472</updated>
+    </task>
+    <task id="LOCAL-00007" summary="auth funktioniert">
+      <option name="closed" value="true" />
+      <created>1721123527782</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1721123527782</updated>
+    </task>
+    <task id="LOCAL-00008" summary="aufgeräumt">
+      <option name="closed" value="true" />
+      <created>1721123568680</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1721123568680</updated>
+    </task>
+    <task id="LOCAL-00009" summary="ROLLEN provisorisch">
+      <option name="closed" value="true" />
+      <created>1721129114867</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1721129114867</updated>
+    </task>
+    <task id="LOCAL-00010" summary="check if admin endpoint done">
+      <option name="closed" value="true" />
+      <created>1721129638093</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1721129638093</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="create UserController.java" />
+    <MESSAGE value="all basic controllers" />
+    <MESSAGE value="sdf" />
+    <MESSAGE value="updated method names" />
+    <MESSAGE value="updated dependencies for spring security" />
+    <MESSAGE value="huere scheisssss" />
+    <MESSAGE value="auth funktioniert" />
+    <MESSAGE value="aufgeräumt" />
+    <MESSAGE value="ROLLEN provisorisch" />
+    <MESSAGE value="check if admin endpoint done" />
+    <option name="LAST_COMMIT_MESSAGE" value="check if admin endpoint done" />
+  </component>
+</project>
