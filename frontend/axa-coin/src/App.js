@@ -13,6 +13,7 @@ function App() {
         <Route path="/" element={<Layout />}> {/* Verwende Layout in den Routen */}
           <Route index element={<Home />} />
           <Route path="start" element={<Start />} />
+          <Route path="test" element={<Start />} />
         </Route> {/* Schließe die Layout-Route */}
         <Route path="/login" element={<Login />} /> {/* Login-Route ohne Layout */}
       </Routes>
