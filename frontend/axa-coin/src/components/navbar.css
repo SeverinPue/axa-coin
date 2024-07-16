@@ -1,0 +1,10 @@
+nav p{
+    margin-top: 0;
+}
+header{
+
+    position: sticky;
+    height: 3rem;
+    background-color: var(--primary);
+    top: 0;
+}

@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+:root{
+    margin: 0px;
+    padding: 0px;
+    --primary: #cfcfcf;
+    --secondary: #000;
+    --titles: #69b9c9;
+    --titlesaction: #489FB5;
+    --highlight: #EDE7E3;
+    --highlightaction: #FFA62B;
+}
+html, body{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+.header{
+    width: 100vw;
+    height: 20vh;
+    background-color: var(--primary);
+    border-bottom: 2px solid var(--titles);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navList{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+.navList a{
+    color: var(--titles);
+    text-decoration: none;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    margin: 0px 10px;
+    padding: 10px;
+    border-radius: 30px;
+    border: 2px solid var(--secondary);
+}
+.navList a:hover{
+    border: 2px solid var(--highlightaction);
+    color: var(--titlesaction);
+}
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+h1,p,a{
+    margin: 0px;
+    font-family: 'Raleway', sans-serif;
+    text-decoration: none;
+}
+a{
+    margin: 20px;
+    color: var(--secondary);
+}
+a:hover{
+    color: var(--titlesaction);
+}
+h1{
+    color: var(--titles);
+}
+button{
+    margin: 10px;
+    border-radius: 20px;
+    height: 30px;
+    width: 100px;
+    background-color: var(--primary);
+    border: 2px solid var(--titles);
+    color: var(--secondary);
+    font-family: 'Raleway', sans-serif;
+}
+button:hover{
+    border: 2px solid var(--highlightaction);
+}
+
+.main{
+    width: 100vw;
+    height: 70vh;
+    background-color: var(--primary);
+    border-bottom: 2px solid var(--titles);
+    box-sizing: border-box;
+}
+p{
+    color: var(--secondary);
+}
+.footer{
+    width: 100vw;
+    height: 10vh;
+    background-color: var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

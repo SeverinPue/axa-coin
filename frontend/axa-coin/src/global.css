@@ -1,0 +1,16 @@
+:root{
+    --primary: #cfcfcf;
+    --secondary: #000;
+    --titles: #69b9c9;
+    --titlesaction: #489FB5;
+    --highlight: #EDE7E3;
+    --highlightaction: #FFA62B;
+    --font-famaly: 'Raleway', sans-serif;
+}
+
+body, html{
+
+    font-family: var(--font-famaly);
+    margin: 0;
+    padding: 0;
+}
