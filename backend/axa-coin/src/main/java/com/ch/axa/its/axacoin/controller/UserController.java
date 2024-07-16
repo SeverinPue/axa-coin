@@ -53,10 +53,6 @@ public class UserController {
         userRepository.deleteById(id);
     }
 
-    public UserDto saveDto(UserDto userDto) {
-        userDto.setPassword(bCryptPasswordEncoder
-                .encode(userDto.getPassword()));
-        return userDto;
-    }
+
 
 }

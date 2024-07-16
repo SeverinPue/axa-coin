@@ -3,7 +3,10 @@ package com.ch.axa.its.axacoin;
 import com.ch.axa.its.axacoin.Entity.*;
 import com.ch.axa.its.axacoin.Repositorys.*;
 import com.github.javafaker.Faker;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -23,6 +26,9 @@ public class DataLoader implements CommandLineRunner {
     private final TaskTraineeRepository taskTraineeRepository;
     private final TransactionRepository transactionRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private final Faker faker = new Faker();
 
     public DataLoader(UserRepository userRepository, TraineeRepository traineeRepository, TrainerRepository trainerRepository, ProductRepository productRepository, TaskRepository taskRepository, TaskTraineeRepository taskTraineeRepository, TransactionRepository transactionRepository) {
@@ -37,6 +43,12 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        User livio = new User();
+        livio.setUsername("livio");
+        livio.setPassword(passwordEncoder.encode("livio"));
+        livio.setEmail("livio@gmail.com");
+        livio.setRole(Role.USER);
+        userRepository.save(livio);
         for (int i = 0; i < 5; i++) {
             User user = createUser();
             Trainer trainer = createTrainer(user);
@@ -51,8 +63,9 @@ public class DataLoader implements CommandLineRunner {
     private User createUser() {
         User user = new User();
         user.setUsername(faker.name().username());
-        user.setPassword(faker.internet().password());
+        user.setPassword(passwordEncoder.encode(faker.internet().password()));
         user.setEmail(faker.internet().emailAddress());
+        user.setRole(Role.USER);
         return userRepository.save(user);
     }
 
