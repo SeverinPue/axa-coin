@@ -20,6 +20,7 @@ public class Task {
     private String description;
     private LocalDate endDate;
     private int earningPoints;
+    private boolean important;
 
     @JsonIgnoreProperties({"tasks", "trainees", "products"})
     @ManyToOne

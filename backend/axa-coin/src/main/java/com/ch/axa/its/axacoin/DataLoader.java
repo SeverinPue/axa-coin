@@ -30,6 +30,7 @@ public class DataLoader implements CommandLineRunner {
     private PasswordEncoder passwordEncoder;
 
     private final Faker faker = new Faker();
+    private Random random;
 
     public DataLoader(UserRepository userRepository, TraineeRepository traineeRepository, TrainerRepository trainerRepository, ProductRepository productRepository, TaskRepository taskRepository, TaskTraineeRepository taskTraineeRepository, TransactionRepository transactionRepository) {
         this.userRepository = userRepository;
@@ -44,6 +45,7 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User livio = new User();
+        random = new Random();
         livio.setUsername("livio");
         livio.setPassword(passwordEncoder.encode("livio"));
         livio.setEmail("livio@gmail.com");
@@ -109,6 +111,7 @@ public class DataLoader implements CommandLineRunner {
                 task.setDescription(faker.lorem().paragraph());
                 task.setEndDate(LocalDate.now().plusDays(faker.number().numberBetween(1, 30)));
                 task.setEarningPoints(faker.number().numberBetween(10, 100));
+                task.setImportant(random.nextBoolean());
                 task.setCreator(trainer);
                 add(task);
             }
