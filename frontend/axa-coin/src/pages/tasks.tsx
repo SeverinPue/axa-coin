@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Task from "../components/task";
-import './stylesheets/start.css'
+import './stylesheets/tasks.css'
 
-export default function Start() {
+export default function Tasks() {
 
   const [tasks, setTasks] = useState([])
   const isLaterThanToday = dateStr => new Date(dateStr) > new Date();

@@ -1,12 +1,13 @@
 import React from "react";
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import Layout from "./Layout.js";
-import Start from "./pages/start.tsx";
+import Start from "./pages/start.jsx";
 import Login from "./pages/login.tsx";
 import Footer from "./components/footer.tsx";
 import "./App.css";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import NotFound from "./pages/notFound.tsx"; 
+import Tasks from "./pages/tasks.tsx";
 
 function App() {
   return (
@@ -15,8 +16,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate replace to="/start" />} />
           <Route path="" element={<Layout />}>
-            <Route path="/start" element={<ProtectedRoute component={<Start />} />} />
-
+            <Route path="/start" element={<ProtectedRoute component={<Start/>} />} />
+            <Route path="/tasks" element={<ProtectedRoute component={<Tasks/>}/>}></Route>
             <Route path="/login" element={<Login />} /> 
             <Route path="*" element={<NotFound />} /> 
           </Route>
