@@ -112,9 +112,15 @@ public class DataLoader implements CommandLineRunner {
     }
     private void createTaskTrainees(List<Task> tasks, Trainee trainee) {
         taskTraineeRepository.saveAll(new HashSet<>() {{
+            Random random = new Random();
             for (Task task : tasks) {
                 TaskTrainee taskTrainee = new TaskTrainee();
-                taskTrainee.setDateOfSubmission(LocalDate.now());
+                int randomNumber = random.nextInt(4) + 1;
+                if(randomNumber == 1) {
+                    taskTrainee.setDateOfSubmission(LocalDate.now());
+                }else{
+                    taskTrainee.setDateOfSubmission(null);
+                }
                 taskTrainee.setTask_id(task);
                 taskTrainee.setTrainee_id(trainee);
                 add(taskTrainee);
