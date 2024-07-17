@@ -51,12 +51,8 @@ export default function Login() {
   return (
     <>
       <header>
-        <div>
           <ThemeSwitcher></ThemeSwitcher>
-        </div>
-        <div>
           <h1>Willkommen Bei AXA-Coin</h1>
-        </div>
       </header>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
