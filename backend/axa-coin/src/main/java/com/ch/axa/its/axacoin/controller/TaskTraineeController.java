@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -51,9 +53,25 @@ public class TaskTraineeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TaskTrainee> updateTaskTrainee(@PathVariable String id, @Valid @RequestBody TaskTrainee taskTrainee) {
-        taskTrainee.setId(id);
-        return ResponseEntity.ok(taskTraineeRepository.save(taskTrainee));
+    public ResponseEntity<TaskTrainee> updateTaskTrainee(
+            @PathVariable String id,
+            @RequestBody Map<String, Object> updates) {
+        TaskTrainee existingTaskTrainee = taskTraineeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("TaskTrainee not found with id: " + id));
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "dateOfSubmission":
+                    if (value == null) {
+                        existingTaskTrainee.setDateOfSubmission(null);
+                    } else {
+                        existingTaskTrainee.setDateOfSubmission(LocalDate.parse((String) value));
+                    }
+                    break;
+            }
+        });
+        TaskTrainee savedTaskTrainee = taskTraineeRepository.save(existingTaskTrainee);
+        System.out.println(savedTaskTrainee.getDateOfSubmission());
+        return ResponseEntity.ok(savedTaskTrainee);
     }
 
     @DeleteMapping("/{id}")
