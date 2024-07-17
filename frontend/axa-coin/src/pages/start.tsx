@@ -6,10 +6,11 @@ export default function Start() {
 
   const [tasks, setTasks] = useState([])
 
-  const handleSubmit = (id: String, task: any) => {
+  const handleSubmit = (id: string, task: any) => {
+    const updatedDateOfSubmission = task.dateOfSubmission ? null : new Date().toISOString().slice(0, 10);
+
     const updatedTask = {
-      ...task,
-      dateOfSubmission: new Date().toISOString()
+      dateOfSubmission: updatedDateOfSubmission
     };
 
     fetch(`http://localhost:8080/api/tasktrainee/${id}`, {
@@ -23,6 +24,8 @@ export default function Start() {
       .then(r => r.json())
       .then(data => console.log(data));
   };
+
+
   useEffect(() => {
     fetch("http://localhost:8080/api/tasktrainee", {
       method: "GET",
