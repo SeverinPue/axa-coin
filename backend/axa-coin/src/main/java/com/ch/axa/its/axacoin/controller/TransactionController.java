@@ -25,7 +25,7 @@ public class TransactionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Transaction> getTransactionById(@RequestParam String id){
+    public ResponseEntity<Transaction> getTransactionById(@PathVariable String id){
         Optional<Transaction> transaction = transactionRepository.findById(id);
         if(transaction.isPresent()){
             return ResponseEntity.ok(transaction.get());
@@ -39,13 +39,13 @@ public class TransactionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Transaction> updateTransaction(@RequestParam String id, @Valid @RequestBody Transaction transaction) {
+    public ResponseEntity<Transaction> updateTransaction(@PathVariable String id, @Valid @RequestBody Transaction transaction) {
         transaction.setId(id);
         return ResponseEntity.ok(transactionRepository.save(transaction));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTransaction(@RequestParam String id) {
+    public void deleteTransaction(@PathVariable String id) {
         transactionRepository.deleteById(id);
     }
 }

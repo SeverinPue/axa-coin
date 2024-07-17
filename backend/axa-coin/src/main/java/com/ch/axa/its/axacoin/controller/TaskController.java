@@ -26,7 +26,7 @@ public class TaskController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Task> getTaskById(@RequestParam String id){
+    public ResponseEntity<Task> getTaskById(@PathVariable String id){
         Optional<Task> task = taskRepository.findById(id);
         if(task.isPresent()){
             return ResponseEntity.ok(task.get());
@@ -40,13 +40,13 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Task> updateTask(@RequestParam String id, @Valid @RequestBody Task task) {
+    public ResponseEntity<Task> updateTask(@PathVariable String id, @Valid @RequestBody Task task) {
         task.setId(id);
         return ResponseEntity.ok(taskRepository.save(task));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTask(@RequestParam String id) {
+    public void deleteTask(@PathVariable String id) {
         taskRepository.deleteById(id);
     }
 }

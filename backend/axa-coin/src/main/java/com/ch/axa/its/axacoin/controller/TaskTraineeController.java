@@ -31,7 +31,7 @@ public class TaskTraineeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TaskTrainee> getTaskTraineeById(@RequestParam String id){
+    public ResponseEntity<TaskTrainee> getTaskTraineeById(@PathVariable String id){
         Optional<TaskTrainee> taskTrainee = taskTraineeRepository.findById(id);
         if(taskTrainee.isPresent()){
             return ResponseEntity.ok(taskTrainee.get());
@@ -51,13 +51,13 @@ public class TaskTraineeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TaskTrainee> updateTaskTrainee(@RequestParam String id, @Valid @RequestBody TaskTrainee taskTrainee) {
+    public ResponseEntity<TaskTrainee> updateTaskTrainee(@PathVariable String id, @Valid @RequestBody TaskTrainee taskTrainee) {
         taskTrainee.setId(id);
         return ResponseEntity.ok(taskTraineeRepository.save(taskTrainee));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTaskTrainee(@RequestParam String id) {
+    public void deleteTaskTrainee(@PathVariable String id) {
         taskTraineeRepository.deleteById(id);
     }
 }
