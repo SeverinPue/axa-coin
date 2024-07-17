@@ -1,52 +1,47 @@
 import React, { useState } from "react";
-import "./login.css";
+import "./stylesheets/login.css";
 import ThemeSwitcher from "../components/ThemeSwitcher";
+import { useNavigate } from "react-router-dom"; 
 
 export default function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate(); 
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Basic validation example
     if (!username || !password) {
-      setError("Bitte geben Sie Benutzername und Passwort ein.");
+      setError("Please enter both username and password.");
       return;
     }
 
-    setError("");
-
-    const userData = {
-      username: username,
-      password: password,
-    };
-
-    fetch("http://localhost:8080/api/auth/authenticate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          setError("Falsches Password oder Benuzername!");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        sessionStorage.setItem("jwt", data.token);
-        sessionStorage.setItem("id", data.id);
-      })
-      .catch((error) => {
-        console.error("Fehler beim Fetchen: " + error);
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/authenticate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
       });
 
-    setPassword("");
-    setUsername("");
+      if (!response.ok) {
+        throw new Error("Incorrect username or password!");
+      }
+
+      const data = await response.json();
+      sessionStorage.setItem("jwt", data.token);
+      sessionStorage.setItem("id", data.id);
+      navigate("/start", { state: { key: "value" } }); // Now called from the component
+
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setPassword('');
+      setUsername('');
+    }
   };
+
+
 
   return (
     <>
