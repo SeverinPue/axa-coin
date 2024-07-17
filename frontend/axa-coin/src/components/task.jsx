@@ -17,8 +17,7 @@ export default function Task({ title, description, endDate, earningPoints, submi
   return (
     <div className="card">
       <div className="toplevel">
-        <p className="title">{title}</p>
-        <p className="date">{endDate}</p>
+        <p className="taskTitle">{title}</p>
         {isMenuVisible ? (
           <SlArrowUp className="toggle-button" onClick={toggleMenu} />
         ) : (
@@ -27,6 +26,7 @@ export default function Task({ title, description, endDate, earningPoints, submi
       </div>
       {isMenuVisible ? (
         <div className="toggle-menu">
+          <p className="date">{endDate}</p>
           <p className="description">{description}</p>
           <p className="earningPoints">{earningPoints} Points</p>
           <button className="submitButton" onClick={handleSubmit}>
@@ -34,7 +34,7 @@ export default function Task({ title, description, endDate, earningPoints, submi
           </button>
         </div>
       ) : (
-        <div className="toggle-menu"/>
+        <div className="toggle-menu" />
       )}
     </div>
   );

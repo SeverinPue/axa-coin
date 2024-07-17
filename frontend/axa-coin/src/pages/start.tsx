@@ -5,6 +5,7 @@ import './stylesheets/start.css'
 export default function Start() {
 
   const [tasks, setTasks] = useState([])
+  const isLaterThanToday = dateStr => new Date(dateStr) > new Date();
 
   const handleSubmit = (id: string, task: any) => {
     const updatedDateOfSubmission = task.dateOfSubmission ? null : new Date().toISOString().slice(0, 10);
@@ -22,11 +23,14 @@ export default function Start() {
       body: JSON.stringify(updatedTask)
     })
       .then(r => r.json())
-      .then(data => console.log(data));
+      .then(updateTasks);
   };
 
 
   useEffect(() => {
+    updateTasks();
+  }, [])
+  const updateTasks = () => {
     fetch("http://localhost:8080/api/tasktrainee", {
       method: "GET",
       headers: {
@@ -35,23 +39,69 @@ export default function Start() {
       },
     }).then(r => r.json())
       .then(data => setTasks(data))
-  }, [])
+  }
 
   return <>
     
     <div className="mainTasks">
-    {tasks.map((task: any, index) => (
-        <Task
-          key={index}
-          title={task.task_id.title}
-          endDate={task.task_id.endDate}
-          description={task.task_id.description}
-          earningPoints={task.task_id.earningPoints}
-          submitted={task.dateOfSubmission != null ? true : false}
-          handleSubmitRoot={() => handleSubmit(task.id, task)}
-        />
-      ))}
 
+    <div className="important">
+      <div className="title">
+        <h1>important </h1>
+      </div>
+      <div className="tasks">
+        {tasks.map((task: any, index) => (
+            task.task_id.important && task.dateOfSubmission == null ?
+            <Task
+              key={index}
+              title={task.task_id.title}
+              endDate={task.task_id.endDate}
+              description={task.task_id.description}
+              earningPoints={task.task_id.earningPoints}
+              submitted={task.dateOfSubmission != null ? true : false}
+              handleSubmitRoot={() => handleSubmit(task.id, task)}
+            /> : <></>
+          ))}
+      </div>
+    </div>
+    <div className="unimportant">
+    <div className="title">
+      <h1>Other tasks</h1>
+    </div>
+    <div className="tasks">
+      {tasks.map((task: any, index) => (
+            !task.task_id.important && task.dateOfSubmission == null ?
+            <Task
+              key={index}
+              title={task.task_id.title}
+              endDate={task.task_id.endDate}
+              description={task.task_id.description}
+              earningPoints={task.task_id.earningPoints}
+              submitted={task.dateOfSubmission != null ? true : false}
+              handleSubmitRoot={() => handleSubmit(task.id, task)}
+            /> : <></>
+          ))}
+    </div>
+    </div>
+    <div className="done">
+      <div className="title">
+        <h1>done</h1>
+      </div>
+    <div className="tasks">
+      {tasks.map((task: any, index) => (
+              task.dateOfSubmission !== null && isLaterThanToday(task.task_id.endDate) ?
+              <Task
+                key={index}
+                title={task.task_id.title}
+                endDate={task.task_id.endDate}
+                description={task.task_id.description}
+                earningPoints={task.task_id.earningPoints}
+                submitted={task.dateOfSubmission != null ? true : false}
+                handleSubmitRoot={() => handleSubmit(task.id, task)}
+              /> : <></>
+            ))}
+    </div>
+    </div>
     </div>
   </>;
 }

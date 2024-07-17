@@ -105,7 +105,11 @@ public class DataLoader implements CommandLineRunner {
         return (List<Task>) taskRepository.saveAll(new HashSet<>() {{
             for (int i = 0; i < 5; i++) {
                 Task task = new Task();
-                task.setTitle(faker.lorem().sentence());
+                String title = faker.lorem().sentence();
+                if (title.length() > 60){
+                    title = title.substring(0, 60);
+                }
+                task.setTitle(title);
                 task.setDescription(faker.lorem().paragraph());
                 task.setEndDate(LocalDate.now().plusDays(faker.number().numberBetween(1, 30)));
                 task.setEarningPoints(faker.number().numberBetween(10, 100));
