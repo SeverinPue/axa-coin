@@ -3,7 +3,6 @@ import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import Layout from "./Layout.js";
 import Start from "./pages/start.jsx";
 import Login from "./pages/login.tsx";
-import Footer from "./components/footer.tsx";
 import "./App.css";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import NotFound from "./pages/notFound.tsx"; 
