@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="frontend">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/dfc5c9ae-c8c8-40bb-b93c-87ab0ebf4064.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/dfc5c9ae-c8c8-40bb-b93c-87ab0ebf4064.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/services/authService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/services/authService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/Entity/TaskTrainee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/Entity/TaskTrainee.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,6 +220,23 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create UserController.java" />

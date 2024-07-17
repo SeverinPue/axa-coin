@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./login.css"
+import "./login.css";
+import ThemeSwitcher from "../components/ThemeSwitcher";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -41,10 +42,21 @@ export default function Login() {
       .catch((error) => {
         console.error("Fehler beim Fetchen: " + error);
       });
+
+    setPassword("");
+    setUsername("");
   };
 
   return (
     <>
+      <header>
+        <div>
+          <ThemeSwitcher></ThemeSwitcher>
+        </div>
+        <div>
+          <h1>Willkommen Bei AXA-Coin</h1>
+        </div>
+      </header>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input

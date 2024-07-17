@@ -20,7 +20,7 @@ public class TaskTrainee {
     private LocalDate dateOfSubmission;
 
 
-    @JsonIgnoreProperties("taskTrainees")
+    @JsonIgnoreProperties({"taskTrainees", "creator"})
     @ManyToOne
     Task task_id;
 
