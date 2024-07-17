@@ -24,7 +24,6 @@ public class User implements UserDetails {
 
     private String username;
     private String password;
-    private String email;
 
     @OneToMany(mappedBy = "user")
     private Set<Trainer> trainers;

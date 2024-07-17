@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@RequestParam String id){
+    public ResponseEntity<User> getUserById(@PathVariable String id){
         Optional<User> user = userRepository.findById(id);
         if(user.isPresent()){
             return ResponseEntity.ok(user.get());
@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@RequestParam String id, @Valid @RequestBody User user) {
+    public ResponseEntity<User> updateUser(@PathVariable String id, @Valid @RequestBody User user) {
         Optional<User> userOptional = userRepository.findById(id);
         user.setId(id);
         if(userOptional.get().getUsername().equals(user.getUsername())){
@@ -63,7 +63,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@RequestParam String id) {
+    public void deleteUser(@PathVariable String id) {
         userRepository.deleteById(id);
     }
 
