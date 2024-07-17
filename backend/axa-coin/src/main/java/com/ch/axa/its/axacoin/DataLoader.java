@@ -89,7 +89,11 @@ public class DataLoader implements CommandLineRunner {
             for (int i = 0; i < 5; i++) {
                 Product product = new Product();
                 product.setName(faker.commerce().productName());
-                product.setDescription(faker.lorem().sentence());
+                String description = faker.lorem().sentence();
+                if (description.length() > 240){
+                    description = description.substring(0, 240);
+                }
+                product.setDescription(description);
                 product.setPrice(faker.number().randomDouble(2, 1, 100));
                 product.setCreator(trainer);
                 add(product);
