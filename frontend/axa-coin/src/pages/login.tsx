@@ -38,6 +38,7 @@ export default function Login() {
       })
       .then((data) => {
         sessionStorage.setItem("jwt", data.token);
+        sessionStorage.setItem("id", data.id);
       })
       .catch((error) => {
         console.error("Fehler beim Fetchen: " + error);

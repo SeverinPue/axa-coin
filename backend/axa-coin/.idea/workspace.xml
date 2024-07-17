@@ -5,8 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="frontend">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/Entity/TaskTrainee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/Entity/TaskTrainee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/DataLoader$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/DataLoader$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/DataLoader$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/DataLoader$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/DataLoader$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/DataLoader$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/DataLoader$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/DataLoader$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/DataLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/DataLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/Entity/TaskTrainee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/Entity/TaskTrainee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/Entity/Trainee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/Entity/Trainee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/Repositorys/TaskTraineeRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/Repositorys/TaskTraineeRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/config/SecurityConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/config/SecurityConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/controller/TaskTraineeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/controller/TaskTraineeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/controller/auth/AuthenticationResponse$AuthenticationResponseBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/controller/auth/AuthenticationResponse$AuthenticationResponseBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/controller/auth/AuthenticationResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/controller/auth/AuthenticationResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/controller/auth/AuthenticationService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/ch/axa/its/axacoin/controller/auth/AuthenticationService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
