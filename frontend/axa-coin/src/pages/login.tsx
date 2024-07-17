@@ -9,6 +9,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate(); 
 
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -31,8 +32,8 @@ export default function Login() {
       const data = await response.json();
       sessionStorage.setItem("jwt", data.token);
       sessionStorage.setItem("id", data.id);
-      navigate("/start", { state: { key: "value" } }); // Now called from the component
 
+      navigate("/start", { state: { key: "value" } }); 
     } catch (error) {
       setError(error.message);
     } finally {
@@ -40,7 +41,6 @@ export default function Login() {
       setUsername('');
     }
   };
-
 
 
   return (

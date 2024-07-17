@@ -14,9 +14,9 @@ function App() {
       <BrowserRouter className="main">
         <Routes>
           <Route path="/" element={<Navigate replace to="/start" />} />
-          <Route path="" element={<ProtectedRoute component={<Layout />} />}>
+          <Route path="" element={<Layout />}>
             <Route path="/start" element={<ProtectedRoute component={<Start />} />} />
-            
+
             <Route path="/login" element={<Login />} /> 
             <Route path="*" element={<NotFound />} /> 
           </Route>
