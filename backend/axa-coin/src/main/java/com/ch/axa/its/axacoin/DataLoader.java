@@ -48,7 +48,6 @@ public class DataLoader implements CommandLineRunner {
         random = new Random();
         livio.setUsername("livio");
         livio.setPassword(passwordEncoder.encode("livio"));
-        livio.setEmail("livio@gmail.com");
         livio.setRole("ROLE_"+Role.ADMIN.name());
         userRepository.save(livio);
         for (int i = 0; i < 5; i++) {
@@ -66,7 +65,6 @@ public class DataLoader implements CommandLineRunner {
         User user = new User();
         user.setUsername(faker.name().username());
         user.setPassword(passwordEncoder.encode(faker.internet().password()));
-        user.setEmail(faker.internet().emailAddress());
         user.setRole("ROLE_"+Role.USER.name());
         return userRepository.save(user);
     }
