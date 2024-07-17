@@ -26,5 +26,5 @@ public class TaskTrainee {
 
     @JsonIgnoreProperties({"taskTrainees", "transactions", "trainer"})
     @ManyToOne
-    Trainee trainee_id;
+    Trainee trainee;
 }

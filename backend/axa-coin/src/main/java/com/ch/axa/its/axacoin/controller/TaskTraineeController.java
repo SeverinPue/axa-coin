@@ -2,8 +2,10 @@ package com.ch.axa.its.axacoin.controller;
 
 import com.ch.axa.its.axacoin.Entity.Task;
 import com.ch.axa.its.axacoin.Entity.TaskTrainee;
+import com.ch.axa.its.axacoin.Entity.Trainee;
 import com.ch.axa.its.axacoin.Repositorys.TaskRepository;
 import com.ch.axa.its.axacoin.Repositorys.TaskTraineeRepository;
+import com.ch.axa.its.axacoin.Repositorys.TraineeRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,9 @@ public class TaskTraineeController {
     @Autowired
     private TaskTraineeRepository taskTraineeRepository;
 
+    @Autowired
+    private TraineeRepository traineeRepository;
+
     @GetMapping
     public ResponseEntity<List<TaskTrainee>> getAllTaskTrainees(){
         return ResponseEntity.ok(taskTraineeRepository.findAll());
@@ -32,6 +37,12 @@ public class TaskTraineeController {
             return ResponseEntity.ok(taskTrainee.get());
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/trainee/{id}")
+    public ResponseEntity<List<TaskTrainee>> getTaskTraineeByTraineeId(@PathVariable String id){
+        Trainee trainee = traineeRepository.findById(id).orElse(null);
+        return ResponseEntity.ok(taskTraineeRepository.findAllByTrainee(trainee));
     }
 
     @PostMapping
