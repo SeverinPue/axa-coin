@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
     --primary: #cfcfcf;
+    --primary-contrast: #bbbbbb ;
     --secondary: #000;
     --titles: #489FB5;
     --titlesaction: #3e8799;
@@ -11,6 +12,7 @@
   
   [data-theme='dark'] {
     --primary: #202020;
+    --primary-contrast: #494949 ;
     --secondary: #cfcfcf;
     --titles: #38798a;
     --titlesaction: #69b9c9;
@@ -33,4 +35,22 @@
       border: 2px solid var(--highlightaction);
       background-color: var(--primary);
 
+    }
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: var(--primary);
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: var(--titles);
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--titlesaction);
     }
