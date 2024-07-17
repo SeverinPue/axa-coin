@@ -17,8 +17,8 @@ public class Trainee {
 
     private int year;
 
-    @JsonIgnoreProperties("trainee_id")
-    @OneToMany(mappedBy = "trainee_id")
+    @JsonIgnoreProperties("trainee")
+    @OneToMany(mappedBy = "trainee")
     Set<TaskTrainee> taskTrainees;
 
     @JsonIgnoreProperties("trainee")
