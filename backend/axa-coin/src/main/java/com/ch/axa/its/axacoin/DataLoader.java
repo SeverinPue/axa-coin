@@ -126,7 +126,7 @@ public class DataLoader implements CommandLineRunner {
                     taskTrainee.setDateOfSubmission(null);
                 }
                 taskTrainee.setTask_id(task);
-                taskTrainee.setTrainee_id(trainee);
+                taskTrainee.setTrainee(trainee);
                 add(taskTrainee);
             }
         }});
