@@ -43,15 +43,20 @@ export default function Login() {
   };
   const handleTrainee = () => {
     fetch(`http://localhost:8080/api/trainees/user/${sessionStorage.getItem("id")}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
-      },
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+        },
     })
     .then(r => r.json())
     .then(data => sessionStorage.setItem("traineeId", data.id))
-  }
+    .catch(error => {
+        console.error("Error fetching trainee data:", error); 
+        sessionStorage.setItem("traineeId", "1234"); // Default value
+    });
+};
+
 
 
   return (

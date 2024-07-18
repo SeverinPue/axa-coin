@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="frontend">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/DataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/DataLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/Entity/Trainee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/Entity/Trainee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/shop.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="frontend" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,7 +118,7 @@
       <workItem from="1721054877551" duration="1088000" />
       <workItem from="1721109491011" duration="16147000" />
       <workItem from="1721128133579" duration="3621000" />
-      <workItem from="1721282920338" duration="3407000" />
+      <workItem from="1721282920338" duration="4008000" />
     </task>
     <task id="LOCAL-00001" summary="create UserController.java">
       <option name="closed" value="true" />
