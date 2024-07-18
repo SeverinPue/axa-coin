@@ -1,14 +1,22 @@
 'use client'
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import User from "../components/user.tsx";
 
 export default function EditUser (){
-    const [username, setUsername] = useState<string>();
-    const [email, setEmail] = useState<string>();
-    const [trainer, setTrainer] = useState<string>();
+    const dialogRef = useRef(null);
+    const [username, setUsername] = useState<string>("");
+    const [trainer, setTrainer] = useState<string>("");
     const [trainers, setTrainers] = useState<Array<any>>();
     const [trainees, setTrainees] = useState<Array<any>>();
+
+    const openDialog = () => {
+      dialogRef.current.showModal();
+    };
+  
+    const closeDialog = () => {
+      dialogRef.current.close();
+    };
 
     useEffect(() => {
         fetchTrainees();
@@ -17,7 +25,7 @@ export default function EditUser (){
 
     const fetchTrainees = () => {
 
-        fetch("http://localhost:8080/api/trainee", {
+        fetch("http://localhost:8080/api/trainees", {
             headers: {
               "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
             },
@@ -47,15 +55,42 @@ export default function EditUser (){
             });
     }
 
-    function loadTrainee(user: any){
-        setUsername(user.username);
-        setEmail(user.setEmail);
-        setTrainer(user.trainer);
-        fetchTrainers();
+    function loadTrainee(trainee: any){
+      openDialog();
+      setUsername(trainee.user.username);
+      setTrainer(trainee.trainer.id);
+      fetchTrainers();
+    }
+
+    function saveTrainee(trainee){
+      closeDialog();
+      console.log("Trainee gespeichert")
+      const updatedTrainee = {id: trainee.id, username: username, trainerId: trainer, userId: trainee.user.id}
+
+      fetch("http://localhost:8080/api/trainee", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },body: JSON.stringify(updatedTrainee)
+      })
+        .then((response) => {
+          if (!response.ok) {
+            setError("Falsches Password oder Benuzername!");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          sessionStorage.setItem("jwt", data.token);
+          sessionStorage.setItem("id", data.id);
+        })
+        .catch((error) => {
+          console.error("Fehler beim Fetchen: " + error);
+        });
     }
 
     function deleteTrainee(traineeId: string){
-        /*
+      console.log("Trainee wird gelöscht: " + traineeId)
+        
         fetch("http://localhost:8080/api/auth/authenticate/", {
             method: "DELETE",
             headers: {
@@ -74,28 +109,35 @@ export default function EditUser (){
             })
             .catch((error) => {
               console.error("Fehler beim Fetchen: " + error);
-            });*/
+            });
     }
 
     return(
         <div>
-            <div>
-                <label htmlFor="email">Email</label>
-                <input type="text" id="email" value={email} onChange={e => setEmail(e.target.value)} />
+            <dialog ref={dialogRef}>
+              <label htmlFor="username">Benutzername</label>
+              <input type="text" id="username" value={username} onChange={e => setUsername(e.target.value)} />
 
-                <label htmlFor="dropdown">Berufsbildner*in</label>
-                <select id="dropdown" value={trainer} onChange={e => setTrainer(e.target.value)}>
-                    <option>Bitte wählen</option>
-                    {
-                        trainers?.map(trainerprov => <option value={trainerprov.id}>{trainerprov.user.username}</option>)
-                    }
-                </select>
-            </div>
+              <label htmlFor="dropdown">Berufsbildner*in</label>
+              <select id="dropdown" value={trainer} onChange={e => setTrainer(e.target.value)}>
+                  <option>Bitte wählen</option>
+                  {
+                      trainers?.map(trainerprov => <option key={trainerprov.id} value={trainerprov.id}>{trainerprov.user.username}</option>)
+                  }
+              </select>
+              <button onClick={saveTrainee}>speichern</button>
+              <button onClick={closeDialog}>abbrechen</button>
+            </dialog>
             <div>
                 {
-                    trainees?.map(trainee => <User key={trainee.id} loadUser={loadTrainee} deleteUser={deleteTrainee} user={trainee.user}></User>)
+                    trainees?.map(trainee => <User key={trainee.id} loadUser={loadTrainee} deleteUser={deleteTrainee} user={trainee}></User>)
                 }
             </div>
         </div>
+
     )
+}
+
+function setError(arg0: string) {
+  throw new Error("Function not implemented.");
 }
