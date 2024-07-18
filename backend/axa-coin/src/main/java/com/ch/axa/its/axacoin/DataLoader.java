@@ -80,6 +80,7 @@ public class DataLoader implements CommandLineRunner {
         trainee.setUser(user);
         trainee.setTrainer(trainer);
         Random rand = new Random();
+        trainee.setPoints(20000);
         trainee.setYear(rand.nextInt(4) + 1);
         return traineeRepository.save(trainee);
     }
