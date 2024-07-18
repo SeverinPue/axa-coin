@@ -1,0 +1,74 @@
+.card {
+    margin: 20px;
+    width: 200px;
+    min-width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    border: 2px solid var(--titles);
+    font-family: var(--font-family);
+    background-color: var(--primary);
+    color: var(--secondary);
+    position: relative;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .toplevel {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .taskTitle {
+    font-weight: 900;
+    font-size: 1.3rem;
+  }
+  
+  .toggle-button {
+    position: absolute;
+    right: 10px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .down {
+    display: block;
+  }
+  
+  .up {
+    display: none;
+    transform: rotate(180deg);
+  }
+  
+  .card:hover .down {
+    display: none;
+  }
+  
+  .card:hover .up {
+    display: block;
+  }
+  
+  .toggle-menu {
+    display: none;
+    flex-direction: column;
+    height: 40%;
+    margin-top: 10px;
+  }
+  
+  .card:hover .toggle-menu {
+    display: flex;
+  }
+  
+  .date, .description, .earningPoints {
+    margin: 5px 0;
+  }
+  
+
+  

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Task from "../components/task2.jsx";
+import Task from "../components/task.jsx";
 import './stylesheets/tasks.css';
 
 export default function Tasks() {

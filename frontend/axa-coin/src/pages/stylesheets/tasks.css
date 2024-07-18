@@ -31,7 +31,13 @@
   .taskSelect select {
     font-family: var(--font-family);
     color: var(--titles);
+    font-weight: 800;
+    background-color: var(--primary);
+    border: 2px solid var(--titles);
     padding: 5px;
     margin-left: 10px;
+  }
+  .taskSelect select-selected{
+    border: 2px solid var(--highlightaction);
   }
   
