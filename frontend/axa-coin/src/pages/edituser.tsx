@@ -9,6 +9,7 @@ export default function EditUser (){
     const [trainer, setTrainer] = useState<string>("");
     const [trainers, setTrainers] = useState<Array<any>>();
     const [trainees, setTrainees] = useState<Array<any>>();
+    const [trainee, setTrainee] = useState<any>();
 
     const openDialog = () => {
       dialogRef.current.showModal();
@@ -57,31 +58,23 @@ export default function EditUser (){
       openDialog();
       setUsername(trainee.user.username);
       setTrainer(trainee.trainer.id);
+      setTrainee(trainee)
       fetchTrainers();
     }
 
-    function saveTrainee(trainee){
+    function saveTrainee(){
       closeDialog();
       console.log("Trainee gespeichert")
-      const updatedTrainee = {id: trainee.id, username: username, trainerId: trainer, userId: trainee.user.id}
+      const updatedTrainee = {username: username, trainer: trainer}
 
-      fetch("http://localhost:8080/api/trainees", {
+      fetch("http://localhost:8080/api/trainees/"+trainee.id, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
         },body: JSON.stringify(updatedTrainee)
       })
-        .then((response) => {
-          if (!response.ok) {
-            setError("Fehler");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          sessionStorage.setItem("jwt", data.token);
-          sessionStorage.setItem("id", data.id);
-        })
+        .then(res => fetchTrainees())
         .catch((error) => {
           console.error("Fehler beim Fetchen: " + error);
         });

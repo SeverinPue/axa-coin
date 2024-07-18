@@ -2,6 +2,7 @@ package com.ch.axa.its.axacoin.controller;
 
 import com.ch.axa.its.axacoin.Entity.TaskTrainee;
 import com.ch.axa.its.axacoin.Entity.Trainee;
+import com.ch.axa.its.axacoin.Entity.Trainer;
 import com.ch.axa.its.axacoin.Entity.User;
 import com.ch.axa.its.axacoin.Repositorys.TraineeRepository;
 import com.ch.axa.its.axacoin.Repositorys.TrainerRepository;
@@ -74,6 +75,18 @@ public class TraineeController {
             switch (key) {
                 case "points":
                     existingTrainee.setPoints(Double.parseDouble(value.toString()));
+                    break;
+                case "username":
+                    Optional<User> user = userRepository.findByUsername(value.toString());
+                    if (!user.isPresent()){
+                        existingTrainee.getUser().setUsername(value.toString());
+                    }
+                    break;
+                case "trainer":
+                    Optional<Trainer> trainer = trainerRepository.findById(value.toString());
+                    if (trainer.isPresent()) {
+                        existingTrainee.setTrainer(trainer.get());
+                    }
                     break;
             }
         });
