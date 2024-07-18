@@ -22,6 +22,7 @@ function App() {
             <Route path="/tasks" element={<ProtectedRoute component={<Tasks/>}/>}></Route>
             <Route path="/shop" element={<ProtectedRoute component={<Shop/>}/>}></Route>
             <Route path="/login" element={<Login />} /> 
+            <Route path="/edituser" element={<EditUser />} />
             <Route path="*" element={<NotFound />} /> 
           </Route>
         </Routes>
