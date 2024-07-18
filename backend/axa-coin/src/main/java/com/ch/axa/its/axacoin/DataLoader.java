@@ -108,7 +108,7 @@ public class DataLoader implements CommandLineRunner {
                     description = description.substring(0, 240);
                 }
                 product.setDescription(description);
-                product.setPrice(faker.number().randomDouble(2, 1, 100));
+                product.setPrice((int) (Math.random() * 91) + 10);
                 product.setCreator(trainer);
                 add(product);
             }
