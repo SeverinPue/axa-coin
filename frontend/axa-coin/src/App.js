@@ -8,6 +8,8 @@ import ProtectedRoute from "./components/ProtectedRoute.js";
 import NotFound from "./pages/notFound.tsx"; 
 import Tasks from "./pages/tasks.tsx";
 import Shop from "./pages/shop.tsx";
+import EditUser from "./pages/edituser.tsx";
+import Home from "./pages/home.tsx";
 
 function App() {
   return (

@@ -17,6 +17,8 @@ public class Trainee {
 
     private int year;
 
+    private double points;
+
     @JsonIgnoreProperties("trainee")
     @OneToMany(mappedBy = "trainee")
     Set<TaskTrainee> taskTrainees;
