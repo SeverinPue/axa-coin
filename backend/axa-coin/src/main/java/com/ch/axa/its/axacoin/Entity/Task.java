@@ -21,6 +21,7 @@ public class Task {
     private LocalDate endDate;
     private int earningPoints;
     private boolean important;
+    private boolean approved;
 
     @JsonIgnoreProperties({"tasks", "trainees", "products"})
     @ManyToOne

@@ -1,8 +1,7 @@
 package com.ch.axa.its.axacoin.controller;
 
+import com.ch.axa.its.axacoin.Entity.TaskTrainee;
 import com.ch.axa.its.axacoin.Entity.Trainee;
-import com.ch.axa.its.axacoin.Entity.Trainer;
-import com.ch.axa.its.axacoin.Entity.UpdateTraineeDto;
 import com.ch.axa.its.axacoin.Entity.User;
 import com.ch.axa.its.axacoin.Repositorys.TraineeRepository;
 import com.ch.axa.its.axacoin.Repositorys.TrainerRepository;
@@ -12,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -63,24 +64,22 @@ public class TraineeController {
         return ResponseEntity.ok(traineeRepository.save(trainee));
     }
 
-    @PutMapping("")
-    public ResponseEntity<Trainee> updateTrainee(@Valid @RequestBody UpdateTraineeDto updatedTrainee) {
-        Optional<Trainee> trainee = traineeRepository.findById(updatedTrainee.getId());
-        Optional<User> user = userRepository.findById(updatedTrainee.getUserId());
-
-        if(trainee.isPresent()){
-            trainee.get().setTrainer(trainerRepository.findById(updatedTrainee.getTrainerId()).get());
-
-            if(user.isPresent()){
-                trainee.get().setUser(user.get());
-                user.get().setUsername(updatedTrainee.getUsername());
-                return ResponseEntity.ok(traineeRepository.save(trainee.get()));
-            }else {
-                return ResponseEntity.notFound().build();
+    @PutMapping("/{id}")
+    public ResponseEntity<Trainee> updateTrainee(
+            @PathVariable String id,
+            @Valid @RequestBody Map<String, Object> updates) {
+        Trainee existingTrainee = traineeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Trainee not found with id: " + id));
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "points":
+                    existingTrainee.setPoints(Double.parseDouble(value.toString()));
+                    break;
             }
-        }else {
-            return ResponseEntity.notFound().build();
-        }
+        });
+        Trainee savedTrainee = traineeRepository.save(existingTrainee);
+        return ResponseEntity.ok(savedTrainee);
+
     }
 
 

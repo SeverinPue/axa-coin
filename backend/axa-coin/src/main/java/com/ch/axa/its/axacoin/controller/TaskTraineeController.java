@@ -70,7 +70,6 @@ public class TaskTraineeController {
             }
         });
         TaskTrainee savedTaskTrainee = taskTraineeRepository.save(existingTaskTrainee);
-        System.out.println(savedTaskTrainee.getDateOfSubmission());
         return ResponseEntity.ok(savedTaskTrainee);
     }
 
