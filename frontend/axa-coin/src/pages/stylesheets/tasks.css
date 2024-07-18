@@ -37,7 +37,9 @@
     padding: 5px;
     margin-left: 10px;
   }
-  .taskSelect select-selected{
-    border: 2px solid var(--highlightaction);
+  .taskSelect select:focus {
+    outline: none; 
+    border: 2px solid var(--titles);
   }
+ 
   
