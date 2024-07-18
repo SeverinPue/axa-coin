@@ -1,9 +1,7 @@
 package com.ch.axa.its.axacoin.controller;
 
-import com.ch.axa.its.axacoin.Entity.TaskTrainee;
-import com.ch.axa.its.axacoin.Entity.Trainee;
-import com.ch.axa.its.axacoin.Entity.Trainer;
-import com.ch.axa.its.axacoin.Entity.User;
+import com.ch.axa.its.axacoin.Entity.*;
+import com.ch.axa.its.axacoin.Repositorys.ProductRepository;
 import com.ch.axa.its.axacoin.Repositorys.TraineeRepository;
 import com.ch.axa.its.axacoin.Repositorys.TrainerRepository;
 import com.ch.axa.its.axacoin.Repositorys.UserRepository;
@@ -27,6 +25,9 @@ public class TraineeController {
 
     @Autowired
     private TrainerRepository trainerRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -94,8 +95,25 @@ public class TraineeController {
         return ResponseEntity.ok(savedTrainee);
 
     }
+    @PutMapping("/purchase/{id}")
+    public ResponseEntity<Trainee> updatePoints(
+            @PathVariable String id,
+            @Valid @RequestBody Map<String, Object> updates) {
+        Trainee existingTrainee = traineeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Trainee not found with id: " + id));
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "productId":
+                    Optional<Product> product = productRepository.findById(value.toString());
+                    if (product.isPresent()) {
+                            existingTrainee.setPoints(existingTrainee.getPoints() + product.get().getPrice());
+                    }
+            }
+        });
 
-
+        Trainee savedTrainee = traineeRepository.save(existingTrainee);
+        return ResponseEntity.ok(savedTrainee);
+    }
 
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable String id) {
