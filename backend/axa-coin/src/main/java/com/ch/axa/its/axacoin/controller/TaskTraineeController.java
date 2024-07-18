@@ -69,6 +69,13 @@ public class TaskTraineeController {
                     break;
                 case "approved":
                     existingTaskTrainee.getTask_id().setApproved((Boolean) value);
+                    break;
+                case "endDate":
+                    if (value == null) {
+                        existingTaskTrainee.getTask_id().setEndDate(null);
+                    } else {
+                        existingTaskTrainee.getTask_id().setEndDate(LocalDate.parse((String) value));
+                    }
             }
         });
         TaskTrainee savedTaskTrainee = taskTraineeRepository.save(existingTaskTrainee);

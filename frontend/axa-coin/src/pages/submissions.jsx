@@ -34,7 +34,8 @@ export default function Submission() {
   }
   const handleRejectLocal = (task) => {
     const updatedTask = {
-      dateOfSubmission
+      dateOfSubmission: null,
+      endDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     };
     fetch(`http://localhost:8080/api/tasktrainees/${task.id}`, {
       method: "PUT",
