@@ -15,7 +15,7 @@ export default function Tasks() {
       dateOfSubmission: updatedDateOfSubmission,
     };
 
-    fetch(`http://localhost:8080/api/tasktrainee/${id}`, {
+    fetch(`http://localhost:8080/api/tasktrainees/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +32,7 @@ export default function Tasks() {
   }, []);
 
   const updateTasks = () => {
-    fetch("http://localhost:8080/api/tasktrainee", {
+    fetch(`http://localhost:8080/api/tasktrainees/trainee/${sessionStorage.getItem("traineeId")}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

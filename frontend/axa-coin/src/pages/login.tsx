@@ -32,7 +32,7 @@ export default function Login() {
       const data = await response.json();
       sessionStorage.setItem("jwt", data.token);
       sessionStorage.setItem("id", data.id);
-
+      handleTrainee();
       navigate("/start", { state: { key: "value" } }); 
     } catch (error) {
       setError(error.message);
@@ -41,6 +41,17 @@ export default function Login() {
       setUsername('');
     }
   };
+  const handleTrainee = () => {
+    fetch(`http://localhost:8080/api/trainees/user/${sessionStorage.getItem("id")}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+      },
+    })
+    .then(r => r.json())
+    .then(data => sessionStorage.setItem("traineeId", data.id))
+  }
 
 
   return (

@@ -54,7 +54,6 @@ public class DataLoader implements CommandLineRunner {
         jay.setUsername("jay");
         jay.setPassword(passwordEncoder.encode("jay"));
         jay.setRole("ROLE_"+Role.ADMIN.name());
-
         userRepository.save(jay);
         Trainee jaytrainee = createTrainee(jay, createTrainer(createUser()));
         traineeRepository.save(jaytrainee);
