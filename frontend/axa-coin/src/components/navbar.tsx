@@ -10,9 +10,9 @@ export default function Navbar() {
           <ThemeSwitcher></ThemeSwitcher>
         </div>
         <ul className="navList">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Tasks</a></li>
-          <li><a href="#">Shop</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/tasks">Tasks</a></li>
+          <li><a href="/shop">Shop</a></li>
         </ul>
       </nav>
     </>

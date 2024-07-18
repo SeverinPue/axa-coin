@@ -7,6 +7,7 @@ import "./App.css";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import NotFound from "./pages/notFound.tsx"; 
 import Tasks from "./pages/tasks.tsx";
+import Shop from "./pages/shop.tsx";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="" element={<Layout />}>
             <Route path="/start" element={<ProtectedRoute component={<Start/>} />} />
             <Route path="/tasks" element={<ProtectedRoute component={<Tasks/>}/>}></Route>
+            <Route path="/shop" element={<ProtectedRoute component={<Shop/>}/>}></Route>
             <Route path="/login" element={<Login />} /> 
             <Route path="*" element={<NotFound />} /> 
           </Route>
