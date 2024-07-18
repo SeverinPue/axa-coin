@@ -13,7 +13,7 @@ export default function User (props: Props){
         <div>
             <button onClick={e => props.loadUser(props.user)}>bearbeiten</button>
             <button onClick={e => props.deleteUser(props.user.id)}>löschen</button>
-            <p>{props.user.username}</p>
+            <p>{props.user.user.username}</p>
 
         </div>
     )

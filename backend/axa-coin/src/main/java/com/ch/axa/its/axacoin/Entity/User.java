@@ -2,6 +2,8 @@ package com.ch.axa.its.axacoin.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,9 +28,11 @@ public class User implements UserDetails {
     private String password;
 
     @OneToMany(mappedBy = "user")
+    @Cascade(CascadeType.DETACH)
     private Set<Trainer> trainers;
 
     @OneToMany(mappedBy = "user")
+    @Cascade(CascadeType.DETACH)
     private Set<Trainee> trainees;
 
     private String role;

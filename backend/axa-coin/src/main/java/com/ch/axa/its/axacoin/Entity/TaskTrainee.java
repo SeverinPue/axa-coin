@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDate;
 
@@ -22,6 +23,7 @@ public class TaskTrainee {
 
     @JsonIgnoreProperties({"taskTrainees", "creator"})
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.DETACH)
     Task task_id;
 
     @JsonIgnoreProperties({"taskTrainees", "transactions", "trainer"})

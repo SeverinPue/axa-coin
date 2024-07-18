@@ -30,9 +30,7 @@ export default function EditUser (){
               "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
             },
           })
-            .then((response) => {
-              return response.json();
-            })
+            .then(r => r.json())
             .then((data) => {setTrainees(data); console.log(data)})
             .catch((error) => {
               console.error("Fehler beim Fetchen: " + error);
@@ -67,15 +65,16 @@ export default function EditUser (){
       console.log("Trainee gespeichert")
       const updatedTrainee = {id: trainee.id, username: username, trainerId: trainer, userId: trainee.user.id}
 
-      fetch("http://localhost:8080/api/trainee", {
+      fetch("http://localhost:8080/api/trainees", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
         },body: JSON.stringify(updatedTrainee)
       })
         .then((response) => {
           if (!response.ok) {
-            setError("Falsches Password oder Benuzername!");
+            setError("Fehler");
           }
           return response.json();
         })
@@ -91,25 +90,17 @@ export default function EditUser (){
     function deleteTrainee(traineeId: string){
       console.log("Trainee wird gelöscht: " + traineeId)
         
-        fetch("http://localhost:8080/api/auth/authenticate/", {
+        fetch("http://localhost:8080/api/trainees/"+traineeId, {
             method: "DELETE",
             headers: {
-              "Content-Type": "application/json",
+              "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
             }
           })
-            .then((response) => {
-              if (!response.ok) {
-                setError("Falsches Password oder Benuzername!");
-              }
-              return response.json();
-            })
-            .then((data) => {
-              sessionStorage.setItem("jwt", data.token);
-              sessionStorage.setItem("id", data.id);
-            })
+          .then(()=> fetchTrainees())
             .catch((error) => {
               console.error("Fehler beim Fetchen: " + error);
             });
+      
     }
 
     return(
@@ -125,13 +116,14 @@ export default function EditUser (){
                       trainers?.map(trainerprov => <option key={trainerprov.id} value={trainerprov.id}>{trainerprov.user.username}</option>)
                   }
               </select>
-              <button onClick={saveTrainee}>speichern</button>
+              <button onClick={() => saveTrainee()}>speichern</button>
               <button onClick={closeDialog}>abbrechen</button>
             </dialog>
             <div>
-                {
-                    trainees?.map(trainee => <User key={trainee.id} loadUser={loadTrainee} deleteUser={deleteTrainee} user={trainee}></User>)
+                {trainees &&
+                  trainees.map(trainee => <User key={trainee.id} loadUser={trainee => loadTrainee(trainee)} deleteUser={traineeId => deleteTrainee(traineeId)} user={trainee}></User>)
                 }
+                    
             </div>
         </div>
 
