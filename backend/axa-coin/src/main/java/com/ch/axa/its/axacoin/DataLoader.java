@@ -56,6 +56,7 @@ public class DataLoader implements CommandLineRunner {
         jay.setRole("ROLE_"+Role.ADMIN.name());
         userRepository.save(jay);
         Trainee jaytrainee = createTrainee(jay, createTrainer(createUser()));
+        jaytrainee.setPoints(20000);
         traineeRepository.save(jaytrainee);
         List<Task> jayTasks = createTasks(createTrainer(createUser()));
         createTaskTrainees(jayTasks, jaytrainee);
@@ -127,6 +128,7 @@ public class DataLoader implements CommandLineRunner {
                 task.setEndDate(LocalDate.now().plusDays(faker.number().numberBetween(1, 30)));
                 task.setEarningPoints(faker.number().numberBetween(10, 100));
                 task.setImportant(random.nextBoolean());
+                task.setApproved(false);
                 task.setCreator(trainer);
                 add(task);
             }
