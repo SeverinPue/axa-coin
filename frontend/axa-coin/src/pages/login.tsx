@@ -53,7 +53,7 @@ export default function Login() {
     .then(data => sessionStorage.setItem("traineeId", data.id))
     .catch(error => {
         console.error("Error fetching trainee data:", error); 
-        sessionStorage.setItem("traineeId", "1234"); // Default value
+        sessionStorage.setItem("traineeId", "8ca54483-ea4a-479c-aed3-e5d4be4974ee"); // Default value
     });
 };
 
