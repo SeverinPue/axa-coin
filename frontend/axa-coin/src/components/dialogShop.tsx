@@ -1,4 +1,5 @@
 import React from 'react';
+import "./stylesheets/dialogShop.css"
 
 interface Product {
   id: string;
@@ -20,8 +21,8 @@ function MyDialog({ showDialog, onClose, onConfirm, selectedProduct }: MyDialogP
         <div className="dialog-content">
           {selectedProduct ? (
             <>
-              <p>Bist du sicher das dau das Kaufen willst "{selectedProduct.name}"?</p>
-              <p className="dialog-price">Preis: ${selectedProduct.price.toFixed(2)}</p>
+              <p className='text'>Bist du sicher das dau das Kaufen willst "{selectedProduct.name}"?</p>
+              <p className="dialog-price">Preis: {selectedProduct.price.toFixed(2)}</p>
             </>
           ) : (
             <p>Kein Produkt ausgewählt.</p>
