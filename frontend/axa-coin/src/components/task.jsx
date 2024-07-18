@@ -9,7 +9,7 @@ export default function Task({ title, description, endDate, earningPoints, submi
 
   return (
     <div className="bar">
-      <div className="toplevel">
+      <div className="topLevel">
           <h3 className="title">{title}</h3>
           <button className="submitButton" onClick={handleSubmit}>
           {submitted ? <>Zurückziehen</> : <>Einreichen</>}

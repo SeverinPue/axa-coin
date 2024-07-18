@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Task from "../components/task.jsx";
-import './stylesheets/submission.css';
+import CustomSubmission from '../components/Submission.jsx'
+import './stylesheets/submissions.css';
 
 export default function Submission() {
-  const [submissions, setSubmissions] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('important');
+  const [tasks, setTasks] = useState([]);
 
   const isLaterThanToday = (dateStr) => new Date(dateStr) > new Date();
 
-  const handleSubmit = (id, task) => {
-    const updatedDateOfSubmission = task.dateOfSubmission ? null : new Date().toISOString().slice(0, 10);
-
+  const handleApproveLocal = (task) => {
     const updatedTask = {
-      dateOfSubmission: updatedDateOfSubmission,
+      points: (task.task_id.earningPoints + task.trainee.points),
+      approved: true
     };
 
-    fetch(`http://localhost:8080/api/tasktrainee/${id}`, {
+    fetch(`http://localhost:8080/api/trainees/${task.trainee.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -23,16 +21,38 @@ export default function Submission() {
       },
       body: JSON.stringify(updatedTask),
     })
-      .then((r) => r.json())
+    fetch(`http://localhost:8080/api/tasktrainees/${task.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
+      },
+      body: JSON.stringify(updatedTask),
+    })
+      .then(r => r.json())
       .then(updateTasks);
-  };
-
+  }
+  const handleRejectLocal = (task) => {
+    const updatedTask = {
+      dateOfSubmission
+    };
+    fetch(`http://localhost:8080/api/tasktrainees/${task.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
+      },
+      body: JSON.stringify(updatedTask),
+    })
+      .then(r => r.json())
+      .then(updateTasks);
+  }
   useEffect(() => {
     updateTasks();
   }, []);
 
   const updateTasks = () => {
-    fetch("http://localhost:8080/api/tasktrainee", {
+    fetch("http://localhost:8080/api/tasktrainees", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -44,48 +64,21 @@ export default function Submission() {
   };
 
   const renderTasks = (filterFunc) => {
+    console.log(tasks)
     return tasks
       .filter(filterFunc)
       .map((task, index) => (
-        <Task
-          key={index}
-          title={task.task_id.title}
-          endDate={task.task_id.endDate}
-          description={task.task_id.description}
-          earningPoints={task.task_id.earningPoints}
-          submitted={task.dateOfSubmission !== null}
-          handleSubmitRoot={() => handleSubmit(task.id, task)}
-        />
+        <CustomSubmission title={task.task_id.title} trainee={task.trainee.user.username} handleApprove={() => handleApproveLocal(task)} handleReject={() => handleRejectLocal(task)}></CustomSubmission>
       ));
   };
 
   const getFilteredTasks = () => {
-    switch (selectedCategory) {
-      case 'important':
-        return renderTasks((task) => task.task_id.important && task.dateOfSubmission == null);
-      case 'unimportant':
-        return renderTasks((task) => !task.task_id.important && task.dateOfSubmission == null);
-      case 'done':
-        return renderTasks((task) => task.dateOfSubmission !== null && isLaterThanToday(task.task_id.endDate));
-      default:
-        return null;
-    }
+    return renderTasks((task) => task.dateOfSubmission !== null && task.task_id.approved == false);
+
   };
 
   return (
     <div className="mainTasks">
-      <div className="taskSelect">
-        <label htmlFor="taskCategory">Art von Task:</label>
-        <select
-          id="taskCategory"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          <option value="important">Wichtig</option>
-          <option value="unimportant">Sonstig</option>
-          <option value="done">Erledigt</option>
-        </select>
-      </div>
       <div className="tasksContainer">
         {getFilteredTasks()}
       </div>

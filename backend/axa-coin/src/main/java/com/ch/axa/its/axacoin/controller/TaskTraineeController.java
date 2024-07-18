@@ -67,6 +67,8 @@ public class TaskTraineeController {
                         existingTaskTrainee.setDateOfSubmission(LocalDate.parse((String) value));
                     }
                     break;
+                case "approved":
+                    existingTaskTrainee.getTask_id().setApproved((Boolean) value);
             }
         });
         TaskTrainee savedTaskTrainee = taskTraineeRepository.save(existingTaskTrainee);

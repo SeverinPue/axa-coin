@@ -62,11 +62,11 @@ export default function Tasks() {
   const getFilteredTasks = () => {
     switch (selectedCategory) {
       case 'important':
-        return renderTasks((task) => task.task_id.important && task.dateOfSubmission == null);
+        return renderTasks((task) => task.task_id.important && task.dateOfSubmission == null && !task.task_id.approved);
       case 'unimportant':
-        return renderTasks((task) => !task.task_id.important && task.dateOfSubmission == null);
+        return renderTasks((task) => !task.task_id.important && task.dateOfSubmission == null  && !task.task_id.approved);
       case 'done':
-        return renderTasks((task) => task.dateOfSubmission !== null && isLaterThanToday(task.task_id.endDate));
+        return renderTasks((task) => task.dateOfSubmission !== null && isLaterThanToday(task.task_id.endDate)  && !task.task_id.approved);
       default:
         return null;
     }

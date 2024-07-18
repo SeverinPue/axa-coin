@@ -1,0 +1,22 @@
+.submissionBar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.toplevel{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.desc, .actions{
+    margin: 0px 20px;
+}
+
+.submissionTitle, .username{
+    padding: 0px;
+    margin: 20px 0px;
+    text-align: left;
+}
+.approve:hover, .reject:hover{
+    color: var(--titles);
+}

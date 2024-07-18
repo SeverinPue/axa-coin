@@ -10,6 +10,7 @@ import Tasks from "./pages/tasks.tsx";
 import Shop from "./pages/shop.tsx";
 import EditUser from "./pages/edituser.tsx";
 import Home from "./pages/home.tsx";
+import Submission from "./pages/submissions.jsx";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
             <Route path="/start" element={<ProtectedRoute component={<Start/>} />} />
             <Route path="/tasks" element={<ProtectedRoute component={<Tasks/>}/>}></Route>
             <Route path="/shop" element={<ProtectedRoute component={<Shop/>}/>}></Route>
+            <Route path="/submissions" element={<ProtectedRoute component={<Submission/>}/>}></Route>
+
             <Route path="/login" element={<Login />} /> 
             <Route path="/edituser" element={<EditUser />} />
             <Route path="*" element={<NotFound />} /> 
