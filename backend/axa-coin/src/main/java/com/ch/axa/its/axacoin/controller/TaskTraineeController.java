@@ -81,7 +81,24 @@ public class TaskTraineeController {
         TaskTrainee savedTaskTrainee = taskTraineeRepository.save(existingTaskTrainee);
         return ResponseEntity.ok(savedTaskTrainee);
     }
-
+    @PutMapping("/secure/{id}")
+    public ResponseEntity<TaskTrainee> updateTaskTraineeSecure(
+            @PathVariable String id,
+            @RequestBody Map<String, Object> updates) {
+        TaskTrainee existingTaskTrainee = taskTraineeRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("TaskTrainee not found with id: " + id));
+        updates.forEach((key, value) -> {
+            if (key.equals("dateOfSubmission")) {
+                if (value == null) {
+                    existingTaskTrainee.setDateOfSubmission(null);
+                } else {
+                    existingTaskTrainee.setDateOfSubmission(LocalDate.parse((String) value));
+                }
+            }
+        });
+        TaskTrainee savedTaskTrainee = taskTraineeRepository.save(existingTaskTrainee);
+        return ResponseEntity.ok(savedTaskTrainee);
+    }
     @DeleteMapping("/{id}")
     public void deleteTaskTrainee(@PathVariable String id) {
         taskTraineeRepository.deleteById(id);
