@@ -9,6 +9,8 @@ import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.time.LocalDate;
+import java.time.Year;
 import java.util.Set;
 
 @Entity
@@ -19,7 +21,7 @@ public class Trainee {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    private int year;
+    private Year year;
 
     private double points;
 

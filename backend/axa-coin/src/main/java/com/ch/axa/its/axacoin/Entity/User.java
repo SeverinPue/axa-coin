@@ -28,11 +28,11 @@ public class User implements UserDetails {
     private String password;
 
     @OneToOne(mappedBy = "user")
-    @Cascade(CascadeType.REMOVE)
+    @Cascade(CascadeType.ALL)
     private Trainer trainers;
 
     @OneToOne(mappedBy = "user")
-    @Cascade(CascadeType.REMOVE)
+    @Cascade(CascadeType.ALL)
     private Trainee trainees;
 
     private String role;

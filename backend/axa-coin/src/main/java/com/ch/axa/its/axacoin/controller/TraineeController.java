@@ -122,6 +122,7 @@ public class TraineeController {
 
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable String id) {
+        System.out.println("Deleting trainee with id: "+id);
         traineeRepository.deleteById(id);
     }
 }

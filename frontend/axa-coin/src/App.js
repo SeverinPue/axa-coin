@@ -11,7 +11,7 @@ import Tasks from "./pages/tasks.tsx";
 import Shop from "./pages/shop.tsx";
 import EditUser from "./pages/edituser.tsx";
 import Submission from "./pages/submissions.jsx";
-import DashboardStart from "./pages/dashboardStart.jsx"
+import TaskEdit from "./pages/taskDashboard.tsx"
 
 function App() {
   return (
@@ -24,10 +24,10 @@ function App() {
             <Route path="/tasks" element={<ProtectedRoute component={<Tasks/>}/>}></Route>
             <Route path="/shop" element={<ProtectedRoute component={<Shop/>}/>}></Route>
             <Route path="/a/submissions" element={<AdminProtectedRoute component={<Submission/>}/>}></Route>
-            <Route path="/a/tasks" element={<AdminProtectedRoute component={<DashboardStart/>}/>}></Route>
+            <Route path="/a/tasks" element={<AdminProtectedRoute component={<TaskEdit/>}/>}></Route>
 
             <Route path="/login" element={<Login />} /> 
-            <Route path="/edituser" element={<EditUser />} />
+            <Route path="/a/users" element={<AdminProtectedRoute component={<EditUser/>}/>} />
             <Route path="*" element={<NotFound />} /> 
           </Route>
         </Routes>

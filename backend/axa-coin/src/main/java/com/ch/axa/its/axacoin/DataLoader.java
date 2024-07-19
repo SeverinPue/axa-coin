@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Year;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -98,7 +99,7 @@ public class DataLoader implements CommandLineRunner {
         trainee.setTrainer(trainer);
         Random rand = new Random();
         trainee.setPoints(20000);
-        trainee.setYear(rand.nextInt(4) + 1);
+        trainee.setYear(Year.now());
         return traineeRepository.save(trainee);
     }
 
