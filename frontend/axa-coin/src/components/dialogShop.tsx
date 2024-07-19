@@ -21,8 +21,8 @@ function MyDialog({ showDialog, onClose, onConfirm, selectedProduct }: MyDialogP
         <div className="dialog-content">
           {selectedProduct ? (
             <>
-              <p className='text'>Bist du sicher das dau das Kaufen willst "{selectedProduct.name}"?</p>
-              <p className="dialog-price">Preis: {selectedProduct.price.toFixed(2)}</p>
+              <p className='text'>Bist du sicher das du "{selectedProduct.name}" das Kaufen willst?</p>
+              <p className="dialog-price">Preis: {selectedProduct.price}</p>
             </>
           ) : (
             <p>Kein Produkt ausgewählt.</p>
