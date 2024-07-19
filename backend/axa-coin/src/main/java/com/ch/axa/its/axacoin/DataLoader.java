@@ -50,10 +50,12 @@ public class DataLoader implements CommandLineRunner {
         livio.setPassword(passwordEncoder.encode("livio"));
         livio.setRole("ROLE_"+Role.ADMIN.name());
         userRepository.save(livio);
+
+
         User jay = new User();
         jay.setUsername("jay");
         jay.setPassword(passwordEncoder.encode("jay"));
-        jay.setRole("ROLE_"+Role.ADMIN.name());
+        jay.setRole("ROLE_"+Role.USER.name());
         userRepository.save(jay);
         Trainee jaytrainee = createTrainee(jay, createTrainer(createUser()));
         jaytrainee.setPoints(20000);

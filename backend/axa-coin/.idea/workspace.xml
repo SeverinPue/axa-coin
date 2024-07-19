@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="shop fertig">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/components/navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/components/navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/shop.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/stylesheets/shop.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/stylesheets/shop.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/DataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/DataLoader.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

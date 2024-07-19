@@ -33,7 +33,7 @@ export default function Login() {
       sessionStorage.setItem("jwt", data.token);
       sessionStorage.setItem("id", data.id);
       handleTrainee();
-      !checkAdmin ? navigate("/start", { state: { key: "value" } }) : navigate("/a/start")
+      !checkAdmin() ? navigate("/start", { state: { key: "value" } }) : navigate("/a/start")
     } catch (error) {
       setError(error.message);
     } finally {
@@ -76,6 +76,7 @@ export default function Login() {
         console.error('Error:', error);
         return false
       });
+      return false;
   }
 
 

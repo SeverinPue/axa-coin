@@ -25,7 +25,7 @@ function App() {
             <Route path="/tasks" element={<ProtectedRoute component={<Tasks/>}/>}></Route>
             <Route path="/shop" element={<ProtectedRoute component={<Shop/>}/>}></Route>
             <Route path="/a/submissions" element={<AdminProtectedRoute component={<Submission/>}/>}></Route>
-            <Route path="/a/start" element={<AdminProtectedRoute component={<DashboardStart/>}/>}></Route>
+            <Route path="/a/tasks" element={<AdminProtectedRoute component={<DashboardStart/>}/>}></Route>
 
             <Route path="/login" element={<Login />} /> 
             <Route path="/edituser" element={<EditUser />} />
