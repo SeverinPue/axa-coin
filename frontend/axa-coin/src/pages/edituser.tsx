@@ -112,7 +112,7 @@ export default function EditUser (){
           "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
         },body: JSON.stringify(updateUser)
       })
-        .then(res => {fetchTrainees(); fetchTrainers})
+        .then(res => {fetchTrainees(); fetchTrainers();})
         .catch((error) => {
           console.error("Fehler beim Fetchen: " + error);
         });
@@ -134,7 +134,7 @@ export default function EditUser (){
               "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
             }
           })
-          .then(()=> {fetchTrainees(); fetchTrainers})
+          .then(()=> {fetchTrainees(); fetchTrainers();})
             .catch((error) => {
               console.error("Fehler beim Fetchen: " + error);
             });
