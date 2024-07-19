@@ -27,11 +27,11 @@ public class Task {
 
     @JsonIgnoreProperties({"tasks", "trainees", "products"})
     @ManyToOne
-    @Cascade(CascadeType.DETACH)
     Trainer creator;
 
     @JsonIgnoreProperties("task_id")
     @OneToMany(mappedBy = "task_id")
+    @Cascade(CascadeType.REMOVE)
     Set<TaskTrainee> taskTrainees;
 }
 

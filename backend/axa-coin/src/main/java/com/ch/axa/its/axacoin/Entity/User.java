@@ -27,13 +27,13 @@ public class User implements UserDetails {
     private String username;
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    @Cascade(CascadeType.DETACH)
-    private Set<Trainer> trainers;
+    @OneToOne(mappedBy = "user")
+    @Cascade(CascadeType.REMOVE)
+    private Trainer trainers;
 
-    @OneToMany(mappedBy = "user")
-    @Cascade(CascadeType.DETACH)
-    private Set<Trainee> trainees;
+    @OneToOne(mappedBy = "user")
+    @Cascade(CascadeType.REMOVE)
+    private Trainee trainees;
 
     private String role;
 

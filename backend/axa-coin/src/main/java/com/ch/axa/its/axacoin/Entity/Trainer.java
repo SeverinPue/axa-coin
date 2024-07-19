@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Set;
 
@@ -20,19 +22,21 @@ public class Trainer {
 
     @JsonIgnoreProperties({"creator", "taskTrainees"})
     @OneToMany(mappedBy = "creator")
-    @Cascade(CascadeType.DETACH)
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private Set<Task> tasks;
 
     @JsonIgnoreProperties({"trainers", "trainees"})
-    @ManyToOne
-    @Cascade(CascadeType.DETACH)
+    @OneToOne
+    @Cascade(CascadeType.REMOVE)
     User user;
 
     @JsonIgnoreProperties({"transactions", "creator"})
     @OneToMany(mappedBy = "creator")
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     Set<Product> products;
 
     @JsonIgnoreProperties({"trainer", "taskTrainees", "transactions"})
     @OneToMany(mappedBy = "trainer")
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     Set<Trainee> trainees;
 }
