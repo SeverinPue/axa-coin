@@ -106,7 +106,7 @@ public class TraineeController {
                 case "productId":
                     Optional<Product> product = productRepository.findById(value.toString());
                     if (product.isPresent()) {
-                            existingTrainee.setPoints(existingTrainee.getPoints() + product.get().getPrice());
+                            existingTrainee.setPoints(existingTrainee.getPoints() - product.get().getPrice());
                     }
             }
         });

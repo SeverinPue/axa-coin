@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="frontend" />
+    <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="dataloader points">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/TraineeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/TraineeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/components/navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/components/navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/components/stylesheets/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/components/stylesheets/navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/shop.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,12 +35,12 @@
     &quot;assignee&quot;: &quot;thlivio&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/SeverinPue/axa-coin.git",
-    "accountId": "87fe1bb0-4e29-4e07-ade1-3e1d724feb6f"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/SeverinPue/axa-coin.git&quot;,
+    &quot;accountId&quot;: &quot;87fe1bb0-4e29-4e07-ade1-3e1d724feb6f&quot;
   }
-}]]></component>
+}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
 }</component>
@@ -216,7 +222,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721132094744</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="dataloader points">
+      <option name="closed" value="true" />
+      <created>1721304280519</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1721304280519</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,6 +267,7 @@
     <MESSAGE value="check if token valid enpoint done" />
     <MESSAGE value=".class" />
     <MESSAGE value="frontend" />
-    <option name="LAST_COMMIT_MESSAGE" value="frontend" />
+    <MESSAGE value="dataloader points" />
+    <option name="LAST_COMMIT_MESSAGE" value="dataloader points" />
   </component>
 </project>

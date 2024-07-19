@@ -9,28 +9,14 @@ interface Product {
   price: number;
 }
 
-interface Trainee {
-  points: number;
-}
-
 export default function Shop() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [trainee, setTrainee] = useState<Trainee>();
-  const [points, setPoints] = useState(0);
   const [showDialog, setShowDialog] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  
 
   useEffect(() => {
     fetchShopProducts();
-    fetchPoints();
   }, []);
-
-  useEffect(() => {
-    if (trainee) { 
-      setPoints(trainee.points);
-    }
-  }, [trainee]);
 
   function fetchShopProducts() {
     fetch("http://localhost:8080/api/products", {
@@ -43,22 +29,9 @@ export default function Shop() {
       .then((r) => r.json())
       .then((data) => setProducts(data));
   }
-  function fetchPoints() {
-    fetch(`http://localhost:8080/api/trainees/${sessionStorage.getItem("traineeId")}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
-      },
-    })
-      .then((r) => r.json())
-      .then(data => {
-        setTrainee(data); 
-      })  }
-
 
   const handleOpenDialog = (product: Product) => {
-    setSelectedProduct(product); 
+    setSelectedProduct(product);
     setShowDialog(true);
   };
 
@@ -68,20 +41,28 @@ export default function Shop() {
 
   const handleConfirm = () => {
     if (selectedProduct) {
-      setPoints(points - selectedProduct.price)
-      console.log(`Bought ${selectedProduct.name}!`);
-    }
+      const updateFields = {
+        productId: selectedProduct.id,
+      }
+      fetch(
+        `http://localhost:8080/api/trainees/purchase/${sessionStorage.getItem(
+          "traineeId"
+        )}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+          },
+          body: JSON.stringify(updateFields),
 
-    fetch(`http://localhost:8080/api/trainees/${sessionStorage.getItem("traineeId")}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
-      },
-      body: JSON.stringify({
-        "points": points 
-      })
-    })
+        }
+      )
+        .then((r) => r.json())
+        .then((data) => {
+          console.log(data);
+        });
+    }
 
     handleCloseDialog();
   };
@@ -89,7 +70,6 @@ export default function Shop() {
   return (
     <>
       <div className="shop-container">
-      <p>{points}</p>
         <ShopDialog
           showDialog={showDialog}
           onClose={handleCloseDialog}
@@ -103,7 +83,7 @@ export default function Shop() {
               <h3>{product.name}</h3>
               <p className="description">{product.description}</p>
               <div className="divPrice">
-                <p className="price">{product.price.toFixed(2)}</p>
+                <p className="price">{product.price}</p>
               </div>
               <div className="divButton">
                 <button
