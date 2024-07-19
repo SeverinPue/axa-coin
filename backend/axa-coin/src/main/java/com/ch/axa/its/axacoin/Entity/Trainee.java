@@ -33,11 +33,10 @@ public class Trainee {
 
     @JsonIgnoreProperties({"tasks", "products", "trainees"})
     @ManyToOne
-    @Cascade(CascadeType.DETACH)
     Trainer trainer;
 
     @JsonIgnoreProperties({"trainees", "trainers"})
-    @ManyToOne
-    @Cascade(CascadeType.DETACH)
+    @OneToOne
+    @Cascade(CascadeType.REMOVE)
     User user;
 }

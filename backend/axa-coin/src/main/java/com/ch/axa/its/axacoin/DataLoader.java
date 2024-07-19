@@ -58,7 +58,7 @@ public class DataLoader implements CommandLineRunner {
         jay.setRole("ROLE_"+Role.USER.name());
         userRepository.save(jay);
         Trainee jaytrainee = createTrainee(jay, createTrainer(createUser()));
-        jaytrainee.setPoints(20000);
+        jaytrainee.setPoints(500);
         traineeRepository.save(jaytrainee);
         List<Task> jayTasks = createTasks(createTrainer(createUser()));
         createTaskTrainees(jayTasks, jaytrainee);

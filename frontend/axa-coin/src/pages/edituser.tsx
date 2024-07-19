@@ -12,9 +12,9 @@ export default function EditUser (){
     const [trainer, setTrainer] = useState<string>("");
     const [trainers, setTrainers] = useState<Array<any>>();
     const [trainees, setTrainees] = useState<Array<any>>();
-    const [trainee, setTrainee] = useState<any>();
     const [role, setRole] = useState<string>("");
-    const [showTrainees, setShowTrainees] = useState<boolean>(false);
+    const [id, setId] = useState<string>("");
+    const [filter, setFilter] = useState<string>("trainees");
 
     const reset = () => {
       setUsername("");
@@ -69,9 +69,7 @@ export default function EditUser (){
               "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
             },
           })
-            .then((response) => {
-              return response.json();
-            })
+            .then(response => response.json())
             .then((data) => {setTrainers(data); console.log(data)})
             .catch((error) => {
               console.error("Fehler beim Fetchen: " + error);
@@ -83,43 +81,60 @@ export default function EditUser (){
       setRole("USER_ROLE")
       setUsername(trainee.user.username);
       setTrainer(trainee.trainer.id);
-      setTrainee(trainee)
+      setId(trainee.id);
     }
 
     function loadTrainer(trainer: any){
       openDialog();
       setRole("ADMIN_ROLE")
       setUsername(trainer.user.username);
+      setId(trainer.id);
     }
 
-    function saveTrainee(){
+    function updateUser(){
       closeDialog();
-      console.log("Trainee gespeichert")
-      const updatedTrainee = {username: username, trainer: trainer}
 
-      fetch("http://localhost:8080/api/trainees/"+trainee.id, {
+      let url:string;
+      let updatedUser;
+
+      if(role === "ADMIN_ROLE"){
+        url= "http://localhost:8080/api/trainers/"+id
+        updatedUser= {username: username}
+      }else{
+        url= "http://localhost:8080/api/trainees/"+id
+        updatedUser = {username: username, trainer: trainer}
+      }
+
+      fetch(url, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
-        },body: JSON.stringify(updatedTrainee)
+        },body: JSON.stringify(updateUser)
       })
-        .then(res => fetchTrainees())
+        .then(res => {fetchTrainees(); fetchTrainers();})
         .catch((error) => {
           console.error("Fehler beim Fetchen: " + error);
         });
     }
 
-    function deleteTrainee(traineeId: string){
-      console.log("Trainee wird gelöscht: " + traineeId)
-        
-        fetch("http://localhost:8080/api/trainees/"+traineeId, {
+    function deleteUser(userId: string){
+      console.log("Trainee wird gelöscht: " + userId)
+      let url:string;
+
+      if(role === "ADMIN_ROLE"){
+        url= "http://localhost:8080/api/trainers/"+userId
+      }else{
+        url= "http://localhost:8080/api/trainees/"+userId
+      }
+
+        fetch(url, {
             method: "DELETE",
             headers: {
               "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
             }
           })
-          .then(()=> fetchTrainees())
+          .then(()=> {fetchTrainees(); fetchTrainers();})
             .catch((error) => {
               console.error("Fehler beim Fetchen: " + error);
             });
@@ -133,26 +148,33 @@ export default function EditUser (){
     return(
         <div className="body">
           <button onClick={openNewUser}>Neuen Benutzer erfassen</button>
+          <select value={filter} onChange={e => setFilter(e.target.value)}>
+            <option value={"trainees"}>Lernende</option>
+            <option value={"trainers"}>Berufsbildner</option>
+          </select>
 
             <dialog ref={dialogRef}>
               <div className="attribute">
                 <label htmlFor="username">Benutzername</label>
                 <input type="text" id="username" value={username} onChange={e => setUsername(e.target.value)} />
               </div>
-              
-                <div className="attribute">
-                    <label htmlFor="dropdown">Berufsbildner*in</label>
-                    <select id="dropdown" value={trainer} onChange={e => setTrainer(e.target.value)}>
-                      <option>Bitte wählen</option>
-                      {
+              {role === "USER_ROLE"
+                ?<div className="attribute">
+                  <label htmlFor="dropdown">Berufsbildner*in</label>
+                  <select id="dropdown" value={trainer} onChange={e => setTrainer(e.target.value)}>
+                    <option>Bitte wählen</option>
+                    {
                       trainers?.map(trainerprov => <option key={trainerprov.id} value={trainerprov.id}>{trainerprov.user.username}</option>)
-                      }
-                    </select>
-                  </div>
-                <p></p>
+                    }
+                  </select>
+                </div>
+                :<p></p>
+              }
+              
+                
               
               <div className="buttons">
-                <button onClick={() => saveTrainee()}>speichern</button>
+                <button onClick={() => updateUser()}>speichern</button>
                 <button onClick={closeDialog}>abbrechen</button>
               </div>
             </dialog>
@@ -200,9 +222,9 @@ export default function EditUser (){
             </dialog>
 
             <div>
-                {showTrainees
-                  ?trainees?.map(trainee => <User key={trainee.id} loadUser={trainee => loadTrainee(trainee)} deleteUser={traineeId => deleteTrainee(traineeId)} user={trainee}></User>)
-                  :trainers?.map(trainer => <User key={trainer.id} loadUser={trainer => loadTrainer(trainer)} deleteUser={trainerId => deleteTrainee(trainerId)} user={trainer}></User>)
+                {filter === "trainees"
+                  ?trainees?.map(trainee => <User key={trainee.id} loadUser={trainee => loadTrainee(trainee)} deleteUser={traineeId => {setRole("USER_ROLE");deleteUser(traineeId)}} user={trainee}></User>)
+                  :trainers?.map(trainer => <User key={trainer.id} loadUser={trainer => loadTrainer(trainer)} deleteUser={trainerId => {setRole("ADMIN_ROLE");deleteUser(trainerId)}} user={trainer}></User>)
                   
                 }
                     

@@ -23,7 +23,7 @@ public class TaskTrainee {
 
     @JsonIgnoreProperties({"taskTrainees", "creator"})
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.DETACH)
+    @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
     Task task_id;
 
     @JsonIgnoreProperties({"taskTrainees", "transactions", "trainer"})

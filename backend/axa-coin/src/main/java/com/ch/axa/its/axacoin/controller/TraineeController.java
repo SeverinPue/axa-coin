@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -33,36 +32,36 @@ public class TraineeController {
     private UserRepository userRepository;
 
     @GetMapping
-    public ResponseEntity<List<Trainee>> getAllTrainees(){
+    public ResponseEntity<List<Trainee>> getAllTrainees() {
         return ResponseEntity.ok(traineeRepository.findAll());
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<Trainee> getTraineeByUserId(@PathVariable String id){
+    public ResponseEntity<Trainee> getTraineeByUserId(@PathVariable String id) {
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             Optional<Trainee> trainee = traineeRepository.findTraineeByUser(user.get());
             if (trainee.isPresent()) {
                 return ResponseEntity.ok(trainee.get());
-            }else {
+            } else {
                 return ResponseEntity.notFound().build();
             }
-        }else {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Trainee> getTraineeById(@PathVariable String id){
+    public ResponseEntity<Trainee> getTraineeById(@PathVariable String id) {
         Optional<Trainee> trainee = traineeRepository.findById(id);
-        if(trainee.isPresent()){
+        if (trainee.isPresent()) {
             return ResponseEntity.ok(trainee.get());
         }
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    public ResponseEntity<Trainee> createTrainee(@RequestBody Trainee trainee){
+    public ResponseEntity<Trainee> createTrainee(@RequestBody Trainee trainee) {
         return ResponseEntity.ok(traineeRepository.save(trainee));
     }
 
@@ -79,7 +78,7 @@ public class TraineeController {
                     break;
                 case "username":
                     Optional<User> user = userRepository.findByUsername(value.toString());
-                    if (!user.isPresent()){
+                    if (!user.isPresent()) {
                         existingTrainee.getUser().setUsername(value.toString());
                     }
                     break;
@@ -95,18 +94,24 @@ public class TraineeController {
         return ResponseEntity.ok(savedTrainee);
 
     }
+
     @PutMapping("/purchase/{id}")
     public ResponseEntity<Trainee> updatePoints(
             @PathVariable String id,
-            @Valid @RequestBody Map<String, Object> updates) {
+            @RequestBody Map<String, Object> updates) {
         Trainee existingTrainee = traineeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Trainee not found with id: " + id));
         updates.forEach((key, value) -> {
             switch (key) {
                 case "productId":
-                    Optional<Product> product = productRepository.findById(value.toString());
+                    String productId = value.toString();
+                    Optional<Product> product = productRepository.findById(productId);
                     if (product.isPresent()) {
+                        if (existingTrainee.getPoints() - product.get().getPrice() >= 0) {
                             existingTrainee.setPoints(existingTrainee.getPoints() - product.get().getPrice());
+                        } else {
+                            throw new IllegalArgumentException("Insufficient points");
+                        }
                     }
             }
         });
