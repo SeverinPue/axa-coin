@@ -43,15 +43,20 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.DELETE, "api/tasktrainees").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "api/tasktrainees").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "api/tasktrainees").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "api/tasktrainees").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "api/trainees").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "api/trainees").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "api/trainees").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "api/trainees").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "api/trainees/purchase/").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "api/trainees").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.DELETE, "api/trainers").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "api/trainers").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "api/trainers").hasRole("ADMIN")
+
+                        .requestMatchers("api/users/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
