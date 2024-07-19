@@ -10,32 +10,36 @@ export default function Navbar() {
   const [trainee, setTrainee] = useState<Trainee>();
   const [points, setPoints] = useState(0);
 
-
-
   useEffect(() => {
     if (trainee?.points) {
       setPoints(trainee.points);
     }
   }, [trainee]);
 
-  
-
   useEffect(() => {
     fetch(
       `http://localhost:8080/api/trainees/${sessionStorage.getItem(
-        "traineeId"
+          "traineeId"
       )}`,
       {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
-        },
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+          },
       }
-    )
-      .then((r) => r.json())
+  )
+      .then((r) => {
+          if (!r.ok) { 
+              throw new Error(`Fehler beim Abrufen der Daten: ${r.status} ${r.statusText}`); 
+          }
+          return r.json(); 
+      })
       .then((data) => {
-        setTrainee(data);
+          setTrainee(data);
+      })
+      .catch((error) => {
+          console.error("Fehler beim Fetch:", error); 
       });
   }, []);
 

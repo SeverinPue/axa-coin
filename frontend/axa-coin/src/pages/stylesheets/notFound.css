@@ -4,9 +4,14 @@ h1{
     font-size: 6rem;
 }
 
+h2{
+
+    color: black;
+}
+
 .flex{
 
-    max-height: ;
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;

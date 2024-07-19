@@ -36,6 +36,7 @@ export default function Shop() {
   };
 
   const handleCloseDialog = () => {
+
     setShowDialog(false);
   };
 
@@ -65,6 +66,7 @@ export default function Shop() {
     }
 
     handleCloseDialog();
+    window.location.reload();
   };
 
   return (
