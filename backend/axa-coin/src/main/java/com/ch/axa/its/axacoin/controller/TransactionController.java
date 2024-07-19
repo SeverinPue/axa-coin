@@ -33,19 +33,4 @@ public class TransactionController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping
-    public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction){
-        return ResponseEntity.ok(transactionRepository.save(transaction));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Transaction> updateTransaction(@PathVariable String id, @Valid @RequestBody Transaction transaction) {
-        transaction.setId(id);
-        return ResponseEntity.ok(transactionRepository.save(transaction));
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteTransaction(@PathVariable String id) {
-        transactionRepository.deleteById(id);
-    }
 }

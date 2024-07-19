@@ -31,10 +31,27 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/authenticate").permitAll()
                         .requestMatchers("/api/auth/admin").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/auth").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/api/trainee/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/api/tasktrainee/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/api/trainers/**").hasAnyRole("ADMIN", "USER")
+
+                        .requestMatchers(HttpMethod.POST, "api/products").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "api/products").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "api/products").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.POST, "api/tasks").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "api/tasks").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "api/tasks").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.DELETE, "api/tasktrainees").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "api/tasktrainees").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "api/tasktrainees").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "api/trainees").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "api/trainees").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "api/trainees").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "api/trainees").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.DELETE, "api/trainers").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "api/trainers").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "api/trainers").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
