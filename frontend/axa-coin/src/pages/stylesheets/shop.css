@@ -4,6 +4,9 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
 
+
+    box-shadow: 5px 5px 5px var(--primary-contrast);
+    border-radius: 0.5rem;
     color: var(--secondary);
     width: 300px;
     height: 250px;
@@ -66,7 +69,7 @@
     padding: 1rem;
 }
 
-h2 {
+.shop-container h2 {
 
     font-weight: 400;
     color: var(--titles);
