@@ -1,0 +1,39 @@
+.body{
+    margin: 2rem;
+    background-color: var(--primary);
+}
+body{
+    background-color: var(--primary);
+}
+
+dialog{
+    font-family: var(--font-family);
+    background-color: var(--primary);
+    border-color: var(--titles);
+    border-width: 0.15rem;
+    border-radius: 0.5rem;
+    width: 30rem;
+}
+
+.attribute{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    
+}
+
+select{
+    font-family: var(--font-family);
+    background-color: var(--primary);
+    font-size: 1.2rem;
+    border-color: var(--titles);
+    border-width: 0.15rem;
+    border-radius: 0.5rem;
+}
+
+
+.buttons{
+    display: flex;
+    justify-content: space-around;
+}
