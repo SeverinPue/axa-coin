@@ -1,6 +1,7 @@
 'use client'
 
 import React from "react"
+import "./stylesheets/user.css"
 
 type Props = {
     loadUser: Function,
@@ -10,10 +11,14 @@ type Props = {
 
 export default function User (props: Props){
     return(
-        <div>
-            <button onClick={e => props.loadUser(props.user)}>bearbeiten</button>
-            <button onClick={e => props.deleteUser(props.user.id)}>löschen</button>
+        <div className="user">
             <p>{props.user.user.username}</p>
+            <div className="buttons">
+                <button onClick={e => props.loadUser(props.user)} className="button">bearbeiten</button>
+                <button onClick={e => props.deleteUser(props.user.id)} className="button">löschen</button>
+            </div>
+            
+            
 
         </div>
     )

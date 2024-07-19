@@ -1,0 +1,19 @@
+.buttons{
+    display: flex;
+    justify-content: space-between;
+}
+
+.user{
+    font-family: var(--font-family);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    background-color: var(--primary-contrast);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.button{
+    margin-left: 0.5rem;
+
+}
