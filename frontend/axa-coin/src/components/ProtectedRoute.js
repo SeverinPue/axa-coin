@@ -51,7 +51,7 @@ const ProtectedRoute = ({ component }) => {
     return <div>Loading...</div>; 
   }
 
-  return !isAuthenticated ? <Navigate to="/login" /> : isAdmin ? <Navigate to="/a/start" /> : component  
+  return !isAuthenticated ? <Navigate to="/login" /> : isAdmin ? <Navigate to="/a/tasks" /> : component  
 };
 
 export default ProtectedRoute;

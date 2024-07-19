@@ -10,7 +10,6 @@ import NotFound from "./pages/notFound.tsx";
 import Tasks from "./pages/tasks.tsx";
 import Shop from "./pages/shop.tsx";
 import EditUser from "./pages/edituser.tsx";
-import Home from "./pages/home.tsx";
 import Submission from "./pages/submissions.jsx";
 import DashboardStart from "./pages/dashboardStart.jsx"
 

@@ -1,12 +1,13 @@
 h1{
 
+    color: var(--secondary);
     margin: 0;
     font-size: 6rem;
 }
 
 h2{
 
-    color: black;
+    color: var(--secondary);
 }
 
 .flex{
