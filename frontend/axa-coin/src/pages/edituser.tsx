@@ -80,7 +80,9 @@ export default function EditUser (){
       openDialog();
       setRole("USER_ROLE")
       setUsername(trainee.user.username);
-      setTrainer(trainee.trainer.id);
+      if(trainee.trainer !== null){
+        setTrainer(trainee.trainer.id);
+      }
       setId(trainee.id);
     }
 

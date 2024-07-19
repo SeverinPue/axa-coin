@@ -68,11 +68,13 @@ public class DataLoader implements CommandLineRunner {
         for (int i = 0; i < 5; i++) {
             User user = createUser();
             Trainer trainer = createTrainer(user);
-            Trainee trainee = createTrainee(user, trainer);
             List<Product> products = createProducts(trainer);
             List<Task> tasks = createTasks(trainer);
-            createTaskTrainees(tasks, trainee);
-            createTransactions(trainee, products);
+            for (int j = 0; j < 5; j++) {
+                Trainee trainee = createTrainee(createUser(), trainer);
+                createTaskTrainees(tasks, trainee);
+                createTransactions(trainee, products);
+            }
         }
     }
 
