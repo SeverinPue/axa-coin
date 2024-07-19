@@ -56,6 +56,7 @@ export default function Shop() {
             Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
           },
           body: JSON.stringify(updateFields),
+
         }
       )
         .then((r) => r.json())
@@ -65,6 +66,7 @@ export default function Shop() {
     }
 
     handleCloseDialog();
+    window.location.reload();
   };
 
   return (
