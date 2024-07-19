@@ -97,7 +97,7 @@ export default function Navbar() {
               <a href="/a/#">Produkte</a>
             </li>
             <li>
-              <a href="/a/#">User</a>
+              <a href="/a/users">User</a>
             </li>
           </ul>
         )}

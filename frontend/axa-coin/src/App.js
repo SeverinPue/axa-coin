@@ -27,7 +27,7 @@ function App() {
             <Route path="/a/tasks" element={<AdminProtectedRoute component={<TaskEdit/>}/>}></Route>
 
             <Route path="/login" element={<Login />} /> 
-            <Route path="/edituser" element={<EditUser />} />
+            <Route path="/a/users" element={<AdminProtectedRoute component={<EditUser/>}/>} />
             <Route path="*" element={<NotFound />} /> 
           </Route>
         </Routes>
