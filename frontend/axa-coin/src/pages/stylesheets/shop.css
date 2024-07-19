@@ -3,9 +3,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-
-
-    box-shadow: 5px 5px 5px var(--primary-contrast);
     border-radius: 0.5rem;
     color: var(--secondary);
     width: 300px;

@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="dataloader points">
+    <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="shop fertig">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/TraineeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/TraineeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/components/navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/components/navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/components/stylesheets/navbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/components/stylesheets/navbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/shop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/shop.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +226,23 @@
       <option name="project" value="LOCAL" />
       <updated>1721304280519</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="shop fertig">
+      <option name="closed" value="true" />
+      <created>1721370222879</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1721370222879</updated>
+    </task>
+    <task id="LOCAL-00015" summary="shop fertig">
+      <option name="closed" value="true" />
+      <created>1721370346910</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1721370346910</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,6 +280,7 @@
     <MESSAGE value=".class" />
     <MESSAGE value="frontend" />
     <MESSAGE value="dataloader points" />
-    <option name="LAST_COMMIT_MESSAGE" value="dataloader points" />
+    <MESSAGE value="shop fertig" />
+    <option name="LAST_COMMIT_MESSAGE" value="shop fertig" />
   </component>
 </project>

@@ -9,10 +9,11 @@ interface Trainee {
 export default function Navbar() {
   const [trainee, setTrainee] = useState<Trainee>();
   const [points, setPoints] = useState(0);
-
+  
   useEffect(() => {
     if (trainee?.points) {
       setPoints(trainee.points);
+      sessionStorage.setItem("points", ""+ trainee.points)
     }
   }, [trainee]);
 
