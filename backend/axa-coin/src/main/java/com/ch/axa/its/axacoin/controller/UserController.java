@@ -1,16 +1,23 @@
 package com.ch.axa.its.axacoin.controller;
 
+import com.ch.axa.its.axacoin.Entity.TaskTrainee;
+import com.ch.axa.its.axacoin.Entity.Trainee;
+import com.ch.axa.its.axacoin.Entity.Trainer;
 import com.ch.axa.its.axacoin.Entity.User;
+import com.ch.axa.its.axacoin.Repositorys.TraineeRepository;
+import com.ch.axa.its.axacoin.Repositorys.TrainerRepository;
 import com.ch.axa.its.axacoin.Repositorys.UserRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
-import java.util.List;
-import java.util.Optional;
+import java.time.Year;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/users")
@@ -22,6 +29,10 @@ public class UserController {
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private TrainerRepository trainerRepository;
+    @Autowired
+    private TraineeRepository traineeRepository;
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers(){
@@ -38,12 +49,44 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        Optional<User> userOptional = userRepository.findByUsername(user.getUsername());
-        if(!userOptional.isPresent()){
-            return ResponseEntity.ok(userRepository.save(user));
+    public ResponseEntity<User> createUser(@Valid @RequestBody Map<String, Object> newUser){
+        User user = new User();
+        try{
+            newUser.forEach((key, value) -> {
+                switch (key) {
+                    case "username":
+                        Optional<User> userOptional = userRepository.findByUsername(value.toString());
+                        if(userOptional.isEmpty()){
+                            user.setUsername(value.toString());
+                        }else{
+                            throw new HttpClientErrorException(HttpStatus.CONFLICT, "username already exists");
+                        }
+                        break;
+                    case "role":
+                        user.setRole(value.toString());
+                        if(user.getRole().equals("ROLE_USER")){
+                            Trainee trainee = new Trainee();
+                            trainee.setPoints(0);
+                            trainee.setYear(Year.of(Integer.parseInt(newUser.get("year").toString())));
+                            trainee.setUser(user);
+                            trainee.setTrainer(trainerRepository.findById(newUser.get("trainer").toString()).get());
+                            user.setTrainees(trainee);
+                        }else{
+                            Trainer trainer = new Trainer();
+                            trainer.setUser(user);
+                            user.setTrainers(trainer);
+                        }
+                        break;
+                    case "password":
+                        user.setPassword(bCryptPasswordEncoder.encode(value.toString()));
+                        break;
+                }
+            });
+        }catch (Exception e){
+            System.out.println(e);
+            return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        return ResponseEntity.ok(userRepository.save(user));
     }
 
     @PutMapping("/{id}")

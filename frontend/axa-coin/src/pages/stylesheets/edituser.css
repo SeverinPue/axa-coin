@@ -37,3 +37,11 @@ select{
     display: flex;
     justify-content: space-around;
 }
+
+.menu button{
+    margin-right: 1rem;
+}
+
+.menu select{
+    margin-right: 1rem;
+}

@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import User from "../components/user.tsx";
 import "./stylesheets/edituser.css"
+import { wait } from "@testing-library/user-event/dist/utils/index";
 
 export default function EditUser (){
     const dialogRef = useRef(null);
@@ -15,6 +16,12 @@ export default function EditUser (){
     const [role, setRole] = useState<string>("");
     const [id, setId] = useState<string>("");
     const [filter, setFilter] = useState<string>("trainees");
+    const [year, setYear] = useState<string>("0");
+    const [years, setYears] = useState<Array<string>>([])
+    const [yearFilter, setYearFilter] = useState<string>("")
+    const [traineesFilter, setTraineesFilter] = useState<Array<any>>([])
+
+
 
     const reset = () => {
       setUsername("");
@@ -48,6 +55,28 @@ export default function EditUser (){
 
     }, [])
 
+    useEffect(() => {
+      let newYears = [...years];
+    trainees?.forEach(traineeprov => {
+      if (!newYears.includes(traineeprov.year)) {
+        newYears.push(traineeprov.year);
+      }
+    });
+    setYears(newYears);
+    console.log(newYears);
+      
+    }, [trainees])
+
+    useEffect(() => {
+      let newTrainees:Array<any> = []
+      trainees?.forEach(traineeprov =>{
+        if(traineeprov.year === yearFilter || yearFilter===""){
+          newTrainees.push(traineeprov)
+        }
+      })
+      setTraineesFilter(newTrainees);
+    }, [yearFilter])
+
     const fetchTrainees = () => {
 
         fetch("http://localhost:8080/api/trainees", {
@@ -78,7 +107,7 @@ export default function EditUser (){
 
     function loadTrainee(trainee: any){
       openDialog();
-      setRole("USER_ROLE")
+      setRole("ROLE_USER")
       setUsername(trainee.user.username);
       if(trainee.trainer !== null){
         setTrainer(trainee.trainer.id);
@@ -88,7 +117,7 @@ export default function EditUser (){
 
     function loadTrainer(trainer: any){
       openDialog();
-      setRole("ADMIN_ROLE")
+      setRole("ROLE_ADMIN")
       setUsername(trainer.user.username);
       setId(trainer.id);
     }
@@ -99,7 +128,7 @@ export default function EditUser (){
       let url:string;
       let updatedUser;
 
-      if(role === "ADMIN_ROLE"){
+      if(filter === "trainers"){
         url= "http://localhost:8080/api/trainers/"+id
         updatedUser= {username: username}
       }else{
@@ -112,7 +141,7 @@ export default function EditUser (){
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
-        },body: JSON.stringify(updateUser)
+        },body: JSON.stringify(updatedUser)
       })
         .then(res => {fetchTrainees(); fetchTrainers();})
         .catch((error) => {
@@ -122,9 +151,10 @@ export default function EditUser (){
 
     function deleteUser(userId: string){
       console.log("Trainee wird gelöscht: " + userId)
+      console.log(role)
       let url:string;
 
-      if(role === "ADMIN_ROLE"){
+      if(filter === "trainers"){
         url= "http://localhost:8080/api/trainers/"+userId
       }else{
         url= "http://localhost:8080/api/trainees/"+userId
@@ -136,7 +166,7 @@ export default function EditUser (){
               "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
             }
           })
-          .then(()=> {fetchTrainees(); fetchTrainers();})
+          .then(()=> {console.log("wurde gelöscht"); fetchTrainees(); fetchTrainers(); reset();})
             .catch((error) => {
               console.error("Fehler beim Fetchen: " + error);
             });
@@ -144,23 +174,55 @@ export default function EditUser (){
     }
 
     function createUser(){
-      closeNewUser()
+      closeNewUser();
+      let newUser:any;
+      if(filter === "trainees"){
+        newUser = {username: username, role: role, password: password, trainer: trainer, year: year}
+      }else{
+        newUser = {username: username, role: role, password: password}
+      }
+
+      console.log(newUser);
+      
+      fetch("http://localhost:8080/api/users", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
+          "Content-Type": "application/json"
+        }, body: JSON.stringify(newUser)
+      })
+      .then(()=> {fetchTrainees(); fetchTrainers();})
+        .catch((error) => {
+          alert("Ungültige Angaben: " + error);
+        });
     }
 
     return(
         <div className="body">
+          <div className="menu">
           <button onClick={openNewUser}>Neuen Benutzer erfassen</button>
           <select value={filter} onChange={e => setFilter(e.target.value)}>
             <option value={"trainees"}>Lernende</option>
             <option value={"trainers"}>Berufsbildner</option>
           </select>
+          {filter === "trainees"
+            ?<select value={yearFilter} onChange={e => setYearFilter(e.target.value)}>
+              <option value={""}>Jahr des Lehrbeginngs</option>
+              {
+                years.map(yearprov => <option value={yearprov} key={yearprov}>{yearprov}</option>)
+              }
+            </select>
+            :<div></div>
+          }
+          </div>
+          
 
             <dialog ref={dialogRef}>
               <div className="attribute">
                 <label htmlFor="username">Benutzername</label>
                 <input type="text" id="username" value={username} onChange={e => setUsername(e.target.value)} />
               </div>
-              {role === "USER_ROLE"
+              {role === "ROLE_USER"
                 ?<div className="attribute">
                   <label htmlFor="dropdown">Berufsbildner*in</label>
                   <select id="dropdown" value={trainer} onChange={e => setTrainer(e.target.value)}>
@@ -200,12 +262,13 @@ export default function EditUser (){
                 <label htmlFor="dropdown">Rolle</label>
                 <select id="dropdown" value={role} onChange={e => setRole(e.target.value)}>
                   <option>Bitte wählen</option>
-                  <option value={"ADMIN_ROLE"}>Berufsbildner</option>
-                  <option value={"USER_ROLE"}>Lernende/r</option>
+                  <option value={"ROLE_ADMIN"}>Berufsbildner</option>
+                  <option value={"ROLE_USER"}>Lernende/r</option>
                 </select>
               </div>
-              {role === "USER_ROLE"
-                ? <div className="attribute">
+              {role === "ROLE_USER"
+                ?<div>
+                    <div className="attribute">
                     <label htmlFor="dropdown">Berufsbildner*in</label>
                     <select id="dropdown" value={trainer} onChange={e => setTrainer(e.target.value)}>
                       <option>Bitte wählen</option>
@@ -214,6 +277,12 @@ export default function EditUser (){
                       }
                     </select>
                   </div>
+                  <div className="attribute">
+                  <label htmlFor="year">Jahr des Lehrbeginns</label>
+                  <input type="number" id="year" value={year} onChange={e => setYear(e.target.value)} />
+                </div>
+                </div> 
+                
                 :<p></p>
               }
               
@@ -225,8 +294,8 @@ export default function EditUser (){
 
             <div>
                 {filter === "trainees"
-                  ?trainees?.map(trainee => <User key={trainee.id} loadUser={trainee => loadTrainee(trainee)} deleteUser={traineeId => {setRole("USER_ROLE");deleteUser(traineeId)}} user={trainee}></User>)
-                  :trainers?.map(trainer => <User key={trainer.id} loadUser={trainer => loadTrainer(trainer)} deleteUser={trainerId => {setRole("ADMIN_ROLE");deleteUser(trainerId)}} user={trainer}></User>)
+                  ?traineesFilter?.map(trainee => <User key={trainee.id} loadUser={trainee => loadTrainee(trainee)} deleteUser={traineeId => {setRole("ROLE_USER");deleteUser(traineeId)}} user={trainee}></User>)
+                  :trainers?.map(trainer => <User key={trainer.id} loadUser={trainer => loadTrainer(trainer)} deleteUser={trainerId => {setRole("ROLE_ADMIN");deleteUser(trainerId)}} user={trainer}></User>)
                   
                 }
                     
