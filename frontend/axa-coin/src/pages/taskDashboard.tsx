@@ -120,6 +120,7 @@ export default function Taskboard() {
       description: description,
       earningPoints: points,
       endDate: date,
+      important: important,
       trainees: traineeUpdate,
     };
 
