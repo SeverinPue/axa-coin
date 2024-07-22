@@ -4,6 +4,7 @@ import com.ch.axa.its.axacoin.Entity.Product;
 import com.ch.axa.its.axacoin.Entity.Task;
 import com.ch.axa.its.axacoin.Repositorys.ProductRepository;
 import com.ch.axa.its.axacoin.Repositorys.TaskRepository;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/tasks")
 @CrossOrigin("*")
+@Hidden
 public class TaskController {
 
     @Autowired

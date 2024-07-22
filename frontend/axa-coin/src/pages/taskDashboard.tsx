@@ -16,6 +16,7 @@ export default function Taskboard() {
   const [filter, setFilter] = useState<string>("");
   const [task, setTask] = useState<any>({});
   const [traineeUpdate, setTraineeUpdate] = useState<Array<string>>([])
+  const [important, setImportant] = useState<boolean>(false);
 
   const reset = () => {
     setTitle("");
@@ -23,6 +24,7 @@ export default function Taskboard() {
     setDate("");
     setPoints(0);
     setTraineeUpdate([]);
+    setImportant(false);
   }
 
   const handleCheckboxChange = (e, traineeId) => {
@@ -101,6 +103,7 @@ export default function Taskboard() {
   function loadTask(task) {
     openDialog();
     setTitle(task.title);
+    setImportant(task.important)
     setDescription(task.description);
     setDate(task.endDate);
     setId(task.id);
@@ -154,7 +157,7 @@ export default function Taskboard() {
     const newTask = {
       title: title,
       description: description,
-      points: points,
+      earningPoints: points,
       endDate: date,
       trainees: traineeUpdate,
     };
@@ -191,6 +194,8 @@ export default function Taskboard() {
           <input type="number" id="points" value={points.toString()} onChange={e => setPoints(parseInt(e.target.value))} />
           <label htmlFor="date">Datum</label>
           <input type="date" id="date" value={date} onChange={e => setDate(e.target.value)} />
+          <label htmlFor="important">Datum</label>
+          <input type="checkbox" id="important" value={date} onChange={e => setDate(e.target.value)} />
         </div>
         <div className="traineeSelect">
           {trainees?.map((trainee) => (

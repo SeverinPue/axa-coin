@@ -63,7 +63,6 @@ public class DataLoader implements CommandLineRunner {
         createTaskTrainees(jayTasks, jaytrainee);
 
 
-        for (int i = 0; i < 5; i++) {
             User user = createUser();
             Trainer trainer = createTrainer(user);
             List<Product> products = createProducts(trainer);
@@ -73,7 +72,7 @@ public class DataLoader implements CommandLineRunner {
                 createTaskTrainees(tasks, trainee);
                 createTransactions(trainee, products);
             }
-        }
+
     }
 
     private User createUser() {
@@ -147,7 +146,7 @@ public class DataLoader implements CommandLineRunner {
                 }else{
                     taskTrainee.setDateOfSubmission(null);
                 }
-                taskTrainee.setTask_id(task);
+                taskTrainee.setTask(task);
                 taskTrainee.setTrainee(trainee);
                 add(taskTrainee);
             }
