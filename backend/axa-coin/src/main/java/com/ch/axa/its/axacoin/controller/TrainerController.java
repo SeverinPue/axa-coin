@@ -3,6 +3,7 @@ package com.ch.axa.its.axacoin.controller;
 import com.ch.axa.its.axacoin.Entity.Task;
 import com.ch.axa.its.axacoin.Entity.Trainer;
 import com.ch.axa.its.axacoin.Repositorys.TrainerRepository;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/trainers")
 @CrossOrigin("*")
+@Hidden
 public class TrainerController {
 
     @Autowired

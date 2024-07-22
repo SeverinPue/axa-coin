@@ -3,15 +3,12 @@ package com.ch.axa.its.axacoin;
 import com.ch.axa.its.axacoin.Entity.*;
 import com.ch.axa.its.axacoin.Repositorys.*;
 import com.github.javafaker.Faker;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Year;
 import java.util.HashSet;
 import java.util.List;
@@ -66,6 +63,7 @@ public class DataLoader implements CommandLineRunner {
         createTaskTrainees(jayTasks, jaytrainee);
 
 
+        for (int i = 0; i < 5; i++) {
             User user = createUser();
             Trainer trainer = createTrainer(user);
             List<Product> products = createProducts(trainer);
@@ -75,7 +73,7 @@ public class DataLoader implements CommandLineRunner {
                 createTaskTrainees(tasks, trainee);
                 createTransactions(trainee, products);
             }
-
+        }
     }
 
     private User createUser() {
@@ -119,7 +117,6 @@ public class DataLoader implements CommandLineRunner {
         }});
     }
 
-
     private List<Task> createTasks(Trainer trainer) {
         return (List<Task>) taskRepository.saveAll(new HashSet<>() {{
             for (int i = 0; i < 5; i++) {
@@ -150,12 +147,13 @@ public class DataLoader implements CommandLineRunner {
                 }else{
                     taskTrainee.setDateOfSubmission(null);
                 }
-                taskTrainee.setTask(task);
+                taskTrainee.setTask_id(task);
                 taskTrainee.setTrainee(trainee);
                 add(taskTrainee);
             }
         }});
     }
+
     private void createTransactions(Trainee trainee, List<Product> products) {
         transactionRepository.saveAll(new HashSet<>() {{
             for (Product product : products) {

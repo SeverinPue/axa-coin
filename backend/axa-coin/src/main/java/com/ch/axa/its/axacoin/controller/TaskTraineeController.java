@@ -6,6 +6,7 @@ import com.ch.axa.its.axacoin.Entity.Trainee;
 import com.ch.axa.its.axacoin.Repositorys.TaskRepository;
 import com.ch.axa.its.axacoin.Repositorys.TaskTraineeRepository;
 import com.ch.axa.its.axacoin.Repositorys.TraineeRepository;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/tasktrainees")
 @CrossOrigin("*")
+@Hidden
 public class TaskTraineeController {
 
     @Autowired

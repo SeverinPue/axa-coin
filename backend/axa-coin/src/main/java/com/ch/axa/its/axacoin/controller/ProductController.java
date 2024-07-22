@@ -4,6 +4,7 @@ import com.ch.axa.its.axacoin.Entity.Product;
 import com.ch.axa.its.axacoin.Entity.User;
 import com.ch.axa.its.axacoin.Repositorys.ProductRepository;
 import com.ch.axa.its.axacoin.Repositorys.UserRepository;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/products")
 @CrossOrigin("*")
+@Hidden
 public class ProductController {
 
     @Autowired

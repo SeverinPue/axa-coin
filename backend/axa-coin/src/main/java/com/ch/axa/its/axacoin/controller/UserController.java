@@ -7,6 +7,7 @@ import com.ch.axa.its.axacoin.Entity.User;
 import com.ch.axa.its.axacoin.Repositorys.TraineeRepository;
 import com.ch.axa.its.axacoin.Repositorys.TrainerRepository;
 import com.ch.axa.its.axacoin.Repositorys.UserRepository;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class UserController {
     private TraineeRepository traineeRepository;
 
     @GetMapping
+    @Hidden
     public ResponseEntity<List<User>> getAllUsers(){
         return ResponseEntity.ok(userRepository.findAll());
     }
@@ -49,6 +51,7 @@ public class UserController {
     }
 
     @PostMapping
+    @Hidden
     public ResponseEntity<User> createUser(@Valid @RequestBody Map<String, Object> newUser){
         User user = new User();
         try{
@@ -90,6 +93,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @Hidden
     public ResponseEntity<User> updateUser(@PathVariable String id, @Valid @RequestBody User user) {
         Optional<User> userOptional = userRepository.findById(id);
         user.setId(id);
@@ -106,6 +110,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
+    @Hidden
     public void deleteUser(@PathVariable String id) {
         userRepository.deleteById(id);
     }
