@@ -67,16 +67,14 @@ export default function Navbar() {
       });
   }, []);
 
-
-
   return (
     <>
-      <nav className="navBar">
-        <div className="logo">
-          <ThemeSwitcher></ThemeSwitcher>
-        </div>
-        <p className="points"> Punkte: {points}</p>
-        {!isAdmin ? (
+      {!isAdmin ? (
+        <div className="navBar">
+          <div className="logo">
+            <ThemeSwitcher></ThemeSwitcher>
+          </div>
+          <p className="points"> Punkte: {points}</p>
           <ul className="navList">
             <li>
               <a href="/">Home</a>
@@ -88,20 +86,25 @@ export default function Navbar() {
               <a href="/shop">Shop</a>
             </li>
           </ul>
-        ) : (
+        </div>
+      ) : (
+        <div className="navBar">
+          <div>
+            <ThemeSwitcher></ThemeSwitcher>
+          </div>
           <ul className="navList">
             <li>
               <a href="/a/tasks">Tasks</a>
             </li>
             <li>
-              <a href="/a/#">Produkte</a>
+              <a href="/a/product">Produkte</a>
             </li>
             <li>
               <a href="/a/users">User</a>
             </li>
           </ul>
-        )}
-      </nav>
+        </div>
+      )}
     </>
   );
 }

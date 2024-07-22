@@ -4,6 +4,7 @@
     background-color: var(--primary);
     height: 10vh;
     display: flex;
+    padding-inline: 2rem;
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid var(--titles);
