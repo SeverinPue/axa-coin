@@ -11,4 +11,6 @@ public interface TaskTraineeRepository extends JpaRepository<TaskTrainee, String
 
     @Query("SELECT taskTrainees FROM TaskTrainee taskTrainees WHERE taskTrainees.trainee = :trainee ")
     List<TaskTrainee> findAllByTrainee(Trainee trainee);
+    List<TaskTrainee> findByTaskId(String taskId);
+
 }

@@ -68,7 +68,7 @@ export default function Taskboard() {
       },
     })
       .then(r => r.json())
-      .then((data) => { setTrainees(data); console.log(data) })
+      .then((data) => { setTrainees(data) })
       .catch((error) => {
         console.error("Fehler beim Fetchen: " + error);
       });
@@ -81,7 +81,7 @@ export default function Taskboard() {
       },
     })
       .then(response => response.json())
-      .then((data) => { setTrainers(data); console.log(data) })
+      .then((data) => { setTrainers(data)})
       .catch((error) => {
         console.error("Fehler beim Fetchen: " + error);
       });
@@ -94,7 +94,7 @@ export default function Taskboard() {
       },
     })
       .then(response => response.json())
-      .then((data) => { setTasks(data); console.log(data) })
+      .then((data) => { setTasks(data) })
       .catch((error) => {
         console.error("Fehler beim Fetchen: " + error);
       });
@@ -108,7 +108,7 @@ export default function Taskboard() {
     setDate(task.endDate);
     setId(task.id);
     setPoints(task.earningPoints);
-    const traineeIds = task.taskTrainees.map((trainee) => trainee.id);
+    const traineeIds = task.taskTrainees.map((trainee) => trainee.trainee.id);
     setTraineeUpdate(traineeIds);
   }
 
@@ -118,8 +118,9 @@ export default function Taskboard() {
     const updatedTask = {
       title: title,
       description: description,
-      points: points,
+      earningPoints: points,
       endDate: date,
+      important: important,
       trainees: traineeUpdate,
     };
 
@@ -159,6 +160,8 @@ export default function Taskboard() {
       description: description,
       earningPoints: points,
       endDate: date,
+      important: important,
+      creator: sessionStorage.getItem("id"),
       trainees: traineeUpdate,
     };
 
@@ -194,8 +197,8 @@ export default function Taskboard() {
           <input type="number" id="points" value={points.toString()} onChange={e => setPoints(parseInt(e.target.value))} />
           <label htmlFor="date">Datum</label>
           <input type="date" id="date" value={date} onChange={e => setDate(e.target.value)} />
-          <label htmlFor="important">Datum</label>
-          <input type="checkbox" id="important" value={date} onChange={e => setDate(e.target.value)} />
+          <label htmlFor="important">Important</label>
+          <input type="checkbox" id="important" checked={important} onChange={e => setImportant(e.target.checked)} />
         </div>
         <div className="traineeSelect">
           {trainees?.map((trainee) => (
@@ -227,6 +230,8 @@ export default function Taskboard() {
           <input type="number" id="points" value={points.toString()} onChange={e => setPoints(parseInt(e.target.value))} />
           <label htmlFor="date">Datum</label>
           <input type="date" id="date" value={date} onChange={e => setDate(e.target.value)} />
+          <label htmlFor="important">Important</label>
+          <input type="checkbox" id="important" checked={important} onChange={e => setImportant(e.target.checked)} />
         </div>
         <div className="traineeSelect">
           {trainees?.map((trainee) => (
