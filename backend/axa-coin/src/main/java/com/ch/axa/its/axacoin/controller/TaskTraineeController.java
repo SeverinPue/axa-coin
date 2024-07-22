@@ -68,13 +68,13 @@ public class TaskTraineeController {
                     }
                     break;
                 case "approved":
-                    existingTaskTrainee.getTask_id().setApproved((Boolean) value);
+                    existingTaskTrainee.getTask().setApproved((Boolean) value);
                     break;
                 case "endDate":
                     if (value == null) {
-                        existingTaskTrainee.getTask_id().setEndDate(null);
+                        existingTaskTrainee.getTask().setEndDate(null);
                     } else {
-                        existingTaskTrainee.getTask_id().setEndDate(LocalDate.parse((String) value));
+                        existingTaskTrainee.getTask().setEndDate(LocalDate.parse((String) value));
                     }
             }
         });

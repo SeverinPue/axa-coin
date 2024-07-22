@@ -32,8 +32,8 @@ public class Task {
     @OnDelete(action = OnDeleteAction.SET_NULL)
     Trainer creator;
 
-    @JsonIgnoreProperties("task_id")
-    @OneToMany(mappedBy = "task_id")
+    @JsonIgnoreProperties("task")
+    @OneToMany(mappedBy = "task")
     @Cascade(CascadeType.REMOVE)
     Set<TaskTrainee> taskTrainees;
 }
