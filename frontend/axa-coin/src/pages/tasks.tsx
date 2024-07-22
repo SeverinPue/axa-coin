@@ -49,10 +49,10 @@ export default function Tasks() {
       .map((task: any, index) => (
         <Task
           key={index}
-          title={task.task_id.title}
-          endDate={task.task_id.endDate}
-          description={task.task_id.description}
-          earningPoints={task.task_id.earningPoints}
+          title={task.task.title}
+          endDate={task.task.endDate}
+          description={task.task.description}
+          earningPoints={task.task.earningPoints}
           submitted={task.dateOfSubmission !== null}
           handleSubmitRoot={() => handleSubmit(task.id, task)}
         />
@@ -62,11 +62,11 @@ export default function Tasks() {
   const getFilteredTasks = () => {
     switch (selectedCategory) {
       case 'important':
-        return renderTasks((task) => task.task_id.important && task.dateOfSubmission == null && !task.task_id.approved);
+        return renderTasks((task) => task.task.important && task.dateOfSubmission == null && !task.task.approved);
       case 'unimportant':
-        return renderTasks((task) => !task.task_id.important && task.dateOfSubmission == null  && !task.task_id.approved);
+        return renderTasks((task) => !task.task.important && task.dateOfSubmission == null  && !task.task.approved);
       case 'done':
-        return renderTasks((task) => task.dateOfSubmission !== null && isLaterThanToday(task.task_id.endDate)  && !task.task_id.approved);
+        return renderTasks((task) => task.dateOfSubmission !== null && isLaterThanToday(task.task.endDate)  && !task.task.approved);
       default:
         return null;
     }

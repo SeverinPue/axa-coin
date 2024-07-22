@@ -9,7 +9,7 @@ export default function Submission() {
 
   const handleApproveLocal = (task) => {
     const updatedTask = {
-      points: (task.task_id.earningPoints + task.trainee.points),
+      points: (task.task.earningPoints + task.trainee.points),
       approved: true
     };
 
@@ -69,12 +69,12 @@ export default function Submission() {
     return tasks
       .filter(filterFunc)
       .map((task, index) => (
-        <CustomSubmission title={task.task_id.title} trainee={task.trainee.user.username} handleApprove={() => handleApproveLocal(task)} handleReject={() => handleRejectLocal(task)}></CustomSubmission>
+        <CustomSubmission title={task.task.title} trainee={task.trainee.user.username} handleApprove={() => handleApproveLocal(task)} handleReject={() => handleRejectLocal(task)}></CustomSubmission>
       ));
   };
 
   const getFilteredTasks = () => {
-    return renderTasks((task) => task.dateOfSubmission !== null && task.task_id.approved == false);
+    return renderTasks((task) => task.dateOfSubmission !== null && task.task.approved == false);
 
   };
 
