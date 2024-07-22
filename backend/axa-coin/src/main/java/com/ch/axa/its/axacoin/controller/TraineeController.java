@@ -5,6 +5,7 @@ import com.ch.axa.its.axacoin.Repositorys.ProductRepository;
 import com.ch.axa.its.axacoin.Repositorys.TraineeRepository;
 import com.ch.axa.its.axacoin.Repositorys.TrainerRepository;
 import com.ch.axa.its.axacoin.Repositorys.UserRepository;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,7 @@ public class TraineeController {
     private UserRepository userRepository;
 
     @GetMapping
+    @Hidden
     public ResponseEntity<List<Trainee>> getAllTrainees() {
         return ResponseEntity.ok(traineeRepository.findAll());
     }
@@ -61,11 +63,13 @@ public class TraineeController {
     }
 
     @PostMapping
+    @Hidden
     public ResponseEntity<Trainee> createTrainee(@RequestBody Trainee trainee) {
         return ResponseEntity.ok(traineeRepository.save(trainee));
     }
 
     @PutMapping("/{id}")
+    @Hidden
     public ResponseEntity<Trainee> updateTrainee(
             @PathVariable String id,
             @Valid @RequestBody Map<String, Object> updates) {
@@ -96,6 +100,7 @@ public class TraineeController {
     }
 
     @PutMapping("/purchase/{id}")
+    @Hidden
     public ResponseEntity<Trainee> updatePoints(
             @PathVariable String id,
             @RequestBody Map<String, Object> updates) {
@@ -121,6 +126,7 @@ public class TraineeController {
     }
 
     @DeleteMapping("/{id}")
+    @Hidden
     public void deleteUser(@PathVariable String id) {
         System.out.println("Deleting trainee with id: "+id);
         traineeRepository.deleteById(id);
