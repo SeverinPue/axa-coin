@@ -169,6 +169,7 @@ export default function EditUser (){
           .then(()=> {console.log("wurde gelöscht"); fetchTrainees(); fetchTrainers(); reset();})
             .catch((error) => {
               console.error("Fehler beim Fetchen: " + error);
+              fetchTrainees(); fetchTrainers();
             });
       
     }
@@ -194,6 +195,8 @@ export default function EditUser (){
       .then(()=> {fetchTrainees(); fetchTrainers();})
         .catch((error) => {
           alert("Ungültige Angaben: " + error);
+          fetchTrainees();
+          fetchTrainers();
         });
     }
 
