@@ -1,56 +1,75 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-:root {
-    --primary: #cfcfcf;
-    --primary-contrast: #bbbbbb ;
-    --secondary: #000;
-    --titles: #489FB5;
-    --titlesaction: #3e8799;
-    --highlight: #EDE7E3;
-    --highlightaction: #FFA62B;
-    --font-family: 'Raleway', sans-serif;
-  }
-  
-  [data-theme='dark'] {
-    --primary: #202020;
-    --primary-contrast: #494949 ;
-    --secondary: #cfcfcf;
-    --titles: #38798a;
-    --titlesaction: #69b9c9;
-    --highlight: #EDE7E3;
-    --highlightaction: #FFA62B;
-    --font-family: 'Raleway', sans-serif;
-  }
-  body{
-    margin: 0px;
-    padding: 0px;
-  }
-    button{
-      padding: 10px;
-      font-family: var(--font-family);
-      border: 2px solid var(--titles);
-      background-color: var(--primary);
-      color: var(--titles);
-    }
-    button:hover{
-      border: 2px solid var(--highlightaction);
-      background-color: var(--primary);
 
-    }
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-    
-    /* Track */
-    ::-webkit-scrollbar-track {
-      background: var(--primary);
-    }
-    
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-      background: var(--titles);
-    }
-    
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--titlesaction);
-    }
+:root {
+  --primary: #cfcfcf;
+  --primary-contrast: #bbbbbb;
+  --secondary: #000;
+  --titles: #489FB5;
+  --titlesaction: #3e8799;
+  --highlight: #EDE7E3;
+  --highlightaction: #FFA62B;
+  --font-family: 'Raleway', sans-serif;
+  --delete: #a73b3b;
+  --new: #3ba74d;
+}
+
+[data-theme='dark'] {
+  --primary: #202020;
+  --primary-contrast: #494949;
+  --secondary: #cfcfcf;
+  --titles: #38798a;
+  --titlesaction: #69b9c9;
+  --highlight: #EDE7E3;
+  --highlightaction: #FFA62B;
+  --font-family: 'Raleway', sans-serif;
+  --delete: #a73b3b;
+  --new: #3ba74d;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+button {
+  padding: 10px;
+  font-family: var(--font-family);
+  border: 2px solid var(--titles);
+  background-color: var(--primary);
+  color: var(--titles);
+}
+
+button:hover {
+  border: 2px solid var(--highlightaction);
+  background-color: var(--primary);
+
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--primary);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--titles);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--titlesaction);
+}
+
+.deleteButton {
+  color: var(--delete);
+  border-color: var(--delete);
+}
+
+.newButton{
+  color: var(--new);
+  border-color: var(--new);
+}

@@ -15,7 +15,7 @@ export default function User (props: Props){
             <p className="userTitle">{props.user.user.username}</p>
             <div className="buttons">
                 <button onClick={e => props.loadUser(props.user)} className="button">bearbeiten</button>
-                <button onClick={e => props.deleteUser(props.user.id)} className="button">löschen</button>
+                <button onClick={e => props.deleteUser(props.user.id)} className="button  deleteButton">löschen</button>
             </div>
             
             

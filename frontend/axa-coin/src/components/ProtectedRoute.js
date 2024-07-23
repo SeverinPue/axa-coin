@@ -6,7 +6,6 @@ const ProtectedRoute = ({ component }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   const [isAdmin, setIsAdmin] = useState(null);
   useEffect(() => {
-    console.log("loaded secure route")
     fetch("http://localhost:8080/api/auth", {
       method: "GET",
       headers: {

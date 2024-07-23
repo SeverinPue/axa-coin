@@ -1,3 +1,25 @@
 .buttonBack{
     margin-left: 5px;
 }
+.taskSelection{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.taskBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+}
+.body{
+    margin: 0px;
+    margin-top: 20px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

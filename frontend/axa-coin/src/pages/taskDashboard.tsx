@@ -169,8 +169,10 @@ export default function Taskboard() {
 
   return (
     <div className="body">
-      <button onClick={openNewTask}>Neue Aufgabe erstellen</button>
-      <button className='buttonBack' onClick={() => navigate("/a/submissions")}>Aufgaben auswerten</button>
+      <div className="taskBar">
+        <button onClick={openNewTask}>Neue Aufgabe erstellen</button>
+        <button className='buttonBack' onClick={() => navigate("/a/submissions")}>Aufgaben auswerten</button>
+      </div>
       <dialog ref={dialogRef}>
         <div className="attributes">
           <label htmlFor="title">Titel</label>
@@ -235,7 +237,7 @@ export default function Taskboard() {
         </div>
       </dialog>
 
-      <div>
+      <div className='taskSelection'>
         {
            tasks?.map(task => <TaskEdit key={task.id} loadTask={trainee => loadTask(trainee)} deleteTask={taskId => {deleteTask(taskId)}} task={task}></TaskEdit>)
         }
