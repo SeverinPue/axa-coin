@@ -178,7 +178,7 @@ export default function EditProdukte() {
         <h2>Produkte Bearbeiten</h2>
         <div className="button-erstellen">
           <button className="newButton" onClick={handleCreate}>
-            Neue Aufgabe erstellen
+            Neues Produkt erstellen
           </button>
         </div>
         <div className="card-container">
@@ -229,10 +229,10 @@ export default function EditProdukte() {
               />
             </label>
             <div className="dialog-buttons">
-              <button className="button" onClick={handleSaveEdit}>
+              <button className="button newButton" onClick={handleSaveEdit}>
                 Speichern
               </button>
-              <button className="button" onClick={handleCloseDialog}>
+              <button className="button deleteButton" onClick={handleCloseDialog}>
                 Abbrechen
               </button>
             </div>
@@ -270,10 +270,10 @@ export default function EditProdukte() {
               <input type="number" ref={priceInputRef} />
             </label>
             <div className="dialog-buttons">
-              <button className="button" onClick={handleSaveNewProduct}>
+              <button className="button newButton" onClick={handleSaveNewProduct}>
                 Erstellen
               </button>
-              <button className="button" onClick={handleCloseDialog}>
+              <button className="button deleteButton" onClick={handleCloseDialog}>
                 Abbrechen
               </button>
             </div>

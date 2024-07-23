@@ -58,6 +58,8 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT, "api/trainers").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "api/trainers").hasRole("ADMIN")
 
+                        .requestMatchers("/api/transactions/").hasAnyRole("ADMIN", "USER")
+
                         .requestMatchers(HttpMethod.POST,"api/users").hasRole("ADMIN")
                         .requestMatchers("api/users/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
