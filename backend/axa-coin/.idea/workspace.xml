@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="shop fertig">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/Entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/Entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/ProductController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +125,7 @@
       <workItem from="1721128133579" duration="3621000" />
       <workItem from="1721282920338" duration="4008000" />
       <workItem from="1721628323520" duration="1398000" />
-      <workItem from="1721629744759" duration="14907000" />
+      <workItem from="1721629744759" duration="17516000" />
     </task>
     <task id="LOCAL-00001" summary="create UserController.java">
       <option name="closed" value="true" />

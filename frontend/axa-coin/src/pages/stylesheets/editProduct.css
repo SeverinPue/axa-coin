@@ -13,7 +13,7 @@
     background-color: var(--primary-contrast);
     border-radius: 0.5rem;
     padding: 8px;
-    width: 100%;
+    width: 80%;
     box-sizing: border-box;
 }
 
@@ -21,8 +21,10 @@
 
 .card-container {
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     box-sizing: border-box;
-    padding: 2rem;
     width: 100vw;
 }
 
@@ -43,6 +45,37 @@
     align-items: center;
 }
 
+.edit-dialog select:focus {
+
+    border: 2px solid var(--highlightaction);
+    outline: none;
+}
+
+.edit-dialog select {
+
+    width: 50%;
+    margin-left: 8px;
+}
+.edit-dialog label {
+
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.edit-dialog textarea:focus {
+
+    border: 2px solid var(--highlightaction);
+    outline: none;
+}
+
+.button-erstellen{
+
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+}
+
 .edit-dialog textarea {
 
     color: var(--secondary);
@@ -61,28 +94,26 @@
 }
 
 .edit-dialog {
-    
+
+    width: 500px;
     border: 2px solid var(--titles);
     background-color: var(--primary-contrast);
     padding: 20px;
     border-radius: 8px;
 }
 
-.edit-dialog label {
-    display: block;
-    margin-bottom: 10px;
-}
-
 
 .edit-dialog input {
     
-    width: 100%;
+    width: 60%;
     padding: 8px;
     margin-bottom: 15px;
     border-radius: 4px;
 }
 
 .dialog-buttons {
+    
+    padding: 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }

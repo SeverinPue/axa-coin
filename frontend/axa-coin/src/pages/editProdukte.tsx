@@ -12,6 +12,8 @@ export default function EditProdukte() {
   const [products, setProducts] = useState<Product[]>([]);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [showEditDialog, setShowEditDialog] = useState(false);
+  const [trainers, setTrainers] = useState<Array<any>>();
+  const [showCreateDialog, setShowCreateDialog] = useState(false);
   const nameInputRef = useRef<HTMLInputElement>(null);
   const descriptionInputRef = useRef<HTMLTextAreaElement>(null);
   const priceInputRef = useRef<HTMLInputElement>(null);
@@ -66,6 +68,7 @@ export default function EditProdukte() {
 
   function handleCloseDialog() {
     setShowEditDialog(false);
+    setShowCreateDialog(false);
     setEditingProduct(null);
   }
 
@@ -76,7 +79,6 @@ export default function EditProdukte() {
       !descriptionInputRef.current ||
       !priceInputRef.current
     ) {
-      // Handle the case where the editing product or input refs are not available
       return;
     }
 
@@ -110,12 +112,75 @@ export default function EditProdukte() {
       });
   }
 
+  const fetchTrainers = () => {
+    fetch("http://localhost:8080/api/trainers", {
+      headers: {
+        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setTrainers(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Fehler beim Fetchen: " + error);
+      });
+  };
+
+  function handleCreate() {
+    fetchTrainers();
+    setShowCreateDialog(true);
+  }
+
+  function handleSaveNewProduct() {
+    if (
+      !nameInputRef.current ||
+      !descriptionInputRef.current ||
+      !priceInputRef.current
+    ) {
+      return;
+    }
+
+    const newProduct = {
+      name: nameInputRef.current.value,
+      description: descriptionInputRef.current.value,
+      price: parseFloat(priceInputRef.current.value),
+    };
+
+    fetch("http://localhost:8080/api/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+      },
+      body: JSON.stringify(newProduct),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to create new product.");
+        }
+        return response.json();
+      })
+      .then(getALLProducts)
+      .catch((error) => {
+        console.error("Error creating product:", error);
+      })
+      .finally(() => {
+        handleCloseDialog();
+        setShowCreateDialog(false);
+      });
+  }
+
   return (
     <>
       <div className="product-list">
-        <h2>Edit Products</h2>
-        <button>Neue Aufgabe erstellen</button>
-
+        <h2>Produkte Bearbeiten</h2>
+        <div className="button-erstellen">
+          <button className="newButton" onClick={handleCreate}>
+            Neue Aufgabe erstellen
+          </button>
+        </div>
         <div className="card-container">
           {products.map((product) => (
             <div key={product.id} className="product-card-edit">
@@ -125,7 +190,7 @@ export default function EditProdukte() {
                   Bearbeiten
                 </button>
                 <button
-                  className="button"
+                  className="button deleteButton"
                   onClick={() => handleDelete(product.id)}
                 >
                   Löschen
@@ -139,7 +204,7 @@ export default function EditProdukte() {
       {showEditDialog && editingProduct && (
         <div className="dialog-overlay">
           <div className="edit-dialog">
-            <h2>Edit Product</h2>
+            <h2>Produkt Bearbeiten</h2>
             <label>
               Name:
               <input
@@ -164,11 +229,52 @@ export default function EditProdukte() {
               />
             </label>
             <div className="dialog-buttons">
+              <button className="button" onClick={handleSaveEdit}>
+                Speichern
+              </button>
               <button className="button" onClick={handleCloseDialog}>
                 Abbrechen
               </button>
-              <button className="button" onClick={handleSaveEdit}>
-                Speichern
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showCreateDialog && (
+        <div className="dialog-overlay">
+          <div className="edit-dialog">
+            <h2>Neues Produkt erstellen</h2>
+            <label>
+              Name:
+              <input type="text" ref={nameInputRef} />
+            </label>
+            <label>
+              Beschreibung:
+              <textarea ref={descriptionInputRef} />
+            </label>
+
+            <label>
+              Berufsbildner:
+              <select id="dropdown">
+                <option>Bitte wählen</option>
+                {trainers?.map((trainerprov) => (
+                  <option key={trainerprov.id} value={trainerprov.id}>
+                    {trainerprov.user.username}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              Preis:
+              <input type="number" ref={priceInputRef} />
+            </label>
+            <div className="dialog-buttons">
+              <button className="button" onClick={handleSaveNewProduct}>
+                Erstellen
+              </button>
+              <button className="button" onClick={handleCloseDialog}>
+                Abbrechen
               </button>
             </div>
           </div>
