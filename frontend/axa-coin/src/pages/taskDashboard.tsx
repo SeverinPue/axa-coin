@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import TaskEdit from "../components/taskEdit.tsx";
 import "./stylesheets/taskboard.css"
+import { useNavigate } from 'react-router-dom';
+
+
 
 export default function Taskboard() {
   const dialogRef = useRef(null);
@@ -8,15 +11,15 @@ export default function Taskboard() {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [date, setDate] = useState<string>("");
-  const [trainers, setTrainers] = useState<Array<any>>([]);
   const [trainees, setTrainees] = useState<Array<any>>([]);
   const [tasks, setTasks] = useState<Array<any>>([]);
   const [points, setPoints] = useState<number>(0);
   const [id, setId] = useState<string>("");
-  const [filter, setFilter] = useState<string>("");
   const [task, setTask] = useState<any>({});
   const [traineeUpdate, setTraineeUpdate] = useState<Array<string>>([])
   const [important, setImportant] = useState<boolean>(false);
+  const navigate = useNavigate();
+
 
   const reset = () => {
     setTitle("");
@@ -39,7 +42,6 @@ export default function Taskboard() {
 
   const openNewTask = () => {
     newTaskRef.current.showModal();
-    fetchTrainers();
   }
 
   const closeNewTask = () => {
@@ -57,7 +59,6 @@ export default function Taskboard() {
   };
   useEffect(() => {
     fetchTrainees();
-    fetchTrainers();
     fetchTasks();
   }, []);
 
@@ -69,19 +70,6 @@ export default function Taskboard() {
     })
       .then(r => r.json())
       .then((data) => { setTrainees(data) })
-      .catch((error) => {
-        console.error("Fehler beim Fetchen: " + error);
-      });
-  }
-
-  const fetchTrainers = () => {
-    fetch("http://localhost:8080/api/trainers", {
-      headers: {
-        "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
-      },
-    })
-      .then(response => response.json())
-      .then((data) => { setTrainers(data)})
       .catch((error) => {
         console.error("Fehler beim Fetchen: " + error);
       });
@@ -181,12 +169,8 @@ export default function Taskboard() {
 
   return (
     <div className="body">
-      <button onClick={openNewTask}>Neuen Task erstellen</button>
-      <select value={filter} onChange={e => setFilter(e.target.value)}>
-        <option value={"all"}>Alle Tasks</option>
-        <option value={"mine"}>Meine Tasks</option>
-      </select>
-
+      <button onClick={openNewTask}>Neue Aufgabe erstellen</button>
+      <button className='buttonBack' onClick={() => navigate("/a/submissions")}>Aufgaben auswerten</button>
       <dialog ref={dialogRef}>
         <div className="attributes">
           <label htmlFor="title">Titel</label>

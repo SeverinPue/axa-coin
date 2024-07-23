@@ -75,6 +75,7 @@ public class TraineeController {
             @Valid @RequestBody Map<String, Object> updates) {
         Trainee existingTrainee = traineeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Trainee not found with id: " + id));
+        System.out.println("updating trainee with id: " + id);
         updates.forEach((key, value) -> {
             switch (key) {
                 case "points":

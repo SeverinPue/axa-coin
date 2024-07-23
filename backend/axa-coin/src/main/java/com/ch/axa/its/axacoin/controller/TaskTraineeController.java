@@ -60,6 +60,7 @@ public class TaskTraineeController {
             @RequestBody Map<String, Object> updates) {
         TaskTrainee existingTaskTrainee = taskTraineeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("TaskTrainee not found with id: " + id));
+
         updates.forEach((key, value) -> {
             switch (key) {
                 case "dateOfSubmission":
@@ -76,8 +77,12 @@ public class TaskTraineeController {
                     if (value == null) {
                         existingTaskTrainee.getTask().setEndDate(null);
                     } else {
+                        System.out.println("error happens here igg");
                         existingTaskTrainee.getTask().setEndDate(LocalDate.parse((String) value));
                     }
+                case "points":
+                    assert value != null;
+                    existingTaskTrainee.getTrainee().setPoints(Double.parseDouble(value.toString()));
             }
         });
         TaskTrainee savedTaskTrainee = taskTraineeRepository.save(existingTaskTrainee);
