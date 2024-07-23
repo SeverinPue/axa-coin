@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import "./stylesheets/editProduct.css";
 interface Product {
   id: string;
   name: string;
@@ -38,24 +38,27 @@ export default function EditProdukte() {
   }
 
   function handleDelete(productId: string) {
-   
     setProducts(products.filter((p) => p.id !== productId));
   }
   return (
-    <div>
-      <h2>Edit Products</h2>
+    <>
+      <div className="product-list">
+        <h2>Edit Products</h2>
 
-      <ul>
-        {products.map((product) => (
-          <li key={product.id}>
-            <h3>{product.name}</h3>
-            <p>Description: {product.description}</p>
-            <p>Price: {product.price}</p>
-            <button onClick={() => handleEdit(product)}>Edit</button>
-            <button onClick={() => handleDelete(product.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-    </div>
+        <div className="card-container">
+          {products.map((product) => (
+            <div key={product.id} className="product-card">
+              <h3>{product.name}</h3>
+              <p>{product.description}</p>
+              <p>Price: {product.price}</p>
+              <div className="card-buttons">
+                <button onClick={() => handleEdit(product)}>Edit</button>
+                <button onClick={() => handleDelete(product.id)}>Delete</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
