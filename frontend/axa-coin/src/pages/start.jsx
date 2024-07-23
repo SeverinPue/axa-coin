@@ -4,11 +4,12 @@ import "./stylesheets/start.css"
 export default function Start() {
   return <>
 
-    <h2 className="startTitle">Willkommen bei AxA-Coin</h2>
+<div className="main">
+   <h2 className="startTitle">Willkommen bei AXA-Coin</h2>
     <h3>So funktioniert's</h3>
     <span>
 
-      <ol>
+      <ol className="list">
         <li>
           <strong>Aufgaben erhalten:</strong>
           <br />
@@ -35,6 +36,9 @@ export default function Start() {
         </li>
       </ol>
     </span>
+</div>
+
+   
 
   </>;
 }
