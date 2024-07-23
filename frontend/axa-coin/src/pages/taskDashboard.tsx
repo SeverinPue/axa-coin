@@ -170,78 +170,99 @@ export default function Taskboard() {
   return (
     <div className="body">
       <div className="taskBar">
-      <button className='buttonBack' onClick={() => navigate("/a/submissions")}>Aufgaben auswerten</button>
+        <button className='buttonBack' onClick={() => navigate("/a/submissions")}>Aufgaben auswerten</button>
         <button className='newButton' onClick={openNewTask}>Neue Aufgabe erstellen</button>
       </div>
-      <dialog ref={dialogRef}>
+      <dialog ref={dialogRef} className='taskDialog'>
         <div className="attributes">
-          <label htmlFor="title">Titel</label>
-          <input type="text" id="title" value={title} onChange={e => setTitle(e.target.value)} />
-          <label htmlFor="description">Beschreibung</label>
-          <input type="text" id="description" value={description} onChange={e => setDescription(e.target.value)} />
-          <label htmlFor="points">Punkte</label>
-          <input type="number" id="points" value={points.toString()} onChange={e => setPoints(parseInt(e.target.value))} />
-          <label htmlFor="date">Datum</label>
-          <input type="date" id="date" value={date} onChange={e => setDate(e.target.value)} />
-          <label htmlFor="important">Important</label>
-          <input type="checkbox" id="important" checked={important} onChange={e => setImportant(e.target.checked)} />
+          <div className="attribute-pair">
+            <label htmlFor="title">Titel:</label>
+            <input type="text" id="title" value={title} onChange={e => setTitle(e.target.value)} />
+          </div>
+          <div className="attribute-pair">
+            <label htmlFor="description">Beschreibung:</label>
+            <input type="text" id="description" value={description} onChange={e => setDescription(e.target.value)} />
+          </div>
+          <div className="attribute-pair">
+            <label htmlFor="points">Punkte:</label>
+            <input type="number" id="points" value={points.toString()} onChange={e => setPoints(parseInt(e.target.value))} />
+          </div>
+          <div className="attribute-pair">
+            <label htmlFor="date">Datum:</label>
+            <input type="date" id="date" value={date} onChange={e => setDate(e.target.value)} />
+          </div>
+          <div className="attribute-pair">
+            <label htmlFor="important">Priorisieren</label>
+            <input type="checkbox" id="important" checked={important} onChange={e => setImportant(e.target.checked)} />
+          </div>
         </div>
         <div className="traineeSelect">
           {trainees?.map((trainee) => (
-            <div key={trainee.id}>
+            <div key={trainee.id} className='traineeContainer'>
+              <label htmlFor={`trainee-${trainee.id}`}>{trainee.user.username}</label>
               <input
                 type="checkbox"
                 id={`trainee-${trainee.id}`}
                 checked={traineeUpdate.includes(trainee.id)}
                 onChange={(e) => handleCheckboxChange(e, trainee.id)}
               />
-              <label htmlFor={`trainee-${trainee.id}`}>{trainee.user.username}</label>
             </div>
           ))}
         </div>
 
         <div className="buttons">
-          <button onClick={() => updateTask(task)}>Speichern</button>
-          <button onClick={closeDialog}>Abbrechen</button>
+          <button className='newButton' onClick={() => updateTask(task)}>Speichern</button>
+          <button className='deleteButton' onClick={closeDialog}>Abbrechen</button>
         </div>
       </dialog>
 
-      <dialog ref={newTaskRef}>
+      <dialog ref={newTaskRef} className='taskDialog'>
         <div className="attributes">
-          <label htmlFor="title">Titel</label>
-          <input type="text" id="title" value={title} onChange={e => setTitle(e.target.value)} />
-          <label htmlFor="description">Beschreibung</label>
-          <input type="text" id="description" value={description} onChange={e => setDescription(e.target.value)} />
-          <label htmlFor="points">Punkte</label>
-          <input type="number" id="points" value={points.toString()} onChange={e => setPoints(parseInt(e.target.value))} />
-          <label htmlFor="date">Datum</label>
-          <input type="date" id="date" value={date} onChange={e => setDate(e.target.value)} />
-          <label htmlFor="important">Important</label>
-          <input type="checkbox" id="important" checked={important} onChange={e => setImportant(e.target.checked)} />
+          <div className="attribute-pair">
+            <label htmlFor="title">Titel</label>
+            <input type="text" id="title" value={title} onChange={e => setTitle(e.target.value)} />
+          </div>
+          <div className="attribute-pair">
+            <label htmlFor="description">Beschreibung</label>
+            <input type="text" id="description" value={description} onChange={e => setDescription(e.target.value)} />
+          </div>
+          <div className="attribute-pair">
+            <label htmlFor="points">Punkte</label>
+            <input type="number" id="points" value={points.toString()} onChange={e => setPoints(parseInt(e.target.value))} />
+          </div>
+          <div className="attribute-pair">
+            <label htmlFor="date">Datum</label>
+            <input type="date" id="date" value={date} onChange={e => setDate(e.target.value)} />
+          </div>
+          <div className="attribute-pair">
+            <label htmlFor="important">Priorisieren</label>
+            <input type="checkbox" id="important" checked={important} onChange={e => setImportant(e.target.checked)} />
+          </div>
         </div>
+
         <div className="traineeSelect">
           {trainees?.map((trainee) => (
-            <div key={trainee.id}>
+            <div key={trainee.id} className='traineeContainer'>
+              <label htmlFor={`trainee-${trainee.id}`}>{trainee.user.username}</label>
               <input
                 type="checkbox"
                 id={`trainee-${trainee.id}`}
                 onChange={(e) => handleCheckboxChange(e, trainee.id)}
               />
-              <label htmlFor={`trainee-${trainee.id}`}>{trainee.user.username}</label>
             </div>
           ))}
         </div>
         <div className="buttons">
-          <button onClick={createTask}>Speichern</button>
-          <button onClick={closeNewTask}>Abbrechen</button>
+          <button className='newButton' onClick={createTask}>Speichern</button>
+          <button className='deleteButton' onClick={closeNewTask}>Abbrechen</button>
         </div>
       </dialog>
 
       <div className='taskSelection'>
         {
-           tasks?.map(task => <TaskEdit key={task.id} loadTask={trainee => loadTask(trainee)} deleteTask={taskId => {deleteTask(taskId)}} task={task}></TaskEdit>)
+          tasks?.map(task => <TaskEdit key={task.id} loadTask={trainee => loadTask(trainee)} deleteTask={taskId => { deleteTask(taskId) }} task={task}></TaskEdit>)
         }
-        
+
       </div>
     </div>
   )
