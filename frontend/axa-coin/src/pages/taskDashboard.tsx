@@ -170,8 +170,8 @@ export default function Taskboard() {
   return (
     <div className="body">
       <div className="taskBar">
-        <button onClick={openNewTask}>Neue Aufgabe erstellen</button>
-        <button className='buttonBack' onClick={() => navigate("/a/submissions")}>Aufgaben auswerten</button>
+      <button className='buttonBack' onClick={() => navigate("/a/submissions")}>Aufgaben auswerten</button>
+        <button className='newButton' onClick={openNewTask}>Neue Aufgabe erstellen</button>
       </div>
       <dialog ref={dialogRef}>
         <div className="attributes">
