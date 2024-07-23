@@ -5,7 +5,6 @@ const AdminProtectedRoute = ({ component }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
   useEffect(() => {
-    console.log("loaded secure admin")
     fetch("http://localhost:8080/api/auth/admin", {
       method: "GET",
       headers: {

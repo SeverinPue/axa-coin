@@ -126,10 +126,10 @@ public class DataLoader implements CommandLineRunner {
                 }
                 task.setTitle(title);
                 task.setDescription(faker.lorem().paragraph());
-                task.setEndDate(LocalDate.now().plusDays(faker.number().numberBetween(1, 30)));
                 task.setEarningPoints(faker.number().numberBetween(10, 100));
                 task.setImportant(random.nextBoolean());
-                task.setApproved(false);
+                task.setEndDate(LocalDate.now().plusDays(faker.number().numberBetween(1, 30)));
+
                 task.setCreator(trainer);
                 add(task);
             }
@@ -146,6 +146,7 @@ public class DataLoader implements CommandLineRunner {
                 }else{
                     taskTrainee.setDateOfSubmission(null);
                 }
+                taskTrainee.setApproved(false);
                 taskTrainee.setTask(task);
                 taskTrainee.setTrainee(trainee);
                 add(taskTrainee);

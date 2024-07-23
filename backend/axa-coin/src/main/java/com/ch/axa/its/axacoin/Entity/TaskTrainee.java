@@ -19,7 +19,7 @@ public class TaskTrainee {
     private String id;
 
     private LocalDate dateOfSubmission;
-
+    private boolean approved;
 
     @JsonIgnoreProperties({"taskTrainees", "creator"})
     @ManyToOne

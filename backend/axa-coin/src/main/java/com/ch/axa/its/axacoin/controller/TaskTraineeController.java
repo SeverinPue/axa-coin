@@ -71,13 +71,12 @@ public class TaskTraineeController {
                     }
                     break;
                 case "approved":
-                    existingTaskTrainee.getTask().setApproved((Boolean) value);
+                    existingTaskTrainee.setApproved((Boolean) value);
                     break;
                 case "endDate":
                     if (value == null) {
                         existingTaskTrainee.getTask().setEndDate(null);
                     } else {
-                        System.out.println("error happens here igg");
                         existingTaskTrainee.getTask().setEndDate(LocalDate.parse((String) value));
                     }
                 case "points":

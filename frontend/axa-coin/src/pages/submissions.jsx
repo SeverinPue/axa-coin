@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import CustomSubmission from '../components/Submission.jsx'
 import './stylesheets/submissions.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function Submission() {
   const [tasks, setTasks] = useState([]);
+  const navigate = useNavigate();
 
   const handleApproveLocal = (task) => {
     const updatedTask = {
@@ -26,7 +28,6 @@ export default function Submission() {
   const handleRejectLocal = (task) => {
     const updatedTask = {
       dateOfSubmission: null,
-      endDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     };
     fetch(`http://localhost:8080/api/tasktrainees/${task.id}`, {
       method: "PUT",
@@ -37,10 +38,7 @@ export default function Submission() {
       body: JSON.stringify(updatedTask),
     })
       .then(r => r.json())
-      .then(() => {
-        updateTasks;
-        console.log("done")
-      });
+      .then(updateTasks);
   }
   useEffect(() => {
     updateTasks();
@@ -54,8 +52,8 @@ export default function Submission() {
         "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
       },
     })
-      .then((r) => r.json())
-      .then((data) => setTasks(data));
+      .then(r => r.json())
+      .then((data) => {setTasks(data); console.log(data)});
   };
 
   const renderTasks = (filterFunc) => {
@@ -67,12 +65,20 @@ export default function Submission() {
   };
 
   const getFilteredTasks = () => {
-    return renderTasks((task) => task.dateOfSubmission !== null && task.task.approved == false);
+    return renderTasks((task) => task.dateOfSubmission !== null && task.approved == false);
 
   };
 
   return (
     <div className="mainTasks">
+      <div className="submissionBar">
+        <h2 className="submissionsTitle">
+          Eingereichte Tasks
+        </h2>
+        <button onClick={() => {navigate("/a/tasks")}} className="backToTask">
+          Züruck zu den Tasks
+        </button>
+      </div>
       <div className="tasksContainer">
         {getFilteredTasks()}
       </div>
