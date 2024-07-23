@@ -1,16 +1,14 @@
 package com.ch.axa.its.axacoin.controller;
 
 import com.ch.axa.its.axacoin.Entity.*;
-import com.ch.axa.its.axacoin.Repositorys.ProductRepository;
-import com.ch.axa.its.axacoin.Repositorys.TraineeRepository;
-import com.ch.axa.its.axacoin.Repositorys.TrainerRepository;
-import com.ch.axa.its.axacoin.Repositorys.UserRepository;
+import com.ch.axa.its.axacoin.Repositorys.*;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -31,6 +29,8 @@ public class TraineeController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TransactionRepository transactionRepository;
 
     @GetMapping
     @Hidden
@@ -115,6 +115,11 @@ public class TraineeController {
                     if (product.isPresent()) {
                         if (existingTrainee.getPoints() - product.get().getPrice() >= 0) {
                             existingTrainee.setPoints(existingTrainee.getPoints() - product.get().getPrice());
+                            Transaction transaction = new Transaction();
+                            transaction.setProduct(product.get());
+                            transaction.setTrainee(existingTrainee);
+                            transaction.setTransactionDate(LocalDate.now());
+                            transactionRepository.save(transaction);
                         } else {
                             throw new IllegalArgumentException("Insufficient points");
                         }
