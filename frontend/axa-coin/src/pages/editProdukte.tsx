@@ -174,7 +174,7 @@ export default function EditProdukte() {
 
   return (
     <>
-      <div className="product-list">
+      <div className="product-list-edit">
         <h2>Produkte Bearbeiten</h2>
         <div className="button-erstellen">
           <button className="newButton" onClick={handleCreate}>

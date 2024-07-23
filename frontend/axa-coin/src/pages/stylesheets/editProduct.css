@@ -1,4 +1,4 @@
-.product-list {
+.product-list-edit {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -112,7 +112,7 @@
 }
 
 .dialog-buttons {
-    
+
     padding: 0;
     display: flex;
     justify-content: space-between;
