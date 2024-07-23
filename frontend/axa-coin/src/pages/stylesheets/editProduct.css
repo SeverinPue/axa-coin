@@ -69,11 +69,11 @@
     outline: none;
 }
 
-.button-erstellen{
+.button-erstellen {
 
     width: 80%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
 }
 
 .edit-dialog textarea {
