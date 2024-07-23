@@ -1,18 +1,22 @@
 .body{
     margin: 2rem;
     background-color: var(--primary);
+    color: var(--secondary);
 }
 body{
     background-color: var(--primary);
+    color: var(--secondary);
 }
 
 dialog{
     font-family: var(--font-family);
     background-color: var(--primary);
+    color: var(--secondary);
     border-color: var(--titles);
     border-width: 0.15rem;
     border-radius: 0.5rem;
     width: 30rem;
+   
 }
 
 .attribute{
@@ -20,17 +24,19 @@ dialog{
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
+    color: var(--secondary);
     
 }
 
 select{
     font-family: var(--font-family);
     background-color: var(--primary);
-    color: var(--titles);
+    color: var(--secondary);
     font-size: 1.2rem;
     border-color: var(--titles);
     border-width: 0.15rem;
     border-radius: 0.5rem;
+    color: var(--secondary);
 }
 
 
@@ -45,4 +51,16 @@ select{
 
 .menu select{
     margin-right: 1rem;
+}
+
+form{
+    width: auto;
+    height: 20rem;
+    font-family: var(--font-family);
+    background-color: var(--primary);
+    border-color: var(--titles);
+    border-width: 0.15rem;
+    border-radius: 0.5rem;
+    width: 30rem;
+    
 }
