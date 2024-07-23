@@ -13,7 +13,7 @@ export default function Task (props: Props){
             <p className="taskTitle">{props.task.title}</p>
             <div className="buttons">
                 <button onClick={e => props.loadTask(props.task)} className="button">bearbeiten</button>
-                <button onClick={e => props.deleteTask(props.task.id)} className="button">löschen</button>
+                <button onClick={e => props.deleteTask(props.task.id)} className="button deleteButton">löschen</button>
             </div>
             
             
