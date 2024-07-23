@@ -5,22 +5,12 @@ import './stylesheets/submissions.css';
 export default function Submission() {
   const [tasks, setTasks] = useState([]);
 
-  const isLaterThanToday = (dateStr) => new Date(dateStr) > new Date();
-
   const handleApproveLocal = (task) => {
     const updatedTask = {
       points: (task.task.earningPoints + task.trainee.points),
       approved: true
     };
 
-    fetch(`http://localhost:8080/api/trainees/${task.trainee.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
-      },
-      body: JSON.stringify(updatedTask),
-    })
     fetch(`http://localhost:8080/api/tasktrainees/${task.id}`, {
       method: "PUT",
       headers: {
@@ -32,6 +22,7 @@ export default function Submission() {
       .then(r => r.json())
       .then(updateTasks);
   }
+  
   const handleRejectLocal = (task) => {
     const updatedTask = {
       dateOfSubmission: null,
@@ -46,7 +37,10 @@ export default function Submission() {
       body: JSON.stringify(updatedTask),
     })
       .then(r => r.json())
-      .then(updateTasks);
+      .then(() => {
+        updateTasks;
+        console.log("done")
+      });
   }
   useEffect(() => {
     updateTasks();
@@ -65,7 +59,6 @@ export default function Submission() {
   };
 
   const renderTasks = (filterFunc) => {
-    console.log(tasks)
     return tasks
       .filter(filterFunc)
       .map((task, index) => (
