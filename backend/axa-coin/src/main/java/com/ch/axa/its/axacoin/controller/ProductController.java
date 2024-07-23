@@ -2,6 +2,8 @@ package com.ch.axa.its.axacoin.controller;
 
 import com.ch.axa.its.axacoin.Entity.*;
 import com.ch.axa.its.axacoin.Repositorys.ProductRepository;
+import com.ch.axa.its.axacoin.Repositorys.TrainerRepository;
+import com.ch.axa.its.axacoin.Repositorys.TransactionRepository;
 import com.ch.axa.its.axacoin.Repositorys.UserRepository;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
@@ -24,6 +26,12 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private TrainerRepository trainerRepository;
+
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts(){
         return ResponseEntity.ok(productRepository.findAll());
@@ -39,10 +47,33 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product){
-        return ResponseEntity.ok(productRepository.save(product));
-    }
+    public ResponseEntity<Product> createProduct(@Valid @RequestBody Map<String, Object> updates) {
+        Product product = new Product();
 
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "name":
+                    product.setName(value.toString());
+                    break;
+                case "description":
+                    product.setDescription(value.toString());
+                    break;
+                case "price":
+                    product.setPrice(Double.parseDouble(value.toString()));
+                    break;
+                case "creator":
+                    Optional<User> user = userRepository.findById(value.toString());
+                    if (user.isPresent()) {
+                        Optional<Trainer> trainer = trainerRepository.findTrainerByUser(user.get());
+                        trainer.ifPresent(product::setCreator);
+                    }
+                    break;
+            }
+        });
+        Product savedTask = productRepository.save(product);
+
+        return ResponseEntity.ok(savedTask);
+    }
     @PutMapping("/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable String id, @Valid @RequestBody Map<String, Object> updates) {
         Optional<Product> optionalProduct = productRepository.findById(id);

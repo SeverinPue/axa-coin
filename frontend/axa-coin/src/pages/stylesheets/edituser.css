@@ -53,14 +53,3 @@ select{
     margin-right: 1rem;
 }
 
-form{
-    width: auto;
-    height: 20rem;
-    font-family: var(--font-family);
-    background-color: var(--primary);
-    border-color: var(--titles);
-    border-width: 0.15rem;
-    border-radius: 0.5rem;
-    width: 30rem;
-    
-}

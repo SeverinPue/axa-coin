@@ -24,7 +24,7 @@ public class Product {
 
     @JsonIgnoreProperties("product")
     @OneToMany(mappedBy = "product")
-    @OnDelete(action = OnDeleteAction.SET_NULL)
+    @Cascade(CascadeType.REMOVE)
     Set<Transaction> transactions;
 
     @JsonIgnoreProperties({"products", "tasks", "trainees"})
