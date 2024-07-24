@@ -10,6 +10,7 @@
 body{
     background-color: var(--primary);
     color: var(--secondary);
+    font-family: var(--font-family);
 
 }
 
