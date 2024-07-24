@@ -25,7 +25,6 @@ export default function Start() {
       const newPasswortJson = {
         oldPassword: currentPassword,
         newPassword: newPassword,
-        username: sessionStorage.getItem("username")
       };
   
       fetch("http://localhost:8080/api/users", {
