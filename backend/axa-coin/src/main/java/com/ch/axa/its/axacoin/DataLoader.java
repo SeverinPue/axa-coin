@@ -44,11 +44,16 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User livio = new User();
-        random = new Random();
         livio.setUsername("livio");
         livio.setPassword(passwordEncoder.encode("livio"));
         livio.setRole("ROLE_"+Role.ADMIN.name());
         userRepository.save(livio);
+
+        User leaderboard = new User();
+        leaderboard.setUsername("leaderboard");
+        leaderboard.setPassword(passwordEncoder.encode("leaderboard"));
+        leaderboard.setRole("ROLE_"+Role.LEADERBOARD.name());
+        userRepository.save(leaderboard);
 
 
         User jay = new User();

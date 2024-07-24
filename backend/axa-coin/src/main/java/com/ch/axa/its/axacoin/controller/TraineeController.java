@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -60,6 +61,19 @@ public class TraineeController {
             return ResponseEntity.ok(trainee.get());
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserPointsDTO>> getAllPoints() {
+        ArrayList<UserPointsDTO> userPointsDTOs = new ArrayList<>();
+        List<Trainee> trainees = traineeRepository.findAll();
+        for (Trainee trainee : trainees) {
+            UserPointsDTO userPointsDTO = new UserPointsDTO();
+            userPointsDTO.setPoints(trainee.getPoints());
+            userPointsDTO.setUsername(trainee.getUser().getUsername());
+            userPointsDTOs.add(userPointsDTO);
+        }
+        return ResponseEntity.ok(userPointsDTOs);
     }
 
     @PostMapping
