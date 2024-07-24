@@ -62,7 +62,7 @@ export default function EditUser() {
   }, [yearFilter])
 
 
-  function filterTrainees(unfilteredTrainees){
+  function filterTrainees(unfilteredTrainees) {
     let newYears = [];
     unfilteredTrainees?.forEach(traineeprov => {
       if (!newYears.includes(traineeprov.year)) {
@@ -206,22 +206,27 @@ export default function EditUser() {
   }
 
   return (
-    <div className="body">
+    <div className="flexboxultramaxpro">
+      <h2>Benutzerverwaltung</h2>
+    <div className="users">
       <div className="menu">
         <button onClick={openNewUser} className="newButton">Neuen Benutzer erfassen</button>
-        <select value={filter} onChange={e => setFilter(e.target.value)}>
-          <option value={"trainees"}>Lernende</option>
-          <option value={"trainers"}>Berufsbildner</option>
-        </select>
-        {filter === "trainees"
-          ? <select value={yearFilter} onChange={e => setYearFilter(e.target.value)}>
-            <option value={""}>Jahr des Lehrbeginngs</option>
-            {
-              years.map(yearprov => <option value={yearprov} key={yearprov}>{yearprov}</option>)
-            }
+        <div>
+          <select value={filter} onChange={e => setFilter(e.target.value)}>
+            <option value={"trainees"}>Lernende</option>
+            <option value={"trainers"}>Berufsbildner</option>
           </select>
-          : <div></div>
-        }
+          {filter === "trainees"
+            ? <select value={yearFilter} onChange={e => setYearFilter(e.target.value)}>
+              <option value={""}>Jahr des Lehrbeginngs</option>
+              {
+                years.map(yearprov => <option value={yearprov} key={yearprov}>{yearprov}</option>)
+              }
+            </select>
+            : <div></div>
+          }
+        </div>
+
       </div>
 
 
@@ -308,6 +313,7 @@ export default function EditUser() {
         }
 
       </div>
+    </div>
     </div>
 
   )
