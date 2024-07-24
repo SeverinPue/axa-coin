@@ -32,6 +32,8 @@ export default function Login() {
       const data = await response.json();
       sessionStorage.setItem("jwt", data.token);
       sessionStorage.setItem("id", data.id);
+      sessionStorage.setItem("username", data.username);
+      
       handleTrainee();
       !checkAdmin() ? navigate("/start", { state: { key: "value" } }) : navigate("/a/tasks")
     } catch (error) {

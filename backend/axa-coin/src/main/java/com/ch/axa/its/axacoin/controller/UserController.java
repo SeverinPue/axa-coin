@@ -1,19 +1,20 @@
 package com.ch.axa.its.axacoin.controller;
 
-import com.ch.axa.its.axacoin.Entity.TaskTrainee;
 import com.ch.axa.its.axacoin.Entity.Trainee;
 import com.ch.axa.its.axacoin.Entity.Trainer;
 import com.ch.axa.its.axacoin.Entity.User;
-import com.ch.axa.its.axacoin.Repositorys.TraineeRepository;
 import com.ch.axa.its.axacoin.Repositorys.TrainerRepository;
 import com.ch.axa.its.axacoin.Repositorys.UserRepository;
+import com.ch.axa.its.axacoin.config.JwtService;
+import com.ch.axa.its.axacoin.controller.dto.Password;
 import io.swagger.v3.oas.annotations.Hidden;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -32,8 +33,11 @@ public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private TrainerRepository trainerRepository;
+
+    private final JwtService jwtService = new JwtService();
+
     @Autowired
-    private TraineeRepository traineeRepository;
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping
     @Hidden
@@ -113,6 +117,23 @@ public class UserController {
     @Hidden
     public void deleteUser(@PathVariable String id) {
         userRepository.deleteById(id);
+    }
+
+    @PutMapping
+    @Hidden
+    public ResponseEntity<User> changePassword(@RequestHeader(value = "Authorization") String token, @RequestBody Password password){
+        String username = jwtService.extractUsername(token).substring(7);
+        Optional<User> user = userRepository.findByUsername(username);
+        if(user.isPresent()){
+            if(user.get().getPassword().equals(passwordEncoder.encode(password.getOldPassword()))){
+                user.get().setPassword(passwordEncoder.encode(password.getNewPassword()));
+                return ResponseEntity.ok(userRepository.save(user.get()));
+            }else{
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
 

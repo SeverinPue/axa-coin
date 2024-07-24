@@ -19,4 +19,5 @@ public class AxaCoinApplication {
         return new BCryptPasswordEncoder();
     }
 
+
 }

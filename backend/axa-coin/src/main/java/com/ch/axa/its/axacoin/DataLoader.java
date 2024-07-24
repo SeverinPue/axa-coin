@@ -5,7 +5,7 @@ import com.ch.axa.its.axacoin.Repositorys.*;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -26,10 +26,10 @@ public class DataLoader implements CommandLineRunner {
     private final TransactionRepository transactionRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private BCryptPasswordEncoder passwordEncoder;
 
     private final Faker faker = new Faker();
-    private Random random;
+    private final Random random = new Random();
 
     public DataLoader(UserRepository userRepository, TraineeRepository traineeRepository, TrainerRepository trainerRepository, ProductRepository productRepository, TaskRepository taskRepository, TaskTraineeRepository taskTraineeRepository, TransactionRepository transactionRepository) {
         this.userRepository = userRepository;
@@ -44,11 +44,16 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User livio = new User();
-        random = new Random();
         livio.setUsername("livio");
         livio.setPassword(passwordEncoder.encode("livio"));
         livio.setRole("ROLE_"+Role.ADMIN.name());
         userRepository.save(livio);
+
+        User leaderboard = new User();
+        leaderboard.setUsername("leaderboard");
+        leaderboard.setPassword(passwordEncoder.encode("leaderboard"));
+        leaderboard.setRole("ROLE_"+Role.LEADERBOARD.name());
+        userRepository.save(leaderboard);
 
 
         User jay = new User();
