@@ -9,6 +9,8 @@ import com.ch.axa.its.axacoin.Repositorys.TrainerRepository;
 import com.ch.axa.its.axacoin.Repositorys.UserRepository;
 import com.ch.axa.its.axacoin.config.JwtService;
 import com.ch.axa.its.axacoin.controller.dto.Password;
+import com.ch.axa.its.axacoin.service.Hash;
+import com.google.common.hash.Hashing;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -18,9 +20,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.nio.charset.StandardCharsets;
 import java.time.Year;
 import java.util.*;
 
@@ -40,7 +44,7 @@ public class UserController {
     private final JwtService jwtService = new JwtService();
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private Hash hash;
 
     @GetMapping
     @Hidden
@@ -128,8 +132,8 @@ public class UserController {
         String username = jwtService.extractUsername(token);
         Optional<User> user = userRepository.findByUsername(username);
         if(user.isPresent()){
-            if(user.get().getPassword().equals(passwordEncoder.encode(password.getOldPassword()))){
-                user.get().setPassword(password.getNewPassword());
+            if(user.get().getPassword().equals(hash.hashString(password.getOldPassword()))){
+                user.get().setPassword(hash.hashString(password.getNewPassword()));
                 return ResponseEntity.ok(userRepository.save(user.get()));
             }else{
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

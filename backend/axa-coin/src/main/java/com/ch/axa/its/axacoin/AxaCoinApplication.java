@@ -1,5 +1,6 @@
 package com.ch.axa.its.axacoin;
 
+import com.ch.axa.its.axacoin.service.Hash;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,5 +19,11 @@ public class AxaCoinApplication {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public Hash hash(){
+        return new Hash();
+    }
+
 
 }
