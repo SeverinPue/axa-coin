@@ -15,11 +15,39 @@ export default function Start() {
     setShowDialog(false);
     setCurrentPassword("");
     setNewPassword("");
+    setNewPasswordBest("");
   }
 
   function handleSavePassword() {
-    
 
+    if(newPassword == newPasswordBest){
+
+      const newPasswortJson = {
+        oldPassword: currentPassword,
+        newPassword: newPassword,
+        username: sessionStorage.getItem("username")
+      };
+  
+      fetch("http://localhost:8080/api/users", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+        },
+        body: JSON.stringify(newPasswortJson),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to create new product.");
+          }
+          return response.json();
+        })
+        .catch((error) => {
+          console.error("Error creating product:", error);
+        })
+        .finally(() => {
+        });
+    }
 
     handleCloseDialog();
   }
@@ -72,29 +100,29 @@ export default function Start() {
           <div
             className="edit-dialog"
             onClick={(e) => e.stopPropagation()}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="dialog-title"
           >
             <h3 id="dialog-title">Passwort ändern</h3>
-            <input
-              type="password"
-              placeholder="Aktuelles Passwort"
-              value={currentPassword}
-              onChange={(e) => setCurrentPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Neues Passwort"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Neues Passwort bestätigen"
-              value={newPasswordBest}
-              onChange={(e) => setNewPasswordBest(e.target.value)}
-            />
+            <label>Altes Passwort:
+              <input
+                type="text"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+              />
+            </label>
+            <label>Neues Passwort:
+              <input
+                type="text"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </label>
+            <label>Neues Passwort Bestätigen:
+              <input
+                type="text"
+                value={newPasswordBest}
+                onChange={(e) => setNewPasswordBest(e.target.value)}
+              /></label>
+
             <div className="dialog-buttons">
               <button onClick={handleCloseDialog}>Abbrechen</button>
               <button onClick={handleSavePassword}>Speichern</button>
