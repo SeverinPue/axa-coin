@@ -63,7 +63,7 @@ public class TraineeController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping
+    @GetMapping("/leaderboard")
     public ResponseEntity<List<UserPointsDTO>> getAllPoints() {
         ArrayList<UserPointsDTO> userPointsDTOs = new ArrayList<>();
         List<Trainee> trainees = traineeRepository.findAll();
