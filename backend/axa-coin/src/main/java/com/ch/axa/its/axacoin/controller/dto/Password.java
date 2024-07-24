@@ -1,4 +1,4 @@
-package com.ch.axa.its.axacoin.Entity;
+package com.ch.axa.its.axacoin.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,9 +7,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class UserPointsDTO {
-    private String username;
-    private double points;
+public class Password {
+    private String oldPassword;
+    private String newPassword;
 }

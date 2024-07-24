@@ -1,5 +1,6 @@
 package com.ch.axa.its.axacoin.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
@@ -25,6 +26,8 @@ public class User implements UserDetails {
     private String id;
 
     private String username;
+
+    @JsonIgnore
     private String password;
 
     @OneToOne(mappedBy = "user")
