@@ -2,6 +2,7 @@ package com.ch.axa.its.axacoin.controller;
 
 import com.ch.axa.its.axacoin.Entity.*;
 import com.ch.axa.its.axacoin.Repositorys.*;
+import com.ch.axa.its.axacoin.controller.dto.UserPointsDTO;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

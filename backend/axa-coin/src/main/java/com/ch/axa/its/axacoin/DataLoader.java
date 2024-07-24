@@ -29,7 +29,7 @@ public class DataLoader implements CommandLineRunner {
     private PasswordEncoder passwordEncoder;
 
     private final Faker faker = new Faker();
-    private Random random;
+    private Random random = new Random();
 
     public DataLoader(UserRepository userRepository, TraineeRepository traineeRepository, TrainerRepository trainerRepository, ProductRepository productRepository, TaskRepository taskRepository, TaskTraineeRepository taskTraineeRepository, TransactionRepository transactionRepository) {
         this.userRepository = userRepository;
