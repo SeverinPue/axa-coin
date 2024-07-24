@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react';
 import TaskEdit from "../components/taskEdit.tsx";
-import "./stylesheets/taskboard.css"
+import ConfirmDialog from '../components/confirmDialog.jsx';
+import "./stylesheets/taskboard.css";
 import { useNavigate } from 'react-router-dom';
-
-
 
 export default function Taskboard() {
   const dialogRef = useRef(null);
@@ -16,19 +15,22 @@ export default function Taskboard() {
   const [points, setPoints] = useState<number>(0);
   const [id, setId] = useState<string>("");
   const [task, setTask] = useState<any>({});
-  const [traineeUpdate, setTraineeUpdate] = useState<Array<string>>([])
+  const [traineeUpdate, setTraineeUpdate] = useState<Array<string>>([]);
   const [important, setImportant] = useState<boolean>(false);
   const navigate = useNavigate();
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [yearSelection, setYearSelection] = useState({});
+  const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
+  const [confirmationAction, setConfirmationAction] = useState(() => () => {});
 
-
-  const reset = () => {
-    setTitle("");
-    setDescription("");
-    setDate("");
-    setPoints(0);
-    setTraineeUpdate([]);
-    setImportant(false);
-  }
+  useEffect(() => {
+    const yearSelectionState = {};
+    years.forEach(year => {
+      const yearTrainees = trainees.filter(trainee => trainee.year === year).map(trainee => trainee.id);
+      yearSelectionState[year] = yearTrainees.every(id => traineeUpdate.includes(id));
+    });
+    setYearSelection(yearSelectionState);
+  }, [traineeUpdate]);
 
   const handleCheckboxChange = (e, traineeId) => {
     if (e.target.checked) {
@@ -40,14 +42,51 @@ export default function Taskboard() {
     }
   };
 
+  const handleSelectAllChange = (e) => {
+    if (e.target.checked) {
+      const allTraineeIds = trainees.map((trainee) => trainee.id);
+      setTraineeUpdate(allTraineeIds);
+    } else {
+      setTraineeUpdate([]);
+    }
+  };
+
+  const handleYearChange = (e, year) => {
+    if (e.target.checked) {
+      const yearTraineeIds = trainees
+        .filter((trainee) => trainee.year === year)
+        .map((trainee) => trainee.id);
+      setTraineeUpdate((prevUpdate) => [...new Set([...prevUpdate, ...yearTraineeIds])]);
+    } else {
+      setTraineeUpdate((prevUpdate) =>
+        prevUpdate.filter((id) => !trainees.some((trainee) => trainee.id === id && trainee.year === year))
+      );
+    }
+  };
+
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
+  const reset = () => {
+    setTitle("");
+    setDescription("");
+    setDate("");
+    setPoints(0);
+    setTraineeUpdate([]);
+    setImportant(false);
+  };
+
+  const years = ["2024", "2025", "2026", "2027"];
+
   const openNewTask = () => {
     newTaskRef.current.showModal();
-  }
+  };
 
   const closeNewTask = () => {
     reset();
     newTaskRef.current.close();
-  }
+  };
 
   const openDialog = () => {
     dialogRef.current.showModal();
@@ -57,6 +96,7 @@ export default function Taskboard() {
     reset();
     dialogRef.current.close();
   };
+
   useEffect(() => {
     fetchTrainees();
     fetchTasks();
@@ -73,7 +113,7 @@ export default function Taskboard() {
       .catch((error) => {
         console.error("Fehler beim Fetchen: " + error);
       });
-  }
+  };
 
   const fetchTasks = () => {
     fetch("http://localhost:8080/api/tasks", {
@@ -86,12 +126,12 @@ export default function Taskboard() {
       .catch((error) => {
         console.error("Fehler beim Fetchen: " + error);
       });
-  }
+  };
 
   function loadTask(task) {
     openDialog();
     setTitle(task.title);
-    setImportant(task.important)
+    setImportant(task.important);
     setDescription(task.description);
     setDate(task.endDate);
     setId(task.id);
@@ -126,18 +166,21 @@ export default function Taskboard() {
       });
   }
 
-  function deleteTask(idL: any) {
-    let url = `http://localhost:8080/api/tasks/${idL}`;
-    fetch(url, {
-      method: "DELETE",
-      headers: {
-        "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
-      }
-    })
-      .then(() => { fetchTasks(); })
-      .catch((error) => {
-        console.error("Fehler beim Fetchen: " + error);
-      });
+  function deleteTask(idL) {
+    setConfirmationAction(() => () => {
+      let url = `http://localhost:8080/api/tasks/${idL}`;
+      fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
+        }
+      })
+        .then(() => { fetchTasks(); })
+        .catch((error) => {
+          console.error("Fehler beim Fetchen: " + error);
+        });
+    });
+    setIsConfirmationVisible(true);
   }
 
   function createTask() {
@@ -166,6 +209,15 @@ export default function Taskboard() {
         console.error("Fehler beim Fetchen: " + error);
       });
   }
+
+  const handleConfirm = () => {
+    confirmationAction();
+    setIsConfirmationVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsConfirmationVisible(false);
+  };
 
   return (
     <div className="body">
@@ -197,21 +249,55 @@ export default function Taskboard() {
           </div>
         </div>
         <div className="traineeSelect">
-          {trainees?.map((trainee) => (
-            <div key={trainee.id} className='traineeContainer'>
-              <label htmlFor={`trainee-${trainee.id}`}>{trainee.user.username}</label>
+          <p className="lernendeAuswahl">Lernende Auswählen:</p>
+          <div className="controlCheckboxes">
+            <label className="allLabel">
+              {traineeUpdate.length === trainees.length ? 'Alle Abwählen' : 'Alle Auswählen'}
               <input
+                className='allBoxes'
                 type="checkbox"
-                id={`trainee-${trainee.id}`}
-                checked={traineeUpdate.includes(trainee.id)}
-                onChange={(e) => handleCheckboxChange(e, trainee.id)}
+                checked={traineeUpdate.length === trainees.length}
+                onChange={handleSelectAllChange}
               />
+            </label>
+            {years.map((year) => (
+              <div className="years">
+                <label key={year} className='yearsLabel'>
+                  {year}
+                  <input
+                    type="checkbox"
+                    checked={yearSelection[year] || false}
+                    onChange={(e) => handleYearChange(e, year)}
+                    className='yearBoxes'
+                  />
+                </label>
+              </div>
+            ))}
+          </div>
+          <div className="buttonContainer">
+            <button onClick={toggleDropdown}>
+              {dropdownVisible ? 'Lernende Einklappen' : 'Lernende Ausklappen'}
+            </button>
+          </div>
+          {dropdownVisible && (
+            <div className="dropdownMenu">
+              {trainees?.map((trainee) => (
+                <div key={trainee.id} className='traineeContainer'>
+                  <label htmlFor={`trainee-${trainee.id}`}>{trainee.user.username}</label>
+                  <input
+                    type="checkbox"
+                    id={`trainee-${trainee.id}`}
+                    checked={traineeUpdate.includes(trainee.id)}
+                    onChange={(e) => handleCheckboxChange(e, trainee.id)}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
 
         <div className="buttons">
-          <button className='newButton' onClick={() => updateTask(task)}>Speichern</button>
+          <button className='newButton' onClick={() => createTask()}>Speichern</button>
           <button className='deleteButton' onClick={closeDialog}>Abbrechen</button>
         </div>
       </dialog>
@@ -219,19 +305,19 @@ export default function Taskboard() {
       <dialog ref={newTaskRef} className='taskDialog'>
         <div className="attributes">
           <div className="attribute-pair">
-            <label htmlFor="title">Titel</label>
+            <label htmlFor="title">Titel:</label>
             <input type="text" id="title" value={title} onChange={e => setTitle(e.target.value)} />
           </div>
           <div className="attribute-pair">
-            <label htmlFor="description">Beschreibung</label>
+            <label htmlFor="description">Beschreibung:</label>
             <input type="text" id="description" value={description} onChange={e => setDescription(e.target.value)} />
           </div>
           <div className="attribute-pair">
-            <label htmlFor="points">Punkte</label>
+            <label htmlFor="points">Punkte:</label>
             <input type="number" id="points" value={points.toString()} onChange={e => setPoints(parseInt(e.target.value))} />
           </div>
           <div className="attribute-pair">
-            <label htmlFor="date">Datum</label>
+            <label htmlFor="date">Datum:</label>
             <input type="date" id="date" value={date} onChange={e => setDate(e.target.value)} />
           </div>
           <div className="attribute-pair">
@@ -239,31 +325,70 @@ export default function Taskboard() {
             <input type="checkbox" id="important" checked={important} onChange={e => setImportant(e.target.checked)} />
           </div>
         </div>
-
         <div className="traineeSelect">
-          {trainees?.map((trainee) => (
-            <div key={trainee.id} className='traineeContainer'>
-              <label htmlFor={`trainee-${trainee.id}`}>{trainee.user.username}</label>
+          <p className="lernendeAuswahl">Lernende Auswählen:</p>
+          <div className="controlCheckboxes">
+            <label className="allLabel">
+              {traineeUpdate.length === trainees.length ? 'Alle Abwählen' : 'Alle Auswählen'}
               <input
+                className='allBoxes'
                 type="checkbox"
-                id={`trainee-${trainee.id}`}
-                onChange={(e) => handleCheckboxChange(e, trainee.id)}
+                checked={traineeUpdate.length === trainees.length}
+                onChange={handleSelectAllChange}
               />
+            </label>
+            {years.map((year) => (
+              <div className="years">
+                <label key={year} className='yearsLabel'>
+                  {year}
+                  <input
+                    type="checkbox"
+                    checked={yearSelection[year] || false}
+                    onChange={(e) => handleYearChange(e, year)}
+                    className='yearBoxes'
+                  />
+                </label>
+              </div>
+            ))}
+          </div>
+          <div className="buttonContainer">
+            <button onClick={toggleDropdown}>
+              {dropdownVisible ? 'Lernende Einklappen' : 'Lernende Ausklappen'}
+            </button>
+          </div>
+          {dropdownVisible && (
+            <div className="dropdownMenu">
+              {trainees?.map((trainee) => (
+                <div key={trainee.id} className='traineeContainer'>
+                  <label htmlFor={`trainee-${trainee.id}`}>{trainee.user.username}</label>
+                  <input
+                    type="checkbox"
+                    id={`trainee-${trainee.id}`}
+                    checked={traineeUpdate.includes(trainee.id)}
+                    onChange={(e) => handleCheckboxChange(e, trainee.id)}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
+
         <div className="buttons">
-          <button className='newButton' onClick={createTask}>Speichern</button>
+          <button className='newButton' onClick={() => updateTask(task)}>Speichern</button>
           <button className='deleteButton' onClick={closeNewTask}>Abbrechen</button>
         </div>
       </dialog>
-
       <div className='taskSelection'>
         {
           tasks?.map(task => <TaskEdit key={task.id} loadTask={trainee => loadTask(trainee)} deleteTask={taskId => { deleteTask(taskId) }} task={task}></TaskEdit>)
         }
-
       </div>
+      <ConfirmDialog
+        text="Möchten sie diesen Task wirklich löschen?"
+        onConfirm={handleConfirm}
+        visible={isConfirmationVisible}
+        onCancel={handleCancel}
+      />
     </div>
-  )
+  );
 }

@@ -30,6 +30,7 @@
     flex-direction: column;
     width: 100%;
     border-bottom: 2px solid var(--titles);
+    padding-bottom: 20px;
 }
 .attribute-pair{
     width: 100%;
@@ -44,7 +45,42 @@
 }
 .traineeSelect{
     overflow-y: auto;
+    margin-bottom: 10px;
 }
 .taskDialog{
-    max-height: 700px;
+    max-height: 750px;
+}
+input[type='checkbox']{
+    height: 30px;   
+    width: 40px;
+}
+.years{
+    width: 100%;
+}
+
+.yearsLabel{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+.allLabel{
+    font-size: 1rem;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px;
+}
+.lernendeAuswahl{
+    width: 200px;
+    margin-left: 0px;
+    margin-top: 30px;
+    font-weight: 600;
+}
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
