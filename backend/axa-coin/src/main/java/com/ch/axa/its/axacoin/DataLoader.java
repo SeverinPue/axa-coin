@@ -2,11 +2,10 @@ package com.ch.axa.its.axacoin;
 
 import com.ch.axa.its.axacoin.Entity.*;
 import com.ch.axa.its.axacoin.Repositorys.*;
-import com.ch.axa.its.axacoin.service.Hash;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -27,7 +26,7 @@ public class DataLoader implements CommandLineRunner {
     private final TransactionRepository transactionRepository;
 
     @Autowired
-    private Hash hash;
+    private BCryptPasswordEncoder passwordEncoder;
 
     private final Faker faker = new Faker();
     private final Random random = new Random();
@@ -46,20 +45,20 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         User livio = new User();
         livio.setUsername("livio");
-        livio.setPassword(hash.hashString("livio"));
+        livio.setPassword(passwordEncoder.encode("livio"));
         livio.setRole("ROLE_"+Role.ADMIN.name());
         userRepository.save(livio);
 
         User leaderboard = new User();
         leaderboard.setUsername("leaderboard");
-        leaderboard.setPassword(hash.hashString("leaderboard"));
+        leaderboard.setPassword(passwordEncoder.encode("leaderboard"));
         leaderboard.setRole("ROLE_"+Role.LEADERBOARD.name());
         userRepository.save(leaderboard);
 
 
         User jay = new User();
         jay.setUsername("jay");
-        jay.setPassword(hash.hashString("jay"));
+        jay.setPassword(passwordEncoder.encode("jay"));
         jay.setRole("ROLE_"+Role.USER.name());
         userRepository.save(jay);
         Trainee jaytrainee = createTrainee(jay, createTrainer(createUser()));
@@ -84,7 +83,7 @@ public class DataLoader implements CommandLineRunner {
     private User createUser() {
         User user = new User();
         user.setUsername(faker.name().username());
-        user.setPassword(hash.hashString(faker.internet().password()));
+        user.setPassword(passwordEncoder.encode(faker.internet().password()));
         user.setRole("ROLE_"+Role.USER.name());
         return userRepository.save(user);
     }
