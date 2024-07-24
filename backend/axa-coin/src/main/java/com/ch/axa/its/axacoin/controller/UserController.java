@@ -122,15 +122,11 @@ public class UserController {
     @PutMapping
     @Hidden
     public ResponseEntity<User> changePassword(@RequestHeader(value = "Authorization") String token, @RequestBody Password password){
-        String username = jwtService.extractUsername(token).substring(7);
+        String username = jwtService.extractUsername(token.substring(7));
         Optional<User> user = userRepository.findByUsername(username);
         if(user.isPresent()){
-            if(user.get().getPassword().equals(passwordEncoder.encode(password.getOldPassword()))){
-                user.get().setPassword(passwordEncoder.encode(password.getNewPassword()));
-                return ResponseEntity.ok(userRepository.save(user.get()));
-            }else{
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            }
+            user.get().setPassword(passwordEncoder.encode(password.getNewPassword()));
+            return ResponseEntity.ok(userRepository.save(user.get()));
         }else{
             return ResponseEntity.notFound().build();
         }
