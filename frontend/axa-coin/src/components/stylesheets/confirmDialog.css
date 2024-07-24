@@ -24,4 +24,10 @@
   .confirmation-dialog-content button {
     margin: 0 10px;
   }
+  .jaButton{
+      min-width: 60px;
+  }
+  .neinButton{
+      min-width: 60px;
+  }
   

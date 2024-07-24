@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./stylesheets/editProduct.css";
+import ConfirmDialog from '../components/confirmDialog.jsx';
+
 
 interface Product {
   id: string;
@@ -17,6 +19,9 @@ export default function EditProdukte() {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const descriptionInputRef = useRef<HTMLTextAreaElement>(null);
   const priceInputRef = useRef<HTMLInputElement>(null);
+  const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
+  const [confirmationAction, setConfirmationAction] = useState<(() => void) | null>(null);
+
 
   useEffect(() => {
     getALLProducts();
@@ -46,25 +51,41 @@ export default function EditProdukte() {
   }
 
   function handleDelete(productId: string) {
-    setProducts(products.filter((p) => p.id !== productId));
+    setIsConfirmationVisible(true);
+    setConfirmationAction(() => () => {
+      setProducts(products.filter((p) => p.id !== productId));
 
-    fetch(`http://localhost:8080/api/products/${productId}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok.");
-        }
-        return response.json();
+      fetch(`http://localhost:8080/api/products/${productId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+        },
       })
-      .then((data: Product[]) => setProducts(data))
-      .catch((error) => {
-        console.error("Error deleting product:", error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok.");
+          }
+          return response.json();
+        })
+        .then((data: Product[]) => setProducts(data))
+        .catch((error) => {
+          console.error("Error deleting product:", error);
+        });
+    });
   }
+  function handleConfirm() {
+    if (confirmationAction) {
+      confirmationAction();
+    }
+    setIsConfirmationVisible(false);
+    setConfirmationAction(null);
+  }
+  
+  function handleCancel() {
+    setIsConfirmationVisible(false);
+    setConfirmationAction(null);
+  }
+  
 
   function handleCloseDialog() {
     setShowEditDialog(false);
@@ -280,6 +301,12 @@ export default function EditProdukte() {
           </div>
         </div>
       )}
+      <ConfirmDialog
+      text="Willst du dieses Produkt wirklich Löschen?"
+      onConfirm={handleConfirm}
+      visible={isConfirmationVisible}
+      onCancel={handleCancel}
+    />
     </>
   );
 }
