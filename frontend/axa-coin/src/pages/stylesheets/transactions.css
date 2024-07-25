@@ -22,3 +22,15 @@ tbody tr:nth-child(even) {
     justify-content: center;
     margin-top: 2rem;
 }
+
+.scroll{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+
+}
+
+.scroll button{
+    margin-right: 1rem;
+    margin-left: 1rem;
+}

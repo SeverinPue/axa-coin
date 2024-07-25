@@ -9,9 +9,13 @@ import com.ch.axa.its.axacoin.Repositorys.UserRepository;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,9 +32,11 @@ public class TransactionController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping
-    public ResponseEntity<List<Transaction>> getAllTransactions(){
-        return ResponseEntity.ok(transactionRepository.findAll());
+    @GetMapping("/page/{page}")
+    public ResponseEntity<Iterable<Transaction>> getAllTransactions(@PathVariable(required = false) Integer page){
+        Sort sort = Sort.by(Sort.Direction.DESC, "transactionDate");
+        Pageable pageable = PageRequest.of((page == null ? 0 : page), 20, sort);
+        return ResponseEntity.ok(transactionRepository.findAll(pageable));
     }
 
     @GetMapping("/{id}")
