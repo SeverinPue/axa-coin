@@ -1,0 +1,45 @@
+.main{
+
+    font-family: var(--font-family);
+}
+
+.startTitle {
+    font-weight: 800;
+    color: var(--titles);
+    font-family: var(--font-family);
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 7rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+
+    color: var(--secondary);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+}
+
+.list li {
+    width: 110vb;
+    color: var(--secondary);
+    background-color: var(--primary-contrast);
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.list li strong {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}

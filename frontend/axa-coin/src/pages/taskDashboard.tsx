@@ -221,6 +221,7 @@ export default function Taskboard() {
 
   return (
     <div className="body">
+      <h2>Task Verwaltung</h2>
       <div className="taskBar">
         <button className='buttonBack' onClick={() => navigate("/a/submissions")}>Aufgaben auswerten</button>
         <button className='newButton' onClick={openNewTask}>Neue Aufgabe erstellen</button>

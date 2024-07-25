@@ -3,14 +3,14 @@ import "./stylesheets/footer.css";
 
 export default function Footer() {
   return (
-    <>
-      <footer className="footer">
-        <ul className="links">
-            <li><a href="#">link 1</a></li>
-            <li><a href="#">link 2</a></li>
-            <li><a href="#">link 3</a></li>
+    <footer className="footer">
+      <nav className="footer-nav">
+        <ul className="footer-links">
+          <li><a href="/about" className="footer-link">Über das Projekt</a></li>
+          <li><a href="/instructions" className="footer-link">Wie funktioniert es?</a></li>
         </ul>
-      </footer>
-    </>
+      </nav>
+    </footer>
   );
 }
+

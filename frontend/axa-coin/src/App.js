@@ -6,7 +6,8 @@ import Login from "./pages/login.tsx";
 import "./App.css";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import AdminProtectedRoute from "./components/adminProtectedRoute.js"
-import NotFound from "./pages/notFound.tsx"; 
+import NotFound from "./pages/notFound.tsx";
+import About from "./pages/about.jsx" 
 import Tasks from "./pages/tasks.tsx";
 import Shop from "./pages/shop.tsx";
 import EditUser from "./pages/edituser.tsx";
@@ -14,6 +15,7 @@ import Submission from "./pages/submissions.jsx";
 import TaskEdit from "./pages/taskDashboard.tsx"
 import EditProdukte from "./pages/editProdukte.tsx";
 import Transactions from "./pages/transactions.tsx";
+import Instructions from "./pages/instructions.jsx"
 
 function App() {
   return (
@@ -29,7 +31,8 @@ function App() {
             <Route path="/a/submissions" element={<AdminProtectedRoute component={<Submission/>}/>}></Route>
             <Route path="/a/product" element={<AdminProtectedRoute component={<EditProdukte/>}/>}></Route>
             <Route path="/a/tasks" element={<AdminProtectedRoute component={<TaskEdit/>}/>}></Route>
-
+            <Route path="/about" element={<About/>} /> 
+            <Route path="/instructions" element={<Instructions />} /> 
             <Route path="/login" element={<Login />} /> 
             <Route path="/a/users" element={<AdminProtectedRoute component={<EditUser/>}/>} />
             <Route path="*" element={<NotFound />} /> 
