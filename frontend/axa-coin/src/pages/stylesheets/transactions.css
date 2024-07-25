@@ -34,3 +34,7 @@ tbody tr:nth-child(even) {
     margin-right: 1rem;
     margin-left: 1rem;
 }
+
+p{
+    color: var(--secondary);
+}
