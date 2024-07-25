@@ -10,6 +10,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface TransactionRepository extends CrudRepository<Transaction, String> {
-    List<Transaction> findAllByTrainee(Trainee trainee);
+    Page<Transaction> findAllByTrainee(Trainee trainee, Pageable pageable);
     Page<Transaction> findAll(Pageable pageable);
 }

@@ -6,21 +6,41 @@ import "./stylesheets/transactions.css";
 export default function Transactions() {
   const [transactions, setTransactions] = useState<Array<any>>([])
   let id = sessionStorage.getItem("id");
+  const [page, setPage] = useState<number>(0);
+  const [maxPage, setMaxPage] = useState<number>(0);
 
   useEffect(() => {
+    loadTransactions()
+  }, [])
 
-    fetch("http://localhost:8080/api/transactions/" + id, {
+  function loadTransactions(){
+    fetch("http://localhost:8080/api/transactions/" + id+"?page="+page, {
       headers: {
         "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
       },
     })
       .then(r => r.json())
-      .then((data) => { setTransactions(data);})
+      .then((data) => { setTransactions(data.content); setMaxPage(data.totalPages) })
       .catch((error) => {
         console.error("Fehler beim Fetchen: " + error);
       });
+  }
 
-  }, [])
+  function handlePages(count) {
+
+    if (count < 0) {
+      if (page > 0) {
+        setPage(page - 1);
+      }
+    } else if (count > 0) {
+      if (page < maxPage - 1) {
+        setPage(page + 1)
+      }
+    }
+
+  }
+
+  useEffect(() => { loadTransactions() }, [page]);
 
 
 
@@ -50,15 +70,11 @@ export default function Transactions() {
 
         </tbody>
       </table>
-
-
-
-
-
-      <ul>
-
-      </ul>
-
+      <div className="scroll">
+        <button onClick={() => handlePages(-1)}>&lt;</button>
+        <p>{page+1}</p>
+        <button onClick={() => handlePages(1)}>&gt;</button>
+      </div>
     </div>
   )
 }

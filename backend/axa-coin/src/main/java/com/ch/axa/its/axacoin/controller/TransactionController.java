@@ -40,12 +40,15 @@ public class TransactionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<Transaction>> getTransactionByUserId(@PathVariable String id){
+    public ResponseEntity<Iterable<Transaction>> getTransactionByUserId(@PathVariable String id, @RequestParam(required = false) Integer page){
+        Sort sort = Sort.by(Sort.Direction.DESC, "transactionDate");
+        Pageable pageable = PageRequest.of((page == null ? 0 : page), 20, sort);
+
         Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             Optional<Trainee> trainee = traineeRepository.findTraineeByUser(user.get());
             if(trainee.isPresent()){
-                return ResponseEntity.ok(transactionRepository.findAllByTrainee(trainee.get()));
+                return ResponseEntity.ok(transactionRepository.findAllByTrainee(trainee.get(), pageable));
             }
         }
 
