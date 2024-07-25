@@ -10,15 +10,66 @@ export default function Navbar() {
   const [trainee, setTrainee] = useState<Trainee>();
   const [points, setPoints] = useState(0);
   const [isAdmin, setAdmin] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+  const [passwordAreSame, setPasswordAreSame] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordBest, setNewPasswordBest] = useState("");
+  const [passwordChanged, setPasswordChanged] = useState(false);
 
-  function handleLogout() { 
-
+  function handleLogout() {
     sessionStorage.removeItem("jwt");
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("traineeid");
     sessionStorage.removeItem("points");
     sessionStorage.removeItem("id");
     window.location.reload();
+  }
+
+  function handlePasswordChange() {
+    setShowDialog(true);
+  }
+
+  function handleCloseDialog() {
+    setShowDialog(false);
+    setNewPassword("");
+    setNewPasswordBest("");
+    setPasswordAreSame("");
+  }
+
+  function handleSavePassword() {
+    if (newPassword == newPasswordBest) {
+      const newPasswortJson = {
+        newPassword: newPassword,
+      };
+
+      fetch("http://localhost:8080/api/users", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+        },
+        body: JSON.stringify(newPasswortJson),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to create new product.");
+          } else {
+            setPasswordChanged(true);
+          }
+          return response.json();
+        })
+        .catch((error) => {
+          alert("Passwort konte nicht geändert werden!");
+        });
+
+      if (passwordChanged) {
+        alert("Passwort konte erfolgreich geändert werden!");
+      }
+
+      handleCloseDialog();
+    } else {
+      setPasswordAreSame("Passwörter sind nicht gleich!");
+    }
   }
 
   useEffect(() => {
@@ -96,7 +147,9 @@ export default function Navbar() {
               <a href="/shop">Shop</a>
             </li>
             <li>
-            <button className="deleteButton" onClick={handleLogout}>Abmelden</button>
+              <button className="deleteButton" onClick={handleLogout}>
+                Abmelden
+              </button>
             </li>
           </ul>
         </div>
@@ -105,6 +158,8 @@ export default function Navbar() {
           <div>
             <ThemeSwitcher></ThemeSwitcher>
           </div>
+          <button onClick={handlePasswordChange}>Passwort ändern</button>
+
           <ul className="navList">
             <li>
               <a href="/a/tasks">Tasks</a>
@@ -116,9 +171,46 @@ export default function Navbar() {
               <a href="/a/users">User</a>
             </li>
             <li>
-            <button className="deleteButton" onClick={handleLogout}>Abmelden</button>
+              <button className="deleteButton" onClick={handleLogout}>
+                Abmelden
+              </button>
             </li>
           </ul>
+        </div>
+      )}
+
+      {showDialog && (
+        <div className="dialog-overlay">
+          <div className="edit-dialog" onClick={(e) => e.stopPropagation()}>
+            <h3 id="dialog-title">Passwort ändern</h3>
+            <label>
+              Neues Passwort:
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </label>
+            <label>
+              Passwort Bestätigen:
+              <input
+                type="password"
+                value={newPasswordBest}
+                onChange={(e) => setNewPasswordBest(e.target.value)}
+              />
+            </label>
+
+            <p className="errorMessage">{passwordAreSame}</p>
+
+            <div className="dialog-buttons">
+              <button className="deleteButton" onClick={handleCloseDialog}>
+                Abbrechen
+              </button>
+              <button className="newButton" onClick={handleSavePassword}>
+                Speichern
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </>
