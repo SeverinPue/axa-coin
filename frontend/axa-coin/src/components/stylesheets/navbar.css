@@ -13,7 +13,6 @@
 .navList{
     display: flex;
     justify-content: center;
-    width: 40%;
     list-style: none;
     padding: 0px;
     margin: 0px;

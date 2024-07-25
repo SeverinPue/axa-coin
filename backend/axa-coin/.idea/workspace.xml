@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="passwort ändern">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/dto/Password.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ch/axa/its/axacoin/controller/dto/Password.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/components/navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/components/navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/start.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/start.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/stylesheets/start.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../frontend/axa-coin/src/pages/stylesheets/start.css" afterDir="false" />
-    </list>
+    <list default="true" id="d0d2b8fa-968d-4800-9512-7cf0b619b56d" name="Changes" comment="passwort ändern" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -130,6 +122,7 @@
       <workItem from="1721282920338" duration="4008000" />
       <workItem from="1721628323520" duration="1398000" />
       <workItem from="1721629744759" duration="22262000" />
+      <workItem from="1721887332584" duration="1544000" />
     </task>
     <task id="LOCAL-00001" summary="create UserController.java">
       <option name="closed" value="true" />

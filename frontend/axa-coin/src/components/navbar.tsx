@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./stylesheets/navbar.css";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { useNavigate } from "react-router-dom";
 
 interface Trainee {
   points: number;
@@ -16,13 +17,16 @@ export default function Navbar() {
   const [newPasswordBest, setNewPasswordBest] = useState("");
   const [passwordChanged, setPasswordChanged] = useState(false);
 
+  const navigate = useNavigate();
+
+
   function handleLogout() {
     sessionStorage.removeItem("jwt");
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("traineeid");
     sessionStorage.removeItem("points");
     sessionStorage.removeItem("id");
-    window.location.reload();
+    navigate("/login");
   }
 
   function handlePasswordChange() {
@@ -145,6 +149,9 @@ export default function Navbar() {
             </li>
             <li>
               <a href="/shop">Shop</a>
+            </li>
+            <li>
+              <a href="/transactions">Kaufverlauf</a>
             </li>
             <li>
               <button className="deleteButton" onClick={handleLogout}>
