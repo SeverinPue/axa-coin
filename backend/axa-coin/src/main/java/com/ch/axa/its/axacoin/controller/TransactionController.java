@@ -46,4 +46,16 @@ public class TransactionController {
         return ResponseEntity.notFound().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Transaction> updateTransaction(@PathVariable String id){
+        Optional<Transaction> transaction = transactionRepository.findById(id);
+        if (transaction.isPresent()) {
+            transaction.get().setChecked(!transaction.get().isChecked());
+            return ResponseEntity.ok(transactionRepository.save(transaction.get()));
+        }else {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
 }

@@ -22,11 +22,13 @@ export default function Start() {
 
   function handleSavePassword() {
 
-    if (newPassword == newPasswordBest) {
+    if (newPassword === newPasswordBest) {
 
-      const newPasswortJson = {
-        newPassword: newPassword,
+      let newPasswortJson = {
+        newPassword
       };
+
+      console.log(sessionStorage.getItem("jwt"))
 
 
       fetch("http://localhost:8080/api/users", {

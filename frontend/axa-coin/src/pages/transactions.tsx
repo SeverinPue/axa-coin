@@ -15,7 +15,7 @@ export default function Transactions() {
       },
     })
       .then(r => r.json())
-      .then((data) => { setTransactions(data); console.log(data) })
+      .then((data) => { setTransactions(data);})
       .catch((error) => {
         console.error("Fehler beim Fetchen: " + error);
       });

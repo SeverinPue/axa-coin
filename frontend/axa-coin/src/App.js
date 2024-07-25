@@ -14,6 +14,7 @@ import Submission from "./pages/submissions.jsx";
 import TaskEdit from "./pages/taskDashboard.tsx"
 import EditProdukte from "./pages/editProdukte.tsx";
 import Transactions from "./pages/transactions.tsx";
+import TransactionsAdmin from "./pages/transactionsAdmin.tsx";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/a/submissions" element={<AdminProtectedRoute component={<Submission/>}/>}></Route>
             <Route path="/a/product" element={<AdminProtectedRoute component={<EditProdukte/>}/>}></Route>
             <Route path="/a/tasks" element={<AdminProtectedRoute component={<TaskEdit/>}/>}></Route>
+            <Route path="/a/transactions" element={<AdminProtectedRoute component={<TransactionsAdmin/>}/>}></Route>
 
             <Route path="/login" element={<Login />} /> 
             <Route path="/a/users" element={<AdminProtectedRoute component={<EditUser/>}/>} />
