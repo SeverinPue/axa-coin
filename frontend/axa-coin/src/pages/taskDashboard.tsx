@@ -64,6 +64,7 @@ export default function Taskboard() {
     }
   };
 
+
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
   };
@@ -77,8 +78,12 @@ export default function Taskboard() {
     setImportant(false);
   };
 
-  const years = ["2024", "2025", "2026", "2027"];
-
+  let years = [];
+  trainees?.forEach(traineeprov => {
+    if (!years.includes(traineeprov.year)) {
+      years.push(traineeprov.year);
+    }
+  });
   const openNewTask = () => {
     newTaskRef.current.showModal();
   };

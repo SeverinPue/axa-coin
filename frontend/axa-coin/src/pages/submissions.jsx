@@ -66,7 +66,6 @@ export default function Submission() {
 
   const getFilteredTasks = () => {
     return renderTasks((task) => task.dateOfSubmission !== null && task.approved == false);
-
   };
 
   return (
