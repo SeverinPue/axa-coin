@@ -20,23 +20,23 @@ export default function Start() {
             <li>
               <strong>Erarbeiten und Abgeben:</strong>
               <br />
-              Du kannst dir selber aufteilen bis wann du welche aufgabe du machen
-              sollst aber spätistens bis zur Deadline abgeben. Sobald du eine
+              Du kannst dir selber aufteilen wann du welche Aufgaben machen
+              willst aber spätestens bis zur Deadline musst du sie abgeben. Sobald du eine
               Aufgabe fertig erarbeitet hast, reichst du sie mit einem Klick auf
               "Einreichen" ein.
             </li>
             <li>
               <strong>Punkte erhalten:</strong>
               <br />
-              Dein Berufsbildner prüft deine eingereichten Aufgaben. Die
-              Berufbildner könenn anschliessend die Aufgabe bestätigen oder
-              Zurückgeben wenn sie bestätigt wird bekommst du deine Punkte.
+              Dein/e Berufsbildner/in prüft deine eingereichten Aufgaben. Sie/Er
+              kann anschliessend die Aufgabe bestätigen oder
+              Zurückgeben, wenn sie bestätigt wird bekommst du deine Punkte.
             </li>
             <li>
               <strong>Shoppen:</strong>
               <br />
               Deine gesammelten AxA-Coins sind deine persönliche Währung! Im
-              Shop findest du eine große Auswahl an coolen Produkten.
+              Shop findest du eine große Auswahl an tollen Produkten, wo du sie einlösen kannst
             </li>
           </ol>
         </span>
