@@ -182,6 +182,9 @@ export default function Navbar() {
               <a href="/a/users">User</a>
             </li>
             <li>
+              <a href="/a/transactions">Kaufverläufe</a>
+            </li>
+            <li>
               <button className="deleteButton" onClick={handleLogout}>
                 Abmelden
               </button>
