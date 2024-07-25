@@ -39,17 +39,16 @@
   margin-top: auto;
 }
 
-.dialog-buttons {
+
+
+.dialog-buttons-shop {
   
-  padding-left: 5rem;
-  padding-top: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   grid-column-start: 2;
   grid-column-end: 4;
   grid-row: 2;
   margin-top: 0; 
 }
 
-.dialog-buttons button{
-
-  margin-inline: 5px;
-}

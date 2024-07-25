@@ -27,9 +27,9 @@ function MyDialog({ showDialog, onClose, onConfirm, selectedProduct }: MyDialogP
           ) : (
             <p>Kein Produkt ausgewählt.</p>
           )}
-          <div className="dialog-buttons">
-            <button onClick={onConfirm}>Confirm</button>
-            <button onClick={onClose}>Cancel</button>
+          <div className="dialog-buttons-shop">
+            <button className='newButton' onClick={onConfirm}>Bestätigen</button>
+            <button className='deleteButton' onClick={onClose}>Abbrechen</button>
           </div>
         </div>
       </div>
