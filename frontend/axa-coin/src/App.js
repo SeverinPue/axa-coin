@@ -32,7 +32,6 @@ function App() {
             <Route path="/a/product" element={<AdminProtectedRoute component={<EditProdukte/>}/>}></Route>
             <Route path="/a/tasks" element={<AdminProtectedRoute component={<TaskEdit/>}/>}></Route>
             <Route path="/a/transactions" element={<AdminProtectedRoute component={<TransactionsAdmin/>}/>}></Route>
-
             <Route path="/login" element={<Login />} /> 
             <Route path="/a/users" element={<AdminProtectedRoute component={<EditUser/>}/>} />
             <Route path="*" element={<NotFound />} /> 

@@ -5,10 +5,10 @@ export default function Footer() {
   return (
     <footer className="footer">
       <nav className="footer-nav">
-        <ul className="footer-links">
-          <li><a href="/about" className="footer-link">Über das Projekt</a></li>
-          <li><a href="/instructions" className="footer-link">Wie funktioniert es?</a></li>
-        </ul>
+        <div className="titles">
+          <h2 className="davinci">Davinci Projekt 2024</h2>
+          <h4 className="autoren">von Livio, Severin und Jay</h4>
+        </div>
       </nav>
     </footer>
   );
