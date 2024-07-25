@@ -9,6 +9,5 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Password {
-    private String oldPassword;
     private String newPassword;
 }

@@ -11,6 +11,16 @@ export default function Navbar() {
   const [points, setPoints] = useState(0);
   const [isAdmin, setAdmin] = useState(false);
 
+  function handleLogout() { 
+
+    sessionStorage.removeItem("jwt");
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("traineeid");
+    sessionStorage.removeItem("points");
+    sessionStorage.removeItem("id");
+    window.location.reload();
+  }
+
   useEffect(() => {
     if (trainee?.points) {
       setPoints(trainee.points);
@@ -85,6 +95,9 @@ export default function Navbar() {
             <li>
               <a href="/shop">Shop</a>
             </li>
+            <li>
+            <button className="deleteButton" onClick={handleLogout}>Abmelden</button>
+            </li>
           </ul>
         </div>
       ) : (
@@ -101,6 +114,9 @@ export default function Navbar() {
             </li>
             <li>
               <a href="/a/users">User</a>
+            </li>
+            <li>
+            <button className="deleteButton" onClick={handleLogout}>Abmelden</button>
             </li>
           </ul>
         </div>
