@@ -167,7 +167,8 @@ export default function Navbar() {
         </div>
       ) : (
         <div className="navBar">
-          <div>
+          <div className="logo">
+          <img className="userIcon" src={url} />
             <ThemeSwitcher></ThemeSwitcher>
           </div>
 
