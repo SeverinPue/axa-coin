@@ -16,9 +16,10 @@ export default function Navbar() {
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordBest, setNewPasswordBest] = useState("");
   const [passwordChanged, setPasswordChanged] = useState(false);
-
+  const url = `https://ui-avatars.com/api/?background=489FB5&color=fff&name=${sessionStorage.getItem(
+    "username"
+  )}`;
   const navigate = useNavigate();
-
 
   function handleLogout() {
     sessionStorage.removeItem("jwt");
@@ -137,6 +138,7 @@ export default function Navbar() {
       {!isAdmin ? (
         <div className="navBar">
           <div className="logo">
+          <img className="userIcon" src={url} />
             <ThemeSwitcher></ThemeSwitcher>
           </div>
           <p className="points"> Punkte: {points}</p>
@@ -158,6 +160,9 @@ export default function Navbar() {
                 Abmelden
               </button>
             </li>
+            <li>
+              <button onClick={handlePasswordChange}>Passwort ändern</button>
+            </li>
           </ul>
         </div>
       ) : (
@@ -165,7 +170,6 @@ export default function Navbar() {
           <div>
             <ThemeSwitcher></ThemeSwitcher>
           </div>
-          <button onClick={handlePasswordChange}>Passwort ändern</button>
 
           <ul className="navList">
             <li>
@@ -181,6 +185,9 @@ export default function Navbar() {
               <button className="deleteButton" onClick={handleLogout}>
                 Abmelden
               </button>
+            </li>
+            <li>
+              <button onClick={handlePasswordChange}>Passwort ändern</button>
             </li>
           </ul>
         </div>

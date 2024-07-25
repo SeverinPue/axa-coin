@@ -4,7 +4,7 @@
     background-color: var(--primary);
     height: 10vh;
     display: flex;
-    padding-inline: 2rem;
+    padding-inline: 1rem;
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid var(--titles);
@@ -18,13 +18,16 @@
     margin: 0px;
     
 }
+.navList li{
+
+    margin: 0px 1rem; 
+}
 .navList a{
     padding: 10px;
     border-radius: 30%;
     border: 2px solid var(--primary);
     font-family: var(--font-family);
     font-size: 2rem;
-    margin: 0px 2rem; 
     text-decoration: none;
     color: var(--titles);
 }
@@ -32,8 +35,15 @@
     border: 2px solid var(--highlightaction);
     color: var(--titlesaction);
 }
+.logo img{
+
+    margin-right: 10px;
+}
 .logo{
-    margin-left: 30px;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .points{
@@ -42,4 +52,9 @@
     font-weight: 520;
     color: var(--titles);
     font-family: var(--font-family);
+}
+
+.userIcon{
+
+    border-radius: 50%;
 }

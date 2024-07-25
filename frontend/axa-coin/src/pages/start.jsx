@@ -2,66 +2,7 @@ import React, { useState } from "react";
 import "./stylesheets/start.css";
 
 export default function Start() {
-  const [showDialog, setShowDialog] = useState(false);
-  const [passwordAreSame, setPasswordAreSame] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [newPasswordBest, setNewPasswordBest] = useState("");
-  const [passwordChanged, setPasswordChanged] = useState(false);
-
-
-  function handlePasswordChange() {
-    setShowDialog(true);
-  }
-
-  function handleCloseDialog() {
-    setShowDialog(false);
-    setNewPassword("");
-    setNewPasswordBest("");
-    setPasswordAreSame("");
-  }
-
-  function handleSavePassword() {
-
-    if (newPassword == newPasswordBest) {
-
-      const newPasswortJson = {
-        newPassword: newPassword,
-      };
-
-
-      fetch("http://localhost:8080/api/users", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
-        },
-        body: JSON.stringify(newPasswortJson),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to create new product.");
-          } else {
-            setPasswordChanged(true)
-          }
-          return response.json();
-        })
-        .catch((error) => {
-
-          alert("Passwort konte nicht geändert werden!")
-        })
-
-      if (passwordChanged) {
-
-        alert("Passwort konte erfolgreich geändert werden!");
-      }
-
-      handleCloseDialog();
-    } else {
-
-      setPasswordAreSame("Passwörter sind nicht gleich!");
-    }
-  }
-
+  
   return (
     <>
       <div className="main-discription">
@@ -100,41 +41,7 @@ export default function Start() {
           </ol>
         </span>
       </div>
-      <div className="div-passwortChange">
-        <button onClick={handlePasswordChange}>Passwort ändern</button>
-      </div>
-
-      {showDialog && (
-
-        <div className="dialog-overlay">
-          <div
-            className="edit-dialog"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h3 id="dialog-title">Passwort ändern</h3>
-            <label>Neues Passwort:
-              <input
-                type="password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
-            </label>
-            <label>Passwort Bestätigen:
-              <input
-                type="password"
-                value={newPasswordBest}
-                onChange={(e) => setNewPasswordBest(e.target.value)}
-              /></label>
-
-            <p className="errorMessage">{passwordAreSame}</p>
-
-            <div className="dialog-buttons">
-              <button className="deleteButton" onClick={handleCloseDialog}>Abbrechen</button>
-              <button className="newButton" onClick={handleSavePassword}>Speichern</button>
-            </div>
-          </div>
-        </div>
-      )}
+      
     </>
   );
 }
