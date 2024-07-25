@@ -110,7 +110,7 @@ export default function Login() {
 
         <button type="submit">Einloggen</button>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p className="errorMessage">{error}</p>}
       </form>
     </>
   );

@@ -52,5 +52,11 @@ h3 {
 
 .edit-dialog{
 
+
     font-family: var(--font-family);
+}
+
+.errorMessage{
+
+    color: var(--delete);
 }

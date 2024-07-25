@@ -19,6 +19,8 @@ public class Transaction {
 
     private LocalDate transactionDate;
 
+    private boolean checked;
+
     @JsonIgnoreProperties({"transactions", "taskTrainees", "trainer"})
     @ManyToOne
     Trainee trainee;

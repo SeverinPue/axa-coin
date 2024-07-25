@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./stylesheets/navbar.css";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { useNavigate } from "react-router-dom";
 
 interface Trainee {
   points: number;
@@ -10,6 +11,71 @@ export default function Navbar() {
   const [trainee, setTrainee] = useState<Trainee>();
   const [points, setPoints] = useState(0);
   const [isAdmin, setAdmin] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
+  const [passwordAreSame, setPasswordAreSame] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordBest, setNewPasswordBest] = useState("");
+  const [passwordChanged, setPasswordChanged] = useState(false);
+  const url = `https://ui-avatars.com/api/?background=489FB5&color=fff&name=${sessionStorage.getItem(
+    "username"
+  )}`;
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    sessionStorage.removeItem("jwt");
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("traineeid");
+    sessionStorage.removeItem("points");
+    sessionStorage.removeItem("id");
+    navigate("/login");
+  }
+
+  function handlePasswordChange() {
+    setShowDialog(true);
+  }
+
+  function handleCloseDialog() {
+    setShowDialog(false);
+    setNewPassword("");
+    setNewPasswordBest("");
+    setPasswordAreSame("");
+  }
+
+  function handleSavePassword() {
+    if (newPassword == newPasswordBest) {
+      const newPasswortJson = {
+        newPassword: newPassword,
+      };
+
+      fetch("http://localhost:8080/api/users", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+        },
+        body: JSON.stringify(newPasswortJson),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to create new product.");
+          } else {
+            setPasswordChanged(true);
+          }
+          return response.json();
+        })
+        .catch((error) => {
+          alert("Passwort konte nicht geändert werden!");
+        });
+
+      if (passwordChanged) {
+        alert("Passwort konte erfolgreich geändert werden!");
+      }
+
+      handleCloseDialog();
+    } else {
+      setPasswordAreSame("Passwörter sind nicht gleich!");
+    }
+  }
 
   useEffect(() => {
     if (trainee?.points) {
@@ -72,6 +138,7 @@ export default function Navbar() {
       {!isAdmin ? (
         <div className="navBar">
           <div className="logo">
+          <img className="userIcon" src={url} />
             <ThemeSwitcher></ThemeSwitcher>
           </div>
           <p className="points"> Punkte: {points}</p>
@@ -85,13 +152,26 @@ export default function Navbar() {
             <li>
               <a href="/shop">Shop</a>
             </li>
+            <li>
+              <a href="/transactions">Kaufverlauf</a>
+            </li>
+            <li>
+              <button className="deleteButton" onClick={handleLogout}>
+                Abmelden
+              </button>
+            </li>
+            <li>
+              <button onClick={handlePasswordChange}>Passwort ändern</button>
+            </li>
           </ul>
         </div>
       ) : (
         <div className="navBar">
-          <div>
+          <div className="logo">
+          <img className="userIcon" src={url} />
             <ThemeSwitcher></ThemeSwitcher>
           </div>
+
           <ul className="navList">
             <li>
               <a href="/a/tasks">Tasks</a>
@@ -102,7 +182,53 @@ export default function Navbar() {
             <li>
               <a href="/a/users">User</a>
             </li>
+            <li>
+              <a href="/a/transactions">Kaufverläufe</a>
+            </li>
+            <li>
+              <button className="deleteButton" onClick={handleLogout}>
+                Abmelden
+              </button>
+            </li>
+            <li>
+              <button onClick={handlePasswordChange}>Passwort ändern</button>
+            </li>
           </ul>
+        </div>
+      )}
+
+      {showDialog && (
+        <div className="dialog-overlay">
+          <div className="edit-dialog" onClick={(e) => e.stopPropagation()}>
+            <h3 id="dialog-title">Passwort ändern</h3>
+            <label>
+              Neues Passwort:
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </label>
+            <label>
+              Passwort Bestätigen:
+              <input
+                type="password"
+                value={newPasswordBest}
+                onChange={(e) => setNewPasswordBest(e.target.value)}
+              />
+            </label>
+
+            <p className="errorMessage">{passwordAreSame}</p>
+
+            <div className="dialog-buttons">
+              <button className="deleteButton" onClick={handleCloseDialog}>
+                Abbrechen
+              </button>
+              <button className="newButton" onClick={handleSavePassword}>
+                Speichern
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </>

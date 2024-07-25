@@ -42,6 +42,7 @@ input:-webkit-autofill {
 
 input {
 
+    font-family: var(--font-family);
     color: var(--secondary);
     background-color: var(--primary);
     border: 2px solid var(--titles);
