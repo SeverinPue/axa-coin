@@ -53,7 +53,7 @@ export default function Submission() {
       },
     })
       .then(r => r.json())
-      .then((data) => {setTasks(data); console.log(data)});
+      .then((data) => {setTasks(data);});
   };
 
   const renderTasks = (filterFunc) => {

@@ -60,9 +60,6 @@ export default function Shop() {
         }
       )
         .then((r) => r.json())
-        .then((data) => {
-          console.log(data);
-        });
     }
 
     handleCloseDialog();
