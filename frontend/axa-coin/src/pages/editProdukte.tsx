@@ -142,7 +142,6 @@ export default function EditProdukte() {
       .then((response) => response.json())
       .then((data) => {
         setTrainers(data);
-        console.log(data);
       })
       .catch((error) => {
         console.error("Fehler beim Fetchen: " + error);

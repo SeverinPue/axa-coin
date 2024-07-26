@@ -73,7 +73,6 @@ export default function EditUser() {
       }
     });
     setYears(newYears)
-    console.log(newYears);
 
     let newTrainees: Array<any> = []
     unfilteredTrainees?.forEach(traineeprov => {
@@ -93,7 +92,7 @@ export default function EditUser() {
       },
     })
       .then(r => r.json())
-      .then((data) => { filterTrainees(data); console.log(data); })
+      .then((data) => { filterTrainees(data);})
       .catch((error) => {
         console.error("Fehler beim Fetchen: " + error);
       });
@@ -107,7 +106,7 @@ export default function EditUser() {
       },
     })
       .then(response => response.json())
-      .then((data) => { setTrainers(data); console.log(data) })
+      .then((data) => setTrainers(data))
       .catch((error) => {
         console.error("Fehler beim Fetchen: " + error);
       });
@@ -175,7 +174,6 @@ export default function EditUser() {
         }
       })
         .then(() => {
-          console.log("wurde gelöscht");
           fetchTrainees();
           fetchTrainers();
           reset();
@@ -209,8 +207,6 @@ export default function EditUser() {
     } else {
       newUser = { username: username, role: role, password: password }
     }
-
-    console.log(newUser);
 
     fetch("http://localhost:8080/api/users", {
       method: "POST",

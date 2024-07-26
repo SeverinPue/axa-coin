@@ -27,7 +27,6 @@ export default function TransactionsAdmin() {
   }
 
   function updateTransaction(id) {
-    console.log(id)
     fetch("http://localhost:8080/api/transactions/" + id, {
       method: "PUT",
       headers: {
