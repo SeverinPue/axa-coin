@@ -135,25 +135,31 @@ export default function EditUser() {
     let url: string;
     let updatedUser;
 
-    if (filter === "trainers") {
-      url = API_URL + "/api/trainers/" + id
-      updatedUser = { username: username }
+    if (username !== "" && password !== "" && role !== "") {
+      if (filter === "trainers") {
+          url = API_URL + "/api/trainers/" + id
+        updatedUser = { username: username }
+      } else {
+          url = API_URL + "/api/trainees/" + id
+        updatedUser = { username: username, trainer: trainer }
+      }
+
+      fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
+        }, body: JSON.stringify(updatedUser)
+      })
+        .then(res => { fetchTrainees(); fetchTrainers(); })
+        .catch((error) => {
+          console.error("Fehler beim Fetchen: " + error);
+        });
     } else {
-      url = API_URL + "/api/trainees/" + id
-      updatedUser = { username: username, trainer: trainer }
+      alert("ungültige Eingabe")
     }
 
-    fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
-      }, body: JSON.stringify(updatedUser)
-    })
-      .then(res => { fetchTrainees(); fetchTrainers(); })
-      .catch((error) => {
-        console.error("Fehler beim Fetchen: " + error);
-      });
+
   }
 
   function deleteUser(userId: string) {
@@ -192,35 +198,44 @@ export default function EditUser() {
     setIsConfirmationVisible(false);
     setConfirmationAction(null);
   }
-  
+
   function handleCancel() {
     setIsConfirmationVisible(false);
     setConfirmationAction(null);
   }
-  
+
 
   function createUser() {
     closeNewUser();
-    let newUser: any;
-    if (filter === "trainees") {
-      newUser = { username: username, role: role, password: password, trainer: trainer, year: year }
+    if (username !== "" && password !== "" && role !== "") {
+      let newUser: any;
+      if (filter === "trainees") {
+        newUser = { username: username, role: role, password: password, trainer: trainer, year: year }
+      } else {
+        newUser = { username: username, role: role, password: password }
+      }
+
+      fetch(API_URL + "/api/users", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
+          "Content-Type": "application/json"
+        }, body: JSON.stringify(newUser)
+      })
+        .then(res => { fetchTrainees(); fetchTrainers();
+          if(res.status === 400){
+            alert("Benutzername nicht verfügbar")
+          }
+        })
+        .catch((error) => {
+          alert("Ungültige Angaben: " + error);
+          fetchTrainees();
+          fetchTrainers();
+        });
     } else {
-      newUser = { username: username, role: role, password: password }
+      alert("ungültige Eingabe")
     }
 
-    fetch(API_URL + "/api/users", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
-        "Content-Type": "application/json"
-      }, body: JSON.stringify(newUser)
-    })
-      .then(() => { fetchTrainees(); fetchTrainers(); })
-      .catch((error) => {
-        alert("Ungültige Angaben: " + error);
-        fetchTrainees();
-        fetchTrainers();
-      });
   }
 
   return (
@@ -257,7 +272,7 @@ export default function EditUser() {
             ? <div className="attribute">
               <label htmlFor="dropdown">Berufsbildner*in</label>
               <select id="dropdown" value={trainer} onChange={e => setTrainer(e.target.value)}>
-                <option>Bitte wählen</option>
+                <option value={""}>Bitte wählen</option>
                 {
                   trainers?.map(trainerprov => <option key={trainerprov.id} value={trainerprov.id}>{trainerprov.user.username}</option>)
                 }
@@ -292,7 +307,7 @@ export default function EditUser() {
           <div className="attribute">
             <label htmlFor="dropdown">Rolle</label>
             <select id="dropdown" value={role} onChange={e => setRole(e.target.value)}>
-              <option>Bitte wählen</option>
+              <option value={""}>Bitte wählen</option>
               <option value={"ROLE_ADMIN"}>Berufsbildner</option>
               <option value={"ROLE_USER"}>Lernende/r</option>
             </select>
@@ -302,7 +317,7 @@ export default function EditUser() {
               <div className="attribute">
                 <label htmlFor="dropdown">Berufsbildner*in</label>
                 <select id="dropdown" value={trainer} onChange={e => setTrainer(e.target.value)}>
-                  <option>Bitte wählen</option>
+                  <option value={""}>Bitte wählen</option>
                   {
                     trainers?.map(trainerprov => <option key={trainerprov.id} value={trainerprov.id}>{trainerprov.user.username}</option>)
                   }
@@ -333,11 +348,11 @@ export default function EditUser() {
         </div>
       </div>
       <ConfirmDialog
-      text="Willst du diesen Benutzer wirklich Löschen?"
-      onConfirm={handleConfirm}
-      visible={isConfirmationVisible}
-      onCancel={handleCancel}
-    />
+        text="Willst du diesen Benutzer wirklich Löschen?"
+        onConfirm={handleConfirm}
+        visible={isConfirmationVisible}
+        onCancel={handleCancel}
+      />
     </div>
 
   )

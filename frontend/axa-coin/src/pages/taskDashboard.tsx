@@ -22,7 +22,7 @@ export default function Taskboard() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [yearSelection, setYearSelection] = useState({});
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
-  const [confirmationAction, setConfirmationAction] = useState(() => () => {});
+  const [confirmationAction, setConfirmationAction] = useState(() => () => { });
 
   useEffect(() => {
     const yearSelectionState = {};
@@ -134,6 +134,22 @@ export default function Taskboard() {
       });
   };
 
+  function validateInput() {
+    if (title.trim() === "") {
+      return false;
+    }
+    if (description.trim() === "") {
+      return false;
+    }
+    if (date.trim() === "") {
+      return false;
+    }
+    if (!Array.isArray(traineeUpdate) || traineeUpdate.length === 0) {
+      return false;
+    }
+    return true;
+  }
+
   function loadTask(task) {
     openDialog();
     setTitle(task.title);
@@ -157,19 +173,23 @@ export default function Taskboard() {
       important: important,
       trainees: traineeUpdate,
     };
-
-    fetch(url, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
-      },
-      body: JSON.stringify(updatedTask)
-    })
-      .then(res => { fetchTasks(); })
-      .catch((error) => {
-        console.error("Fehler beim Fetchen: " + error);
-      });
+    if (validateInput()) {
+      fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
+        },
+        body: JSON.stringify(updatedTask)
+      })
+        .then(res => { fetchTasks(); })
+        .catch((error) => {
+          console.error("Fehler beim Fetchen: " + error);
+        });
+    }
+    else{
+      alert("Bitte alle Felder korrekt ausfüllen")
+    }
   }
 
   function deleteTask(idL) {
@@ -201,19 +221,23 @@ export default function Taskboard() {
       creator: sessionStorage.getItem("id"),
       trainees: traineeUpdate,
     };
-
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
-      },
-      body: JSON.stringify(newTask)
-    })
-      .then(res => { fetchTasks(); })
-      .catch((error) => {
-        console.error("Fehler beim Fetchen: " + error);
-      });
+    if (validateInput()) {
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`
+        },
+        body: JSON.stringify(newTask)
+      })
+        .then(res => { fetchTasks(); })
+        .catch((error) => {
+          console.error("Fehler beim Fetchen: " + error);
+        });
+    }
+    else {
+      alert("Bitte alle Felder ausfüllen")
+    }
   }
 
   const handleConfirm = () => {
