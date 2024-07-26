@@ -91,7 +91,7 @@ export default function Login() {
         <h1>Willkommen Bei AXA-Coin</h1>
       </header>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Benutzernamen:</label>
+        <label htmlFor="username">Benutzername:</label>
         <input
           type="text"
           id="username"
