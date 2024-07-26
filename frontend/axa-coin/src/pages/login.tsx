@@ -14,7 +14,7 @@ export default function Login() {
     event.preventDefault();
 
     if (!username || !password) {
-      setError("Please enter both username and password.");
+      setError("Bitte gebe Benutzername und Passwort ein.");
       return;
     }
 
@@ -26,7 +26,7 @@ export default function Login() {
       });
 
       if (!response.ok) {
-        throw new Error("Incorrect username or password!");
+        throw new Error("Falsches Benuzername und Passwort!");
       }
 
       const data = await response.json();
@@ -90,7 +90,7 @@ export default function Login() {
         <h1>Willkommen Bei AXA-Coin</h1>
       </header>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
+        <label htmlFor="username">Benutzernamen:</label>
         <input
           type="text"
           id="username"
@@ -99,7 +99,7 @@ export default function Login() {
           onChange={(e) => setUsername(e.target.value)}
         />
 
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password">Passwort:</label>
         <input
           type="password"
           id="password"
