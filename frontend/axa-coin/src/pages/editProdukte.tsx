@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./stylesheets/editProduct.css";
-import ConfirmDialog from '../components/confirmDialog.jsx';
+import ConfirmDialog from "../components/confirmDialog.jsx";
 import { API_URL } from "../App.js";
 
 interface Product {
@@ -8,23 +8,36 @@ interface Product {
   name: string;
   description: string;
   price: number;
+  trainerId: string;
+}
+
+interface Trainer {
+  id: string;
+  user: {
+    username: string;
+  };
 }
 
 export default function EditProdukte() {
   const [products, setProducts] = useState<Product[]>([]);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [showEditDialog, setShowEditDialog] = useState(false);
-  const [trainers, setTrainers] = useState<Array<any>>();
+  const [trainers, setTrainers] = useState<Trainer[]>([]);
   const [showCreateDialog, setShowCreateDialog] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const nameInputRef = useRef<HTMLInputElement>(null);
+  const trainerSelectRef = useRef<HTMLSelectElement>(null);
   const descriptionInputRef = useRef<HTMLTextAreaElement>(null);
   const priceInputRef = useRef<HTMLInputElement>(null);
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
-  const [confirmationAction, setConfirmationAction] = useState<(() => void) | null>(null);
-
+  const [confirmationAction, setConfirmationAction] = useState<
+    (() => void) | null
+  >(null);
 
   useEffect(() => {
     getALLProducts();
+    fetchTrainers();
   }, []);
 
   function getALLProducts() {
@@ -73,6 +86,7 @@ export default function EditProdukte() {
         });
     });
   }
+
   function handleConfirm() {
     if (confirmationAction) {
       confirmationAction();
@@ -80,30 +94,31 @@ export default function EditProdukte() {
     setIsConfirmationVisible(false);
     setConfirmationAction(null);
   }
-  
+
   function handleCancel() {
     setIsConfirmationVisible(false);
     setConfirmationAction(null);
   }
-  
 
   function handleCloseDialog() {
+    setError("");
     setShowEditDialog(false);
     setShowCreateDialog(false);
     setEditingProduct(null);
   }
 
   function handleSaveEdit() {
+    
     if (
-      !editingProduct ||
-      !nameInputRef.current ||
-      !descriptionInputRef.current ||
-      !priceInputRef.current
+      !nameInputRef.current?.value ||
+      !descriptionInputRef.current?.value ||
+      !priceInputRef.current?.value ||
+      !editingProduct
     ) {
+      setError("Fülle bitte alle felder aus");
       return;
     }
-
-    const updatedProduct = {
+    const updatedProduct: Product = {
       ...editingProduct,
       name: nameInputRef.current.value,
       description: descriptionInputRef.current.value,
@@ -125,11 +140,10 @@ export default function EditProdukte() {
         return response.json();
       })
       .then(getALLProducts)
-      .catch((error) => {
-        console.error("Error updating product:", error);
-      })
+      .catch((error) => setError(error.message))
       .finally(() => {
         handleCloseDialog();
+        setError(null);
       });
   }
 
@@ -149,16 +163,17 @@ export default function EditProdukte() {
   };
 
   function handleCreate() {
-    fetchTrainers();
     setShowCreateDialog(true);
   }
 
   function handleSaveNewProduct() {
     if (
-      !nameInputRef.current ||
-      !descriptionInputRef.current ||
-      !priceInputRef.current
+      !nameInputRef.current?.value ||
+      !descriptionInputRef.current?.value ||
+      !priceInputRef.current?.value ||
+      !trainerSelectRef.current?.value
     ) {
+      setError("Fülle bitte alle felder aus");
       return;
     }
 
@@ -166,6 +181,7 @@ export default function EditProdukte() {
       name: nameInputRef.current.value,
       description: descriptionInputRef.current.value,
       price: parseFloat(priceInputRef.current.value),
+      trainerId: trainerSelectRef.current.value,
     };
 
     fetch(API_URL + "/api/products", {
@@ -183,12 +199,11 @@ export default function EditProdukte() {
         return response.json();
       })
       .then(getALLProducts)
-      .catch((error) => {
-        console.error("Error creating product:", error);
-      })
+      .catch((error) => setError(error.message))
       .finally(() => {
         handleCloseDialog();
         setShowCreateDialog(false);
+        setError(null);
       });
   }
 
@@ -248,11 +263,16 @@ export default function EditProdukte() {
                 ref={priceInputRef}
               />
             </label>
+            <p className="errorMessage">{error}</p>
+
             <div className="dialog-buttons">
               <button className="button newButton" onClick={handleSaveEdit}>
                 Speichern
               </button>
-              <button className="button deleteButton" onClick={handleCloseDialog}>
+              <button
+                className="button deleteButton"
+                onClick={handleCloseDialog}
+              >
                 Abbrechen
               </button>
             </div>
@@ -275,7 +295,7 @@ export default function EditProdukte() {
 
             <label>
               Berufsbildner:
-              <select id="dropdown">
+              <select id="dropdown" ref={trainerSelectRef}>
                 <option>Bitte wählen</option>
                 {trainers?.map((trainerprov) => (
                   <option key={trainerprov.id} value={trainerprov.id}>
@@ -289,11 +309,19 @@ export default function EditProdukte() {
               Preis:
               <input type="number" ref={priceInputRef} />
             </label>
+            <p className="errorMessage">{error}</p>
+
             <div className="dialog-buttons">
-              <button className="button newButton" onClick={handleSaveNewProduct}>
+              <button
+                className="button newButton"
+                onClick={handleSaveNewProduct}
+              >
                 Erstellen
               </button>
-              <button className="button deleteButton" onClick={handleCloseDialog}>
+              <button
+                className="button deleteButton"
+                onClick={handleCloseDialog}
+              >
                 Abbrechen
               </button>
             </div>
@@ -301,11 +329,11 @@ export default function EditProdukte() {
         </div>
       )}
       <ConfirmDialog
-      text="Willst du dieses Produkt wirklich Löschen?"
-      onConfirm={handleConfirm}
-      visible={isConfirmationVisible}
-      onCancel={handleCancel}
-    />
+        text="Willst du dieses Produkt wirklich Löschen?"
+        onConfirm={handleConfirm}
+        visible={isConfirmationVisible}
+        onCancel={handleCancel}
+      />
     </>
   );
 }
