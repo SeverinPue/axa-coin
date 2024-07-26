@@ -59,18 +59,16 @@ export default function Navbar() {
         .then((response) => {
           if (!response.ok) {
             throw new Error("Failed to create new product.");
-          } else {
-            setPasswordChanged(true);
           }
+
           return response.json();
+        })
+        .then(() => {
+          alert("Passwort wurde erfolgreich geändert!");
         })
         .catch((error) => {
           alert("Passwort konte nicht geändert werden!");
         });
-
-      if (passwordChanged) {
-        alert("Passwort konte erfolgreich geändert werden!");
-      }
 
       handleCloseDialog();
     } else {
@@ -139,7 +137,7 @@ export default function Navbar() {
       {!isAdmin ? (
         <div className="navBar">
           <div className="logo">
-          <img className="userIcon" src={url} />
+            <img className="userIcon" src={url} />
             <ThemeSwitcher></ThemeSwitcher>
           </div>
           <p className="points"> Punkte: {points}</p>
@@ -169,7 +167,7 @@ export default function Navbar() {
       ) : (
         <div className="navBar">
           <div className="logo">
-          <img className="userIcon" src={url} />
+            <img className="userIcon" src={url} />
             <ThemeSwitcher></ThemeSwitcher>
           </div>
 
