@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/trainers")
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000")
 @Hidden
 public class TrainerController {
 

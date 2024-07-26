@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/transactions")
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000")
 @Hidden
 public class TransactionController {
 

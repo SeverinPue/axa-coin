@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/tasks")
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000")
 @Hidden
 public class TaskController {
 
