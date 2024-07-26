@@ -7,7 +7,6 @@ import "./App.css";
 import ProtectedRoute from "./components/ProtectedRoute.js";
 import AdminProtectedRoute from "./components/adminProtectedRoute.js"
 import NotFound from "./pages/notFound.tsx";
-import About from "./pages/about.jsx" 
 import Tasks from "./pages/tasks.tsx";
 import Shop from "./pages/shop.tsx";
 import EditUser from "./pages/edituser.tsx";
@@ -16,6 +15,7 @@ import TaskEdit from "./pages/taskDashboard.tsx"
 import EditProdukte from "./pages/editProdukte.tsx";
 import Transactions from "./pages/transactions.tsx";
 import TransactionsAdmin from "./pages/transactionsAdmin.tsx";
+
 
 function App() {
   return (
@@ -43,3 +43,5 @@ function App() {
 }
 
 export default App;
+
+export const API_URL = 'https://localhost:3000';

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./stylesheets/shop.css";
 import ShopDialog from "../components/dialogShop.tsx";
+import { API_URL } from "../App.js";
 
 interface Product {
   id: string;
@@ -19,7 +20,7 @@ export default function Shop() {
   }, []);
 
   function fetchShopProducts() {
-    fetch("http://localhost:8080/api/products", {
+    fetch(API_URL + "/api/products", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +47,7 @@ export default function Shop() {
         productId: selectedProduct.id,
       }
       fetch(
-        `http://localhost:8080/api/trainees/purchase/${sessionStorage.getItem(
+          API_URL + `/api/trainees/purchase/${sessionStorage.getItem(
           "traineeId"
         )}`,
         {

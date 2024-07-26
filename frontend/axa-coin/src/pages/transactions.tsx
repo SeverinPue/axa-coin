@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import "./stylesheets/transactions.css";
+import { API_URL } from "../App.js";
 
 export default function Transactions() {
   const [transactions, setTransactions] = useState<Array<any>>([])
@@ -14,7 +15,7 @@ export default function Transactions() {
   }, [])
 
   function loadTransactions(){
-    fetch("http://localhost:8080/api/transactions/" + id+"?page="+page, {
+    fetch(API_URL + "/api/transactions/" + id+"?page="+page, {
       headers: {
         "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
       },

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./stylesheets/navbar.css";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../App.js";
 
 interface Trainee {
   points: number;
@@ -47,7 +48,7 @@ export default function Navbar() {
         newPassword: newPassword,
       };
 
-      fetch("http://localhost:8080/api/users", {
+      fetch(API_URL + "/api/users", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -114,7 +115,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/auth/admin", {
+    fetch(API_URL + "/api/auth/admin", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react"
 import User from "../components/user.tsx";
 import "./stylesheets/edituser.css"
 import ConfirmDialog from '../components/confirmDialog.jsx';
-
+import { API_URL } from "../App.js";
 
 export default function EditUser() {
   const dialogRef = useRef(null);
@@ -86,7 +86,7 @@ export default function EditUser() {
 
   const fetchTrainees = () => {
 
-    fetch("http://localhost:8080/api/trainees", {
+    fetch(API_URL + "/api/trainees", {
       headers: {
         "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
       },
@@ -100,7 +100,7 @@ export default function EditUser() {
 
   const fetchTrainers = () => {
 
-    fetch("http://localhost:8080/api/trainers", {
+    fetch(API_URL + "/api/trainers", {
       headers: {
         "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
       },
@@ -136,10 +136,10 @@ export default function EditUser() {
     let updatedUser;
 
     if (filter === "trainers") {
-      url = "http://localhost:8080/api/trainers/" + id
+      url = API_URL + "/api/trainers/" + id
       updatedUser = { username: username }
     } else {
-      url = "http://localhost:8080/api/trainees/" + id
+      url = API_URL + "/api/trainees/" + id
       updatedUser = { username: username, trainer: trainer }
     }
 
@@ -162,9 +162,9 @@ export default function EditUser() {
       let url: string;
 
       if (filter === "trainers") {
-        url = "http://localhost:8080/api/trainers/" + userId;
+        url = API_URL + "/api/trainers/" + userId;
       } else {
-        url = "http://localhost:8080/api/trainees/" + userId;
+        url = API_URL + "/api/trainees/" + userId;
       }
 
       fetch(url, {
@@ -208,7 +208,7 @@ export default function EditUser() {
       newUser = { username: username, role: role, password: password }
     }
 
-    fetch("http://localhost:8080/api/users", {
+    fetch(API_URL + "/api/users", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,

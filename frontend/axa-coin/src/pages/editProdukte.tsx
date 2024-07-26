@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./stylesheets/editProduct.css";
 import ConfirmDialog from '../components/confirmDialog.jsx';
-
+import { API_URL } from "../App.js";
 
 interface Product {
   id: string;
@@ -28,7 +28,7 @@ export default function EditProdukte() {
   }, []);
 
   function getALLProducts() {
-    fetch("http://localhost:8080/api/products", {
+    fetch(API_URL + "/api/products", {
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
       },
@@ -55,7 +55,7 @@ export default function EditProdukte() {
     setConfirmationAction(() => () => {
       setProducts(products.filter((p) => p.id !== productId));
 
-      fetch(`http://localhost:8080/api/products/${productId}`, {
+      fetch(API_URL + `/api/products/${productId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
@@ -110,7 +110,7 @@ export default function EditProdukte() {
       price: parseFloat(priceInputRef.current.value),
     };
 
-    fetch(`http://localhost:8080/api/products/${editingProduct.id}`, {
+    fetch(API_URL + `/api/products/${editingProduct.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -134,7 +134,7 @@ export default function EditProdukte() {
   }
 
   const fetchTrainers = () => {
-    fetch("http://localhost:8080/api/trainers", {
+    fetch(API_URL + "/api/trainers", {
       headers: {
         Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
       },
@@ -168,7 +168,7 @@ export default function EditProdukte() {
       price: parseFloat(priceInputRef.current.value),
     };
 
-    fetch("http://localhost:8080/api/products", {
+    fetch(API_URL + "/api/products", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

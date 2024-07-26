@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./stylesheets/login.css";
 import ThemeSwitcher from "../components/ThemeSwitcher";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../App.js";
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -19,7 +20,7 @@ export default function Login() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/api/auth/authenticate", {
+      const response = await fetch(API_URL + "/api/auth/authenticate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -44,7 +45,7 @@ export default function Login() {
     }
   };
   const handleTrainee = () => {
-    fetch(`http://localhost:8080/api/trainees/user/${sessionStorage.getItem("id")}`, {
+    fetch(API_URL + `/api/trainees/user/${sessionStorage.getItem("id")}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +61,7 @@ export default function Login() {
 
   };
   const checkAdmin = () => {
-    fetch("http://localhost:8080/api/auth/admin", {
+    fetch(API_URL + "/api/auth/admin", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

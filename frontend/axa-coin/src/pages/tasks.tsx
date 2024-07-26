@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Task from "../components/task.jsx";
 import './stylesheets/tasks.css';
+import { API_URL } from "../App.js";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -15,7 +16,7 @@ export default function Tasks() {
       dateOfSubmission: updatedDateOfSubmission,
     };
 
-    fetch(`http://localhost:8080/api/tasktrainees/${id}`, {
+    fetch(API_URL + `/api/tasktrainees/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +33,7 @@ export default function Tasks() {
   }, []);
 
   const updateTasks = () => {
-    fetch(`http://localhost:8080/api/tasktrainees/trainee/${sessionStorage.getItem("traineeId")}`, {
+    fetch(API_URL + `/api/tasktrainees/trainee/${sessionStorage.getItem("traineeId")}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

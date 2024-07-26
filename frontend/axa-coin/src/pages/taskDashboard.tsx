@@ -3,6 +3,7 @@ import TaskEdit from "../components/taskEdit.tsx";
 import ConfirmDialog from '../components/confirmDialog.jsx';
 import "./stylesheets/taskboard.css";
 import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../App.js';
 
 export default function Taskboard() {
   const dialogRef = useRef(null);
@@ -108,7 +109,7 @@ export default function Taskboard() {
   }, []);
 
   const fetchTrainees = () => {
-    fetch("http://localhost:8080/api/trainees", {
+    fetch(API_URL + "/api/trainees", {
       headers: {
         "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
       },
@@ -121,7 +122,7 @@ export default function Taskboard() {
   };
 
   const fetchTasks = () => {
-    fetch("http://localhost:8080/api/tasks", {
+    fetch(API_URL + "/api/tasks", {
       headers: {
         "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
       },
@@ -147,7 +148,7 @@ export default function Taskboard() {
 
   function updateTask(task) {
     closeDialog();
-    let url = `http://localhost:8080/api/tasks/${id}`;
+    let url = API_URL + `/api/tasks/${id}`;
     const updatedTask = {
       title: title,
       description: description,
@@ -173,7 +174,7 @@ export default function Taskboard() {
 
   function deleteTask(idL) {
     setConfirmationAction(() => () => {
-      let url = `http://localhost:8080/api/tasks/${idL}`;
+      let url = API_URL + `/api/tasks/${idL}`;
       fetch(url, {
         method: "DELETE",
         headers: {
@@ -190,7 +191,7 @@ export default function Taskboard() {
 
   function createTask() {
     closeNewTask();
-    let url = `http://localhost:8080/api/tasks`;
+    let url = API_URL + `/api/tasks`;
     const newTask = {
       title: title,
       description: description,

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CustomSubmission from '../components/Submission.jsx'
 import './stylesheets/submissions.css';
 import { useNavigate } from 'react-router-dom';
+import {API_URL} from "../App";
 
 export default function Submission() {
   const [tasks, setTasks] = useState([]);
@@ -13,7 +14,7 @@ export default function Submission() {
       approved: true
     };
 
-    fetch(`http://localhost:8080/api/tasktrainees/${task.id}`, {
+    fetch(API_URL + `/api/tasktrainees/${task.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +30,7 @@ export default function Submission() {
     const updatedTask = {
       dateOfSubmission: null,
     };
-    fetch(`http://localhost:8080/api/tasktrainees/${task.id}`, {
+    fetch(API_URL + `/api/tasktrainees/${task.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +46,7 @@ export default function Submission() {
   }, []);
 
   const updateTasks = () => {
-    fetch("http://localhost:8080/api/tasktrainees", {
+    fetch(API_URL + "/api/tasktrainees", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

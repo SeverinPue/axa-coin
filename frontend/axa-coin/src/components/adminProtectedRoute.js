@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, redirect } from 'react-router-dom';
+import {API_URL} from "../App";
 
 const AdminProtectedRoute = ({ component }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/auth/admin", {
+    fetch(API_URL + "/api/auth/admin", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

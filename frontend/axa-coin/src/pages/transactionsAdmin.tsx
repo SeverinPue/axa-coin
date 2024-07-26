@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import "./stylesheets/transactions.css";
+import { API_URL } from "../App.js";
 
 export default function TransactionsAdmin() {
   const [transactions, setTransactions] = useState<Array<any>>([])
@@ -14,7 +15,7 @@ export default function TransactionsAdmin() {
   }, [])
 
   function loadTransactions() {
-    fetch("http://localhost:8080/api/transactions/page/" + page, {
+    fetch(API_URL + "/api/transactions/page/" + page, {
       headers: {
         "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
       },
@@ -27,7 +28,7 @@ export default function TransactionsAdmin() {
   }
 
   function updateTransaction(id) {
-    fetch("http://localhost:8080/api/transactions/" + id, {
+    fetch(API_URL + "/api/transactions/" + id, {
       method: "PUT",
       headers: {
         "Authorization": `Bearer ${sessionStorage.getItem("jwt")}`,
