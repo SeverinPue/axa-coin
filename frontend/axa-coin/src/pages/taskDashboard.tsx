@@ -163,6 +163,7 @@ export default function Taskboard() {
   }
 
   function updateTask(task) {
+    console.log("lol")
     closeDialog();
     let url = API_URL + `/api/tasks/${id}`;
     const updatedTask = {
@@ -210,8 +211,9 @@ export default function Taskboard() {
   }
 
   function createTask() {
+    console.log("creating task")
     closeNewTask();
-    let url = API_URL + `/api/tasks`;
+    let url = API_URL + `/api/tasks/`;
     const newTask = {
       title: title,
       description: description,
@@ -221,8 +223,10 @@ export default function Taskboard() {
       creator: sessionStorage.getItem("id"),
       trainees: traineeUpdate,
     };
+    console.log(newTask);
     if (validateInput()) {
-      fetch(url, {
+      console.log("test")
+      fetch("http://localhost:8080/api/tasks", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -256,7 +260,7 @@ export default function Taskboard() {
         <button className='buttonBack' onClick={() => navigate("/a/submissions")}>Aufgaben auswerten</button>
         <button className='newButton' onClick={openNewTask}>Neue Aufgabe erstellen</button>
       </div>
-      <dialog ref={dialogRef} className='taskDialog'>
+      <dialog ref={newTaskRef} className='taskDialog'>
         <div className="attributes">
           <div className="attribute-pair">
             <label htmlFor="title">Titel:</label>
@@ -333,7 +337,7 @@ export default function Taskboard() {
         </div>
       </dialog>
 
-      <dialog ref={newTaskRef} className='taskDialog'>
+      <dialog ref={dialogRef} className='taskDialog'>
         <div className="attributes">
           <div className="attribute-pair">
             <label htmlFor="title">Titel:</label>
