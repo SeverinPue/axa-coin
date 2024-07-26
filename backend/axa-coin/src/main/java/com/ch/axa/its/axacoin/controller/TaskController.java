@@ -142,7 +142,6 @@ public class TaskController {
                 taskTraineeRepository.delete(taskTrainee);
             }
         });
-        System.out.println(savedTask.getId());
         newTraineeIds.forEach(traineeId -> {
             if (!existingTraineeIds.contains(traineeId)) {
                 Optional<Trainee> trainee = traineeRepository.findById(traineeId);

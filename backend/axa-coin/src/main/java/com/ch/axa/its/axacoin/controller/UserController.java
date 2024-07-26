@@ -90,7 +90,6 @@ public class UserController {
                 }
             });
         }catch (Exception e){
-            System.out.println(e);
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(userRepository.save(user));
@@ -125,7 +124,6 @@ public class UserController {
         String username = jwtService.extractUsername(token.substring(7));
         Optional<User> user = userRepository.findByUsername(username);
         if(user.isPresent()){
-            System.out.println(password.getNewPassword());
             user.get().setPassword(passwordEncoder.encode(password.getNewPassword()));
             return ResponseEntity.ok(userRepository.save(user.get()));
         }else{

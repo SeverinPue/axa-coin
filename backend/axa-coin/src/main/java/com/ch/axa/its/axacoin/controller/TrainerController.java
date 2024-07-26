@@ -48,7 +48,6 @@ public class TrainerController {
 
     @DeleteMapping("/{id}")
     public void deleteTrainer(@PathVariable String id) {
-        System.out.println("Deleting trainer with id " + id);
         trainerRepository.deleteById(id);
     }
 }

@@ -115,7 +115,7 @@ export default function EditProdukte() {
       !priceInputRef.current?.value ||
       !editingProduct
     ) {
-      setError("Fülle bitte alle felder aus");
+      setError("Fülle bitte alle Felder aus");
       return;
     }
     const updatedProduct: Product = {

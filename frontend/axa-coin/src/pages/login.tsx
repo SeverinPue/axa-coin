@@ -27,7 +27,7 @@ export default function Login() {
       });
 
       if (!response.ok) {
-        throw new Error("Falsches Benuzername und Passwort!");
+        throw new Error("Falscher Benutzername oder Passwort!");
       }
 
       const data = await response.json();

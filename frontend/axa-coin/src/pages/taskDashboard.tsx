@@ -163,7 +163,6 @@ export default function Taskboard() {
   }
 
   function updateTask(task) {
-    console.log("lol")
     closeDialog();
     let url = API_URL + `/api/tasks/${id}`;
     const updatedTask = {
@@ -211,7 +210,6 @@ export default function Taskboard() {
   }
 
   function createTask() {
-    console.log("creating task")
     closeNewTask();
     let url = API_URL + `/api/tasks/`;
     const newTask = {
@@ -223,9 +221,7 @@ export default function Taskboard() {
       creator: sessionStorage.getItem("id"),
       trainees: traineeUpdate,
     };
-    console.log(newTask);
     if (validateInput()) {
-      console.log("test")
       fetch("http://localhost:8080/api/tasks", {
         method: "POST",
         headers: {

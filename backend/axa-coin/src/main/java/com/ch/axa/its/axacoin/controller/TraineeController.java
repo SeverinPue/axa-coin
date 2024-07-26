@@ -90,7 +90,6 @@ public class TraineeController {
             @Valid @RequestBody Map<String, Object> updates) {
         Trainee existingTrainee = traineeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Trainee not found with id: " + id));
-        System.out.println("updating trainee with id: " + id);
         updates.forEach((key, value) -> {
             switch (key) {
                 case "points":
@@ -149,7 +148,6 @@ public class TraineeController {
     @DeleteMapping("/{id}")
     @Hidden
     public void deleteUser(@PathVariable String id) {
-        System.out.println("Deleting trainee with id: "+id);
         traineeRepository.deleteById(id);
     }
 }
