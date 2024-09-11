@@ -1,0 +1,38 @@
+version: '3.8'
+ 
+services:
+
+  mariadb:
+    image: mariadb:10.8.6
+    volumes:
+      - ./db/db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MARIADB_DATABASE: axa-coin
+      MARIADB_USER: dbuser
+      MARIADB_PASSWORD: 1234
+    networks:
+      - axa-coin-be
+ 
+  phpmyadmin:
+    depends_on:
+      - mariadb
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8090:80"
+    environment:
+      PMA_HOST: mariadb
+    networks:
+      - axa-coin-be
+
+  axa-coin-be:
+    image: fixihans/axa-coin-be:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - axa-coin-be
+
+networks:
+  axa-coin-be:
+    driver: bridge
